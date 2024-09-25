@@ -5,6 +5,7 @@
 
 #Exclude
 !./client/*
+!./server-SQL/*
 !.gitignore
 !*.md
 !*.html
