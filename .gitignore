@@ -4,13 +4,14 @@
 ./server-SQL/node_modules/*
 
 #Exclude
-
+!./client/*
+!./server-SQL/*
 !.gitignore
 
-!*.md
-!*.html
+!**.md
+!**.html
 !**.js
-!*.jsx
-!*.sh
-!*.env
-!*.json
+!**.jsx
+!**.sh
+!**.env
+!**.json
