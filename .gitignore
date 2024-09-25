@@ -1,7 +1,7 @@
 #Ignore
 *
 ./client/node_modules/*
-
+./server-SQL/node_modules/*
 
 #Exclude
 !./client/*
@@ -10,7 +10,7 @@
 !*.md
 !*.html
 !*.js
-!*.vue
+!*.jsx
 !*.sh
 !*.env
 !*.json
