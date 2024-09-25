@@ -1,0 +1,15 @@
+#Ignore
+*
+./client/node_modules/*
+
+
+#Exclude
+!./client/*
+!.gitignore
+!.md
+!.html
+!.js
+!.vue
+!.sh
+!.env
+!.json
