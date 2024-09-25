@@ -4,9 +4,9 @@
 ./server-SQL/node_modules/*
 
 #Exclude
-!./client/*
-!./server-SQL/*
+
 !.gitignore
+
 !*.md
 !*.html
 !*.js
