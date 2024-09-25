@@ -9,7 +9,7 @@
 
 !*.md
 !*.html
-!*.js
+!**.js
 !*.jsx
 !*.sh
 !*.env
