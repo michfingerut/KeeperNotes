@@ -6,10 +6,10 @@
 #Exclude
 !./client/*
 !.gitignore
-!.md
-!.html
-!.js
-!.vue
-!.sh
-!.env
-!.json
+!*.md
+!*.html
+!*.js
+!*.vue
+!*.sh
+!*.env
+!*.json
