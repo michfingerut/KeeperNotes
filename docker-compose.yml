@@ -22,8 +22,6 @@ services:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules 
     container_name: kn_server
-    depends_on:
-      - db
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     depends_on:
