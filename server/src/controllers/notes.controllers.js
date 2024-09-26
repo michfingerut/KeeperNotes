@@ -1,6 +1,6 @@
-import Notes from '../db/notes.model.js';
 import logger from '../logger.js';
 import { errorCode, errorHandler, KeeperError } from '../utils/index.js';
+import Notes from '../db/notes.model.js';
 
 //TODO: create swagger
 const getNotes = async (req, res) => {

@@ -1,17 +1,16 @@
 import express from 'express';
-import noteControllers from './controllers/notes.controllers';
-import notesControllers from './controllers/notes.controllers';
+import notesControllers from './controllers/notes.controllers.js';
 
 const router = express.Router();
 
 router
   .route('/notes')
-  .get(noteControllers.getNotes)
+  .get(notesControllers.getNotes)
   .post(notesControllers.postNote);
 
 router
   .route('/notes/:id')
   .put(notesControllers.putNote)
-  .delete(noteControllers.deleteNote);
+  .delete(notesControllers.deleteNote);
 
 export default router;
