@@ -15,7 +15,7 @@ const errorHandler = (err, res, addedMessage) => {
     res.status(err.errorCode);
     res.json({
       name: errorNames.get(err.errorCode),
-      message: addedMessage ? addedMessage : err.message,
+      message: err.message,
       code: err.errorCode,
     });
 
