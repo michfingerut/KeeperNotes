@@ -19,7 +19,7 @@ const getNotes = async (req, res) => {
   */
 
   try {
-    const notes = await Notes.findAll();
+    const notes = await Notes.findAll({ raw: true });
 
     logger.info('get notes');
     res.status(200).json(notes);
@@ -46,15 +46,13 @@ const postNote = async (req, res) => {
   
   */
   try {
-    const note = (await Notes.create(req.body)).dataValues;
+    const note = await Notes.create(req.body, { returning: true });
     const message = `note -> ${note.id} was created successfully`;
 
     logger.info(message);
-    res.status(201).json({
-      message: message,
-    });
+    res.status(201).json(note);
   } catch (err) {
-    errorHandler(err, res, 'user was not created');
+    errorHandler(err, res, 'note was not created');
   }
 };
 
@@ -84,28 +82,21 @@ const putNote = async (req, res) => {
 
   try {
     const updatedNote = (
-      await Users.update(dataToUpdate, {
+      await Notes.update(dataToUpdate, {
         where: { id },
         returning: true,
         raw: true,
       })
-    )[1][0];
+    )[1];
+
+    if (!updatedNote) {
+      throw new KeeperError(errorCode.NOT_FOUND, 'note doesnt exist');
+    }
 
     logger.info(`note -> ${id} was updated successfuly`);
-    res.status(200).json(updatedNote);
+    res.status(200).json(updatedNote[0]);
   } catch (err) {
-    switch (err?.name) {
-      case 'SequelizeDatabaseError':
-        errorHandler(
-          new KeeperError(errorCode.NOT_FOUND, 'note doesnt exist'),
-          res,
-        );
-        break;
-      default:
-        errorHandler(err, res, 'note was not updated');
-
-        break;
-    }
+    errorHandler(err, res, 'note was not updated');
   }
 };
 
