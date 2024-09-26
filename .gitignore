@@ -1,15 +1,18 @@
-#Ignore
-*
+# Ignore client node_modules
 /client/node_modules/*
 
-#Exclude
+# Exclude server directory and its contents
 !/server/**
 !/server/
 
-#ignote build
+# Ignore build and node_modules in the server
 /server/node_modules
 /server/build
 
+# Exclude specific files
+!/scripts/*.sh
+!docker-compose.yml
+!/client/DockerFile
 !.gitignore
 !**.md
 !**.html
