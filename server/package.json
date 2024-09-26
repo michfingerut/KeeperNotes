@@ -6,8 +6,7 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "node ./src/index.js",
-    "start:dev": "nodemon --config ./nodemon.json ./src/index.js",
-    "test": "jest"
+    "start:dev": "nodemon --config ./nodemon.json"
   },
   "dependencies": {
     "dotenv": "16.4.5",

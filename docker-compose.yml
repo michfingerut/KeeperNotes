@@ -18,6 +18,9 @@ services:
   server:
     build: 
       context: ./server
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules 
     container_name: kn_server
     depends_on:
       - db
@@ -29,7 +32,7 @@ services:
       DB_URL: postgres://${DB_USER}:${DB_PASS}@db:${DB_PORT}/${DB_NAME}
       SERVER_PORT: ${SERVER_PORT}
       SERVER_URL: ${SERVER_URL}
-
+      NODE_ENV: development
 
   client:
     build: ./client

@@ -17,5 +17,5 @@ COPY . .
 EXPOSE 3002
 
 # Command to run your application
-CMD ["npm", "run","start:dev"]
+CMD ["npx", "nodemon","src/index.js"]
 
