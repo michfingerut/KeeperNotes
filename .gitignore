@@ -1,13 +1,16 @@
 #Ignore
 *
-./client/node_modules/*
-./server-SQL/node_modules/*
+/client/node_modules/*
 
 #Exclude
-!./client/*
-!./server-SQL/*
-!.gitignore
+!/server/**
+!/server/
 
+#ignote build
+/server/node_modules
+/server/build
+
+!.gitignore
 !**.md
 !**.html
 !**.js
