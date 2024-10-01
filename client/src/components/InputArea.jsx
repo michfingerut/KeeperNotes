@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
+import backApi from '../services/backApi';
 
 function InputArea(props) {
   const [tmpNote, setTmpNote] = useState({
     title: '',
     content: '',
-    key: props.keyCounter,
   });
 
-  function addNote(event) {
+  async function addNote(event) {
+    const createNote = await backApi.postNote(tmpNote);
+
     props.stateFunc((prevNotes) => {
-      return [...prevNotes, tmpNote];
+      return [...prevNotes, { ...tmpNote, id: createNote.id }];
     });
-    props.setKey(props.keyCounter + 1);
 
     setTmpNote(() => {
       return {
         title: '',
         content: '',
-        key: props.keyCounter + 1,
       };
     });
     event.preventDefault();

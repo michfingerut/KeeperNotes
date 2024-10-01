@@ -1,3 +1,5 @@
+//TODO: add patch functionality
+
 function Card(props) {
   return (
     <div className="note">
@@ -5,7 +7,7 @@ function Card(props) {
       <div className="note-container">
         <p>{props.content}</p>
       </div>
-      <button onClick={() => props.deleteFunc(props.index)}> delete</button>
+      <button onClick={() => props.deleteFunc(props.id)}> delete</button>
     </div>
   );
 }
