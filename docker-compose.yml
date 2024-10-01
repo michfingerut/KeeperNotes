@@ -3,7 +3,7 @@ version: '3.8'
 services:
   db:
     image: postgres:15
-    container_name: kn_db
+    container_name: kn-db
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_DB: ${DB_NAME}
@@ -21,7 +21,7 @@ services:
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules 
-    container_name: kn_server
+    container_name: kn-server
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     depends_on:
@@ -34,7 +34,7 @@ services:
 
   client:
     build: ./client
-    container_name: kn_client
+    container_name: kn-client
     environment:
       CLIENT_PORT: ${CLIENT_PORT}
     ports:
