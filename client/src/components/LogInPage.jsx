@@ -1,52 +1,57 @@
 import React, { useState } from 'react';
+import CreateNewUser from './CreateNewUser';
+import LogExistingUser from './LogExistingUser';
 
 function LogInPage(props) {
-  //props.logInFunc
-  //props.setUserInfo
-
-  /***
-   * if i pressed log in it will show:
-   * user name input
-   * pass word input
-   * log in button -> at press it will send get user by if
-   * it will check if the pass word is the same
-   * if not -> error in valid password
-   * if yes -> save userInfo, set loged in -> true
-   *
-   * if i pressed sign up it will show:
-   * user name input
-   * password input (in the future validation)
-   * first name
-   * last name
-   * email
-   * sign up button. when press:
-   * email exists- invalid email
-   * password not good
-   * if all good save userInfo and set log in true
-   */
   const [isInitOption, setIsInitOption] = useState(true);
   const [toSignUp, setToSignUp] = useState(false);
+  const [tmpUsr, setTmpUsr] = useState({
+    firstName: '',
+    lastName: '',
+    password: '',
+    email: '',
+  });
 
   function init() {
     return (
       <div>
-        <button onClick={() => console.log('Log In Clicked')}>Log In</button>
-        <button onClick={() => console.log('Sign Up Clicked')}>Sign Up</button>
+        <button onClick={() => setIsInitOption(false)}>Log In</button>
+        <button
+          onClick={() => {
+            setIsInitOption(false);
+            setToSignUp(true);
+          }}
+        >
+          Sign Up
+        </button>
       </div>
     );
   }
 
   function option() {
-    if (toSignUp) {
-      return signUp();
-    } else {
-      return logIn();
-    }
+    return toSignUp ? (
+      <CreateNewUser
+        handleInput={handleInput}
+        tmpUsr={tmpUsr}
+        setIsLoggedIn={props.setIsLoggedIn}
+        setUserInfo={props.setUserInfo}
+      />
+    ) : (
+      <LogExistingUser
+        handleInput={handleInput}
+        tmpUsr={tmpUsr}
+        setIsLoggedIn={props.setIsLoggedIn}
+        setUserInfo={props.setUserInfo}
+      />
+    );
   }
 
-  function signUp() {}
-
-  function logIn() {}
+  function handleInput(event) {
+    const { value, name } = event.target;
+    setTmpUsr((prev) => {
+      return { ...prev, [name]: value };
+    });
+  }
 
   return (
     <div className="log-in-container">

@@ -8,7 +8,9 @@ function InputArea(props) {
   });
 
   async function addNote(event) {
-    const createNote = await backApi.postNote(tmpNote);
+    event.preventDefault();
+    //TODO: err handling
+    const createNote = await backApi.postNote(tmpNote, props.userId);
 
     props.stateFunc((prevNotes) => {
       return [...prevNotes, { ...tmpNote, id: createNote.id }];
@@ -20,7 +22,6 @@ function InputArea(props) {
         content: '',
       };
     });
-    event.preventDefault();
   }
 
   function handleInput(event) {

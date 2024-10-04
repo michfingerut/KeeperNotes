@@ -1,5 +1,5 @@
 import Axios from 'axios';
-//TODO: needs to be updated to the new API
+
 const back = Axios.create({
   //TODO not HC
   baseURL: 'http://localhost:3002',
@@ -10,19 +10,42 @@ const callBackAPI = async (functionToCall, route, params) => {
   return response.data;
 };
 
-const getNotes = async () => {
-  return await callBackAPI('get', '/notes');
+/******************************************************************************/
+const getNotes = async (userId) => {
+  return await callBackAPI('get', `/users/${userId}/notes`);
 };
 
-const postNote = async (note) => {
-  return await callBackAPI('post', '/notes', note);
+const postNote = async (note, userId) => {
+  return await callBackAPI('post', `/users/${userId}/notes`, note);
 };
 
-const updateNote = async (id, dataToUpdate) => {
-  return await callBackAPI('put', `/notes/${id}`, dataToUpdate);
+const updateNote = async (id, userId, dataToUpdate) => {
+  //TODO: as for now, not in use
+  return await callBackAPI('put', `/users/${userId}/notes/${id}`, dataToUpdate);
 };
-const removeNote = async (id) => {
-  return await callBackAPI('delete', `/notes/${id}`);
+
+const removeNote = async (id, userId) => {
+  return await callBackAPI('delete', `/users/${userId}/notes/${id}`);
+};
+
+/******************************************************************************/
+
+const getUser = async (email, password) => {
+  return await callBackAPI('get', `/users?email=${email}&password=${password}`);
+};
+
+const postUser = async (userInfo) => {
+  return await callBackAPI('post', `/users`, userInfo);
+};
+
+const putUser = async (userId, userInfo) => {
+  //TODO: as for now, not in use
+  return await callBackAPI('put', `/users/${userId}`, userInfo);
+};
+
+const deleteUser = async (userId) => {
+  //TODO: as for now, not in use
+  return await callBackAPI('delete', `/users/${userId}`);
 };
 
 export default {
@@ -30,4 +53,8 @@ export default {
   removeNote,
   postNote,
   updateNote,
+  getUser,
+  postUser,
+  putUser,
+  deleteUser,
 };

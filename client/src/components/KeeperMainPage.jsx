@@ -5,14 +5,16 @@ import InputArea from './InputArea';
 import React, { useState, useEffect } from 'react';
 import backApi from '../services/backApi';
 
-function KeeperMainPage() {
+function KeeperMainPage(props) {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const userInfo = props.userInfo;
+
   useEffect(() => {
     backApi
-      .getNotes()
+      .getNotes(userInfo.uuid)
       .then((data) => {
         setNotes(data);
         setLoading(false);
@@ -24,7 +26,7 @@ function KeeperMainPage() {
   }, []);
 
   async function deleteNote(key) {
-    await backApi.removeNote(key);
+    await backApi.removeNote(key, userInfo.uuid);
     setNotes((prevNotes) => {
       prevNotes = prevNotes.filter((note) => {
         return note.id !== key;
@@ -44,7 +46,7 @@ function KeeperMainPage() {
   return (
     <div className="container">
       <Header title="Keeper" />
-      <InputArea stateFunc={setNotes} />
+      <InputArea stateFunc={setNotes} userId={userInfo.uuid} />
       <div className="cards-container">
         {notes.map((note) => {
           return (
@@ -54,6 +56,7 @@ function KeeperMainPage() {
               title={note.title}
               content={note.content}
               deleteFunc={deleteNote}
+              userId={userInfo.uuid}
             />
           );
         })}
