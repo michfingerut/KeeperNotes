@@ -8,19 +8,15 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_PORT: ${DB_PORT}
-
-    volumes:
-      - db-data:/var/lib/postgresql/data
     ports:
       - "${DB_PORT}:${DB_PORT}"
 
   server:
-    build: 
+    build:
       context: ./server
     volumes:
       - ./server:/usr/src/app
-      - /usr/src/app/node_modules 
+      - /usr/src/app/node_modules
     container_name: kn-server
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
@@ -33,14 +29,17 @@ services:
       NODE_ENV: development
 
   client:
-    build: ./client
+    build: 
+      context: ./client
+    volumes:
+      - ./client:/usr/src/app  
+      - /usr/src/app/node_modules 
     container_name: kn-client
     environment:
       CLIENT_PORT: ${CLIENT_PORT}
+      CLIENT_URL: ${CLIENT_URL}
+      NODE_ENV: development
     ports:
-      - "${CLIENT_PORT}:80"
+      - "${CLIENT_PORT}:${CLIENT_PORT}"
     depends_on:
       - server
-
-volumes:
-  db-data:

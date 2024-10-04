@@ -1,17 +1,15 @@
-FROM node:18 as build
+# Development Dockerfile
+FROM node:18
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 RUN npm install
 
+# Copy the source code to the container
 COPY . .
 
-RUN npm run build
+EXPOSE 3000
 
-FROM nginx:stable-alpine
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Run the React development server
+CMD ["npm", "start"]
