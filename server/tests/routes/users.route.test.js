@@ -37,21 +37,40 @@ describe('Route tests', () => {
         testData.messages.CREATED.user,
       );
 
-      const userId = postRes.body.userId;
-
       //get the user
-      const getRes = await req.get(`${route}/${userId}`);
+      const getRes = await req.get(
+        `${route}?email=${expectedData.email}&password=${expectedData.password}`,
+      );
 
       testUtils.testResponseSingle(getRes, expectedData, OK);
     });
 
     test('.GET on non existing user', async () => {
-      const getRes = await req.get(`${route}/sadsadsad`);
+      const getRes = await req.get(
+        `${route}?email=123@gmail.com&password=1234`,
+      );
 
       testUtils.testMessageResponse(
         getRes,
         NOT_FOUND,
         testData.messages.NOT_FOUND.userNotFound,
+      );
+    });
+
+    test('.GET with wrong password', async () => {
+      const expectedData = testData.users.michal;
+
+      //post new user
+      await req.post(route).send(expectedData);
+
+      const getRes = await req.get(
+        `${route}?email=${expectedData.email}&password=00000`,
+      );
+
+      testUtils.testMessageResponse(
+        getRes,
+        FORBIDDEN,
+        testData.messages.FORBIDDEN.invalidPass,
       );
     });
 
@@ -167,7 +186,9 @@ describe('Route tests', () => {
       expect(deleteRes.statusCode).toEqual(OK);
 
       //get the deleted user
-      const getRes = await req.get(`${route}/${userId}`);
+      const getRes = await req.get(
+        `${route}?email=${expectedData.email}&password=${expectedData.password}`,
+      );
 
       testUtils.testMessageResponse(
         getRes,

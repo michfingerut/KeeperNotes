@@ -16,10 +16,13 @@ router
 
 router
   .route('/users/:userId')
-  .get(usersControllers.getUserById)
+
   .put(usersControllers.putUser)
   .delete(usersControllers.deleteUser);
 
-router.route('/users').post(usersControllers.postUser);
+router
+  .route('/users')
+  .get(usersControllers.getUser)
+  .post(usersControllers.postUser);
 
 export default router;

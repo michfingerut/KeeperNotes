@@ -3,9 +3,9 @@ import logger from '../logger.js';
 import { errorCode, errorHandler, KeeperError } from '../utils/index.js';
 
 //TODO: create swagger
-const getUserById = async (req, res) => {
+const getUser = async (req, res) => {
   /*
-    req format - /users/:userId
+    req format - /users/?email=<email>&password=<password>
     return format:
     {
       firstName: string
@@ -15,19 +15,28 @@ const getUserById = async (req, res) => {
     }
     200 - on success V
     in the future: 400 - if query string not valid
-    403 - if its not the right password
+    403 - if its not the right password V
     404 - if not found V
     500 - internal err V
 
   */
-  const userId = req.params.userId;
+  const email = req.query.email;
+  const password = req.query.password;
   try {
-    const userInfo = await Users.findByPk(userId, { raw: true });
+    const userInfo = await Users.findOne({
+      where: { email },
+      raw: true,
+    });
+
     if (!userInfo) {
       throw new KeeperError(errorCode.NOT_FOUND, 'user doesnt exist');
     }
 
-    logger.info(`getUserById ${userId}`);
+    if (userInfo.password !== password) {
+      throw new KeeperError(errorCode.FORBIDDEN, 'invalid password');
+    }
+
+    logger.info(`getUserById ${userInfo.uuid}`);
     res.status(200).json(userInfo);
   } catch (err) {
     if (err?.name === 'SequelizeDatabaseError') {
@@ -176,4 +185,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export default { getUserById, postUser, putUser, deleteUser };
+export default { getUser, postUser, putUser, deleteUser };

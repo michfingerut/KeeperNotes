@@ -24,6 +24,7 @@ const messages = {
     userExist: 'user already exists',
     emailExist: 'email already exists',
     doesntBelong: 'note doesnt belong to user',
+    invalidPass: 'invalid password',
   },
 };
 
