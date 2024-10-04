@@ -46,6 +46,21 @@ describe('Route tests', () => {
       testUtils.testResponseArray(getRes, expectedData, OK);
     });
 
+    test('.POST non existing userId', async () => {
+      const expectedData = testData.notes;
+
+      //post new note
+      const postRes = await req
+        .post(`/users/${testData.randomUUID}/notes`)
+        .send(expectedData[0]);
+
+      testUtils.testMessageResponse(
+        postRes,
+        NOT_FOUND,
+        testData.messages.NOT_FOUND.userNotFound,
+      );
+    });
+
     test('basic .PUT (one parameter)', async () => {
       const expectedData = testData.notes[0];
 
@@ -91,6 +106,23 @@ describe('Route tests', () => {
       );
     });
 
+    test('.PUT on non existing userId', async () => {
+      const expectedData = testData.notes;
+
+      const postRes = await req.post(route).send(expectedData[0]);
+      const id = postRes.body.id;
+
+      const putRes = await req
+        .put(`/users/${testData.randomUUID}/notes/${id}`)
+        .send(expectedData);
+
+      testUtils.testMessageResponse(
+        putRes,
+        NOT_FOUND,
+        testData.messages.NOT_FOUND.noteNotFound,
+      );
+    });
+
     test('basic .DELETE', async () => {
       const expectedData = testData.notes;
 
@@ -114,8 +146,25 @@ describe('Route tests', () => {
 
       testUtils.testMessageResponse(
         deleteRes,
-        OK,
-        `note -> ${id} was deleted successfuly`,
+        FORBIDDEN,
+        testData.messages.FORBIDDEN.doesntBelong,
+      );
+    });
+
+    test('.DELETE on non existing userId', async () => {
+      const expectedData = testData.notes;
+
+      const postRes = await req.post(route).send(expectedData[0]);
+      const id = postRes.body.id;
+
+      const deleteRes = await req.delete(
+        `/users/${testData.randomUUID}/notes/${id}`,
+      );
+
+      testUtils.testMessageResponse(
+        deleteRes,
+        FORBIDDEN,
+        testData.messages.FORBIDDEN.doesntBelong,
       );
     });
   });

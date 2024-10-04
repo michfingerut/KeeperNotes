@@ -17,6 +17,7 @@ const postNote = async (req, res) => {
       message: "note -> <id> was created successfully"
     }
     201 - on success V
+    404 - if userId doesnt exist V
     in the future: 400 - if parameters not valid
     500 - internal err V
   
@@ -29,7 +30,14 @@ const postNote = async (req, res) => {
     logger.info(message);
     res.status(201).json(note);
   } catch (err) {
-    errorHandler(err, res, 'note was not created');
+    if (err?.name === 'SequelizeForeignKeyConstraintError') {
+      errorHandler(
+        new KeeperError(errorCode.NOT_FOUND, 'user doesnt exist'),
+        res,
+      );
+    } else {
+      errorHandler(err, res, 'note was not created');
+    }
   }
 };
 
@@ -50,17 +58,18 @@ const putNote = async (req, res) => {
 
     200 - on success V
     in the future: 400 - if parameters not valid
-    404 - note doesnt exist
+    404 - note doesnt exist or user doesnt exist
     500 - internal err V
   
   */
   const id = req.params.id;
+  const userId = req.params.userId;
   const dataToUpdate = req.body;
 
   try {
     const updatedNote = (
       await Notes.update(dataToUpdate, {
-        where: { id },
+        where: { id: id, uuid: userId },
         returning: true,
         raw: true,
       })
@@ -86,27 +95,30 @@ const deleteNote = async (req, res) => {
       message: "note -> <id> was deleted successfully"
     }
     200 - on success / if the note is not found V
+    403 - if note doesnt belong to user
     in the future: 400 - if parameters not valid
     in the future: 403 - if dont have permissions
     500 - internal err V
   
   */
   const id = req.params.id;
-  try {
-    await Notes.destroy({ where: { id } });
-    const message = `note -> ${id} was deleted successfuly`;
+  const userId = req.params.userId;
 
+  try {
+    const note = await Notes.findOne({ where: { id: id, uuid: userId } });
+
+    if (!note) {
+      throw new KeeperError(errorCode.FORBIDDEN, 'note doesnt belong to user');
+    }
+
+    await Notes.destroy({ where: { id: id } });
+    const message = `note -> ${id} was deleted successfuly`;
     logger.info(message);
     res.status(200).json({
       message: message,
     });
   } catch (err) {
-    if (err?.name === 'SequelizeDatabaseError') {
-      res.status(200).json({
-        message: `note was deleted successfuly`,
-      });
-    }
-    errorHandler(err, res, 'note was not deleted');
+    errorHandler(err, res);
   }
 };
 
