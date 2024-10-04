@@ -23,6 +23,8 @@ body {
   justify-content: center;
 }
 
+/******************************************************/
+
 header {
   background-color: #f5ba13;
   margin: 16px -16px;
@@ -37,6 +39,8 @@ header h1 {
   font-weight: 200;
 }
 
+/******************************************************/
+
 footer {
   position: absolute;
   text-align: center;
@@ -48,6 +52,8 @@ footer {
 footer p {
   color: #ccc;
 }
+
+/******************************************************/
 
 .note {
   background: #fff;
