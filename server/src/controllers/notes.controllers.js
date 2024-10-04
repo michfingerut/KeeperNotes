@@ -3,34 +3,10 @@ import { errorCode, errorHandler, KeeperError } from '../utils/index.js';
 import Notes from '../db/notes.model.js';
 
 //TODO: create swagger
-const getNotes = async (req, res) => {
-  /* 
-    req format - /notes
-    return format:
-    [{
-      id: number,
-      title: string,
-      content: string
-    }]
-    200 - on success V
-    in the future: 400 - if query string not valid
-    500 - internal err V
-  
-  */
-
-  try {
-    const notes = await Notes.findAll({ raw: true });
-
-    logger.info('get notes');
-    res.status(200).json(notes);
-  } catch (err) {
-    errorHandler(err, res);
-  }
-};
 
 const postNote = async (req, res) => {
   /* 
-    req format - /notes
+    req format - /users/:userId/notes
     body:{
       title: string,
       content: string
@@ -45,6 +21,7 @@ const postNote = async (req, res) => {
     500 - internal err V
   
   */
+  req.body.uuid = req.params.userId;
   try {
     const note = await Notes.create(req.body, { returning: true });
     const message = `note -> ${note.id} was created successfully`;
@@ -58,7 +35,7 @@ const postNote = async (req, res) => {
 
 const putNote = async (req, res) => {
   /* 
-    req format - /note/id
+    req format - /users/:userId/notes/:id
     body:{
       title: string,
       content: string
@@ -102,7 +79,7 @@ const putNote = async (req, res) => {
 
 const deleteNote = async (req, res) => {
   /* 
-    req format - /note/id
+    req format - /users/:userId/notes/:id
     
     return format:
     {
@@ -133,4 +110,28 @@ const deleteNote = async (req, res) => {
   }
 };
 
-export default { getNotes, postNote, putNote, deleteNote };
+const getNotesOfUser = async (req, res) => {
+  /* 
+    req format - /users/:userId/notes
+    return format:
+    [{
+      id: number,
+      title: string,
+      content: string
+    }]
+    200 - on success V
+    in the future: 400 - if query string not valid
+    500 - internal err V
+  
+  */
+  const userId = req.params.userId;
+  try {
+    const notes = await Notes.findAll({ where: { uuid: userId }, raw: true });
+
+    logger.info(`get notes of user ${userId}`);
+    res.status(200).json(notes);
+  } catch (err) {
+    errorHandler(err, res);
+  }
+};
+export default { postNote, putNote, deleteNote, getNotesOfUser };

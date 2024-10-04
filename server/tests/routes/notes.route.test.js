@@ -16,12 +16,19 @@ describe('Route tests', () => {
   const INTERNAL = testData.errorCode.INTERNAL;
 
   //
-  const route = testData.routes.notes;
+  let route;
 
-  beforeAll(async () => {});
+  //
+  let michalUser;
+
+  beforeAll(async () => {
+    await testUtils.clearUsersFromDb();
+    michalUser = await testUtils.createUser();
+    route = `/users/${michalUser.uuid}/notes`;
+  });
 
   beforeEach(async () => {
-    await testUtils.clearUsersFromDb();
+    await testUtils.clearNotesFromDb();
   });
 
   describe('test /notes', () => {

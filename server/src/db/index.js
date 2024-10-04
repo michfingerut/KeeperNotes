@@ -1,9 +1,12 @@
 import logger from '../logger.js';
 import sequelize from './sequalize.js';
+import { createAssociations, syncModels } from './modelSetup.js';
 
 try {
+  await createAssociations();
+  await syncModels();
+
   await sequelize.authenticate();
-  await sequelize.sync({});
   logger.info('connection to sequelize established successfuly');
 } catch (err) {
   logger.error(

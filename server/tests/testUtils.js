@@ -1,8 +1,19 @@
 import Notes from '../src/db/notes.model.js';
+import Users from '../src/db/users.model.js';
 import _ from 'lodash';
+import testData from './testData.js';
 
 const clearUsersFromDb = async () => {
+  await Users.destroy({ where: {} });
+};
+
+const clearNotesFromDb = async () => {
   await Notes.destroy({ where: {} });
+};
+
+const createUser = async () => {
+  const res = await Users.create(testData.users.michal);
+  return res.dataValues;
 };
 
 const testResponseArray = (resData, expectedData, expectedStatus) => {
@@ -14,13 +25,13 @@ const testResponseArray = (resData, expectedData, expectedStatus) => {
   expect(resData.length).toEqual(expectedData.length);
 
   for (let i = 0; i < resData.length; ++i) {
-    compareNote(resData[i], expectedData[i]);
+    compareProperties(resData[i], expectedData[i]);
   }
 };
 
 const testResponseSingle = (resData, expectedData, expectedStatus) => {
   expect(resData.statusCode).toEqual(expectedStatus);
-  compareNote(resData.body, expectedData);
+  compareProperties(resData.body, expectedData);
 };
 
 const testMessageResponse = (resData, expectedStatus, expectedMessage) => {
@@ -28,15 +39,20 @@ const testMessageResponse = (resData, expectedStatus, expectedMessage) => {
   expect(resData.body.message).toEqual(expectedMessage);
 };
 
-const compareNote = (resNote, expectedNote) => {
-  expect(resNote.title).toEqual(expectedNote.title);
-  expect(resNote.content).toEqual(expectedNote.content);
+const compareProperties = (res, expected) => {
+  const keys = Object.keys(expected);
+
+  for (const key of keys) {
+    expect(res[key]).toEqual(expected[key]);
+  }
 };
 
 export default {
   clearUsersFromDb,
-  compareNote,
+  clearNotesFromDb,
   testResponseSingle,
   testResponseArray,
   testMessageResponse,
+  compareProperties,
+  createUser,
 };
