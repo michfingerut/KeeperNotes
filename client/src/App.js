@@ -14,6 +14,7 @@ function App() {
   });
   if (isLoggedIn) {
     //TODO: if logged in then refresh should not go to log in page
+    //TODO: routing
     return <KeeperMainPage userInfo={userInfo} />;
   } else {
     return (
