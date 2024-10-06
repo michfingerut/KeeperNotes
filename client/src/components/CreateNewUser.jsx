@@ -7,13 +7,13 @@ function CreateNewUser(props) {
     event.preventDefault();
     //TODO: err handling
     const userInfo = await backApi.postUser(props.tmpUsr);
-    props.setIsLoggedIn(true);
     props.setUserInfo(() => {
       return {
         ...props.tmpUsr,
-        uuid: userInfo.uuid,
+        uuid: userInfo.userId,
       };
     });
+    props.setIsLoggedIn(true);
   }
 
   return (
