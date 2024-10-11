@@ -23,6 +23,12 @@ function App() {
   //           path="/login"
   //           element={<LogInPage setIsLogged={setIsLogged} />}
   //         ></Route>
+
+  //         <Route
+  //           path="/signup"
+  //           element={<LogInPage setIsLogged={setIsLogged} ??? />}
+  //         ></Route>
+
   //       </Routes>
   //     </BrowserRouter>
   //   </>

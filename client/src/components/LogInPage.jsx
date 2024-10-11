@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CreateNewUser from './CreateNewUser';
 import LogExistingUser from './LogExistingUser';
+import { FaArrowLeft } from 'react-icons/fa';
 
 function LogInPage(props) {
   const [isInitOption, setIsInitOption] = useState(true);
@@ -53,7 +54,12 @@ function LogInPage(props) {
 
   return (
     <div className="log-in-container">
-      <h1>Hello</h1>
+      <h1>
+        {/*
+        TODO: after adding routing, handle the return button
+         <FaArrowLeft style={{ marginRight: '8px' }} /> */}
+        Hello
+      </h1>
       {isInitOption ? init() : option()}
     </div>
   );
