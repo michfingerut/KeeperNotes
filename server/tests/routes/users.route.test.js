@@ -25,6 +25,42 @@ describe('Route tests', () => {
   });
 
   describe('test /users', () => {
+    test('.GET users validation', async () => {
+      const validUser = testData.users.michal;
+      const notValidEmail = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        12,
+        'mich', //not valid email
+        'micha@', //not valid email
+      ];
+
+      for (let i of notValidEmail) {
+        let res = await req.get(
+          `${route}?email=${i}&password=${validUser.password}`,
+        );
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+
+      const notValidPassword = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        'michakaaaa',
+        'Michalaaa',
+        '12345678',
+        'aA1',
+      ];
+
+      for (let i of notValidPassword) {
+        let res = await req.get(
+          `${route}?email=${validUser.email}&password=${i}`,
+        );
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+    });
+
     test('basic .GET and .POST', async () => {
       const expectedData = testData.users.michal;
 
@@ -47,7 +83,7 @@ describe('Route tests', () => {
 
     test('.GET on non existing user', async () => {
       const getRes = await req.get(
-        `${route}?email=123@gmail.com&password=1234`,
+        `${route}?email=123@gmail.com&password=aA123456788`,
       );
 
       testUtils.testMessageResponse(
@@ -64,7 +100,7 @@ describe('Route tests', () => {
       await req.post(route).send(expectedData);
 
       const getRes = await req.get(
-        `${route}?email=${expectedData.email}&password=00000`,
+        `${route}?email=${expectedData.email}&password=bB12345678`,
       );
 
       testUtils.testMessageResponse(
@@ -72,6 +108,101 @@ describe('Route tests', () => {
         FORBIDDEN,
         testData.messages.FORBIDDEN.invalidPass,
       );
+    });
+
+    test('.POST users validation', async () => {
+      const validUser = testData.users.michal;
+      const notValidReq = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: validUser.password,
+        }, //missing param
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          email: validUser.email,
+        }, //missing param
+        {
+          firstName: validUser.firstName,
+          password: validUser.password,
+          email: validUser.email,
+        }, //missing param
+        {
+          lastName: validUser.lastName,
+          password: validUser.password,
+          email: validUser.email,
+        }, //missing param
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: validUser.password,
+          michal: 'michal',
+        }, //not valid param
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          email: validUser.email,
+          michal: 'michal',
+        }, //not valid param
+        {
+          firstName: validUser.firstName,
+          password: validUser.password,
+          email: validUser.email,
+          michal: 'michal',
+        }, //not valid param
+        {
+          lastName: validUser.lastName,
+          password: validUser.password,
+          email: validUser.email,
+          michal: 'michal',
+        }, //not valid param
+        {
+          firstName: true,
+          lastName: validUser.lastName,
+          password: validUser.password,
+          email: validUser.email,
+        }, //not valid firstName
+        {
+          firstName: validUser.firstName,
+          lastName: true,
+          password: validUser.password,
+          email: validUser.email,
+        }, //not valid lastName
+
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: true,
+          email: validUser.email,
+        }, //not valid password
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: 'Aa1',
+          email: validUser.email,
+        }, //not valid password
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: '12345678',
+          email: validUser.email,
+        }, //not valid password
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: validUser.password,
+          email: 'mich',
+        }, //not valid email
+      ];
+
+      for (let i of notValidReq) {
+        let res = await req.post(route).send(i);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
     });
 
     test('.POST on already existing email', async () => {
@@ -92,6 +223,94 @@ describe('Route tests', () => {
         FORBIDDEN,
         testData.messages.FORBIDDEN.userExist,
       );
+    });
+
+    test('.PUT users validation', async () => {
+      const validUser = testData.users.michal;
+      const uuid = testData.randomUUID;
+
+      const notValidUserId = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidUserId) {
+        let res = await req.put(`${route}/${i}`).send(validUser);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+
+      const notValidReq = [
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: validUser.password,
+          michal: 'michal',
+        }, //not valid param
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          email: validUser.email,
+          michal: 'michal',
+        }, //not valid param
+        {
+          firstName: validUser.firstName,
+          password: validUser.password,
+          email: validUser.email,
+          michal: 'michal',
+        }, //not valid param
+        {
+          lastName: validUser.lastName,
+          password: validUser.password,
+          email: validUser.email,
+          michal: 'michal',
+        }, //not valid param
+        {
+          firstName: true,
+          lastName: validUser.lastName,
+          password: validUser.password,
+          email: validUser.email,
+        }, //not valid firstName
+        {
+          firstName: validUser.firstName,
+          lastName: true,
+          password: validUser.password,
+          email: validUser.email,
+        }, //not valid lastName
+
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: true,
+          email: validUser.email,
+        }, //not valid password
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: 'Aa1',
+          email: validUser.email,
+        }, //not valid password
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: '12345678',
+          email: validUser.email,
+        }, //not valid password
+        {
+          firstName: validUser.firstName,
+          lastName: validUser.lastName,
+          password: validUser.password,
+          email: 'mich',
+        }, //not valid email
+      ];
+
+      for (let i of notValidReq) {
+        let res = await req.put(`${route}/${uuid}`).send(i);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
     });
 
     test('basic .PUT (one parameter)', async () => {
@@ -143,8 +362,11 @@ describe('Route tests', () => {
 
     test('.PUT on non existing user', async () => {
       const expectedData = testData.users.michal;
+      const nonExistantUUID = testData.randomUUID;
 
-      const putRes = await req.put(`${route}/123132`).send(expectedData);
+      const putRes = await req
+        .put(`${route}/${nonExistantUUID}`)
+        .send(expectedData);
 
       testUtils.testMessageResponse(
         putRes,
@@ -168,6 +390,21 @@ describe('Route tests', () => {
         FORBIDDEN,
         testData.messages.FORBIDDEN.emailExist,
       );
+    });
+
+    test('.DELETE users validation', async () => {
+      const notValidReq = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidReq) {
+        let res = await req.delete(`${route}/${i}`);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
     });
 
     test('basic .DELETE', async () => {

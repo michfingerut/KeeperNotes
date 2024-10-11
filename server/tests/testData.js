@@ -45,13 +45,13 @@ const users = {
     firstName: 'Michal',
     lastName: 'Fingerut',
     email: 'mich@gmail.com',
-    password: '1234',
+    password: 'aA12345678',
   },
   israel: {
     firstName: 'Israel',
     lastName: 'Israel',
     email: 'israel@gmail.com',
-    password: '1234',
+    password: 'aA12345678',
   },
 };
 

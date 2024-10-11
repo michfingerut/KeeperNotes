@@ -14,7 +14,7 @@ const getUser = async (req, res) => {
       password: string
     }
     200 - on success V
-    in the future: 400 - if query string not valid
+    400 - if query string not valid V
     403 - if its not the right password V
     404 - if not found V
     500 - internal err V
@@ -65,7 +65,7 @@ const postUser = async (req, res) => {
       message: "user -> <userId> was created successfully"
     }
     201 - on success V
-    in the future: 400 - if parameters not valid
+    400 - if parameters not valid V
     403 - if email already exists V
     500 - internal err V
 
@@ -109,9 +109,9 @@ const putUser = async (req, res) => {
       updatedAt: Date
     }
     200 - on success V
-    in the future: 400 - if parameters not valid
+    400 - if parameters not valid V
     403 - if email already exists V
-    404 - user doesnt exist
+    404 - user doesnt exist V
     500 - internal err V
 
   */
@@ -119,6 +119,12 @@ const putUser = async (req, res) => {
   const dataToUpdate = req.body;
 
   try {
+    const isUserExist = await Users.findByPk(userId);
+
+    if (!isUserExist) {
+      throw new KeeperError(errorCode.NOT_FOUND, 'user doesnt exist');
+    }
+
     const updatedUser = (
       await Users.update(dataToUpdate, {
         where: { uuid: userId },
@@ -160,7 +166,7 @@ const deleteUser = async (req, res) => {
       message: "user -> <uuid> was deleted successfully"
     }
     200 - on success / if the user is not found V
-    in the future: 400 - if parameters not valid
+    400 - if parameters not valid V
     403 - if dont have permissions
     500 - internal err V
 

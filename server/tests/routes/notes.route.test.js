@@ -32,6 +32,21 @@ describe('Route tests', () => {
   });
 
   describe('test /notes', () => {
+    test('.GET notes validation', async () => {
+      const notValidReq = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidReq) {
+        let res = await req.get(`/users/${i}/notes`);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+    });
+
     test('basic .GET and .POST', async () => {
       const expectedData = testData.notes;
 
@@ -44,6 +59,37 @@ describe('Route tests', () => {
       const getRes = await req.get(route);
 
       testUtils.testResponseArray(getRes, expectedData, OK);
+    });
+
+    test('.POST notes validation', async () => {
+      const validNote = testData.notes[0];
+      const notValidUserId = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidUserId) {
+        let res = await req.post(`/users/${i}/notes`).send(validNote);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+
+      const notValidNote = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        { title: 'hello', content: [123] }, //not valid content
+        { title: [123], content: 'hello' }, //not valid content
+        { title: 'hello', michal: true }, //not valid param
+        { michal: true, content: 'hello' }, //not valid param
+      ];
+
+      for (let i of notValidNote) {
+        let res = await req.post(route).send(i);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
     });
 
     test('.POST non existing userId', async () => {
@@ -59,6 +105,50 @@ describe('Route tests', () => {
         NOT_FOUND,
         testData.messages.NOT_FOUND.userNotFound,
       );
+    });
+
+    test('.PUT notes validation', async () => {
+      const validNote = testData.notes[0];
+      const notValidUserId = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidUserId) {
+        let res = await req.put(`/users/${i}/notes/1`).send(validNote);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+
+      const notValidId = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        'michal', //not valid string
+        [1, 1], //not valid, array
+      ];
+
+      for (let i of notValidId) {
+        let res = await req
+          .put(`/users/${michalUser.uuid}/notes/${i}`)
+          .send(validNote);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+
+      const notValidNote = [
+        { title: 'hello', content: [123] }, //not valid content
+        { title: [123], content: 'hello' }, //not valid content
+        { title: 'hello', michal: true }, //not valid param
+        { michal: true, content: 'hello' }, //not valid param
+      ];
+
+      for (let i of notValidNote) {
+        let res = await req.put(`${route}/1`).send(i);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
     });
 
     test('basic .PUT (one parameter)', async () => {
@@ -95,9 +185,9 @@ describe('Route tests', () => {
     });
 
     test('.PUT on non existing note', async () => {
-      const expectedData = testData.notes;
+      const expectedData = testData.notes[0];
 
-      const putRes = await req.put(`${route}/200`).send(expectedData);
+      const putRes = await req.put(`${route}/20000`).send(expectedData);
 
       testUtils.testMessageResponse(
         putRes,
@@ -107,9 +197,9 @@ describe('Route tests', () => {
     });
 
     test('.PUT on non existing userId', async () => {
-      const expectedData = testData.notes;
+      const expectedData = testData.notes[0];
 
-      const postRes = await req.post(route).send(expectedData[0]);
+      const postRes = await req.post(route).send(expectedData);
       const id = postRes.body.id;
 
       const putRes = await req
@@ -121,6 +211,21 @@ describe('Route tests', () => {
         NOT_FOUND,
         testData.messages.NOT_FOUND.noteNotFound,
       );
+    });
+
+    test('.DELETE notes validation', async () => {
+      const notValidReq = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidReq) {
+        let res = await req.delete(`/users/${i}`);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
     });
 
     test('basic .DELETE', async () => {

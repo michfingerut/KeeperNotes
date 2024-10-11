@@ -18,7 +18,7 @@ const postNote = async (req, res) => {
     }
     201 - on success V
     404 - if userId doesnt exist V
-    in the future: 400 - if parameters not valid
+    400 - if parameters not valid V
     500 - internal err V
   
   */
@@ -57,8 +57,8 @@ const putNote = async (req, res) => {
     }
 
     200 - on success V
-    in the future: 400 - if parameters not valid
-    404 - note doesnt exist or user doesnt exist
+    400 - if parameters not valid V
+    404 - note doesnt exist or user doesnt exist V
     500 - internal err V
   
   */
@@ -75,7 +75,7 @@ const putNote = async (req, res) => {
       })
     )[1];
 
-    if (!updatedNote) {
+    if (updatedNote.length === 0) {
       throw new KeeperError(errorCode.NOT_FOUND, 'note doesnt exist');
     }
 
@@ -95,9 +95,9 @@ const deleteNote = async (req, res) => {
       message: "note -> <id> was deleted successfully"
     }
     200 - on success / if the note is not found V
-    403 - if note doesnt belong to user
-    in the future: 400 - if parameters not valid
-    in the future: 403 - if dont have permissions
+    403 - if note doesnt belong to user V
+    400 - if parameters not valid V
+    TODO: 403 - if dont have permissions
     500 - internal err V
   
   */
@@ -132,7 +132,7 @@ const getNotesOfUser = async (req, res) => {
       content: string
     }]
     200 - on success V
-    in the future: 400 - if query string not valid
+    400 - if query string not valid V
     500 - internal err V
   
   */

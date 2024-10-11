@@ -1,28 +1,29 @@
 import express from 'express';
 import notesControllers from './controllers/notes.controllers.js';
 import usersControllers from './controllers/users.controllers.js';
+import routesValidators from './validators/routes.validators.js';
 
 const router = express.Router();
 
 router
   .route('/users/:userId/notes')
-  .get(notesControllers.getNotesOfUser)
-  .post(notesControllers.postNote);
+  .get(routesValidators.getNoteOfUser, notesControllers.getNotesOfUser)
+  .post(routesValidators.postNote, notesControllers.postNote);
 
 router
   .route('/users/:userId/notes/:id')
-  .put(notesControllers.putNote)
-  .delete(notesControllers.deleteNote);
+  .put(routesValidators.putNote, notesControllers.putNote)
+  .delete(routesValidators.deleteNote, notesControllers.deleteNote);
 
 router
   .route('/users/:userId')
 
-  .put(usersControllers.putUser)
-  .delete(usersControllers.deleteUser);
+  .put(routesValidators.putUser, usersControllers.putUser)
+  .delete(routesValidators.deleteUser, usersControllers.deleteUser);
 
 router
   .route('/users')
-  .get(usersControllers.getUser)
-  .post(usersControllers.postUser);
+  .get(routesValidators.getUser, usersControllers.getUser)
+  .post(routesValidators.postUser, usersControllers.postUser);
 
 export default router;
