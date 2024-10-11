@@ -6,7 +6,6 @@ const Users = sequelize.define(
   'users',
   {
     uuid: {
-      //TODO for some reason doesnt create it
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
@@ -30,7 +29,6 @@ const Users = sequelize.define(
     },
   },
   {
-    //TODO consider indexing email and password
     id: false,
   },
 );
