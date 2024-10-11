@@ -2,13 +2,19 @@ import React from 'react';
 import backApi from '../services/backApi';
 
 function LogExistingUser(props) {
-  //TODO: handle wrong password or email
   async function toLog(event) {
     event.preventDefault();
+
+    const form = event.target;
+    if (!form.checkValidity()) {
+      return;
+    }
+
     const userInfo = await backApi.getUser(
       props.tmpUsr.email,
       props.tmpUsr.password,
     );
+
     localStorage.setItem('isLogged', true);
     localStorage.setItem('uuid', userInfo.uuid);
     props.setIsLogged(true);
@@ -32,6 +38,8 @@ function LogExistingUser(props) {
           value={props.tmpUsr.password}
           placeholder="Password"
           required
+          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
+          title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number."
         />
         <button type="submit">Log In</button>
       </form>

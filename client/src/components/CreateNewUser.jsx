@@ -39,6 +39,8 @@ function CreateNewUser(props) {
           value={props.tmpUsr.password}
           placeholder="Password"
           required
+          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
+          title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number."
         />
         <input
           type="email"
