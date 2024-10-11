@@ -28,6 +28,9 @@ body {
 /******************************************************/
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #f5ba13;
   margin: 16px -16px;
   padding: 16px 32px;
@@ -179,10 +182,9 @@ button {
   margin-bottom: 20px;
 }
 
+.header button,
 .log-in-container button {
   padding: 12px 24px;
-  font-size: 1.2em;
-  width: 200px;
   margin: 10px;
   background-color: #f5ba13;
   border: 2px solid black;
@@ -193,6 +195,10 @@ button {
   color: black;
 }
 
+.log-in-container button {
+  width: 200px;
+}
+.header button:hover,
 .log-in-container button:hover {
   background-color: white;
   color: #d69f09;
