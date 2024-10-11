@@ -1,13 +1,14 @@
 # Ignore client node_modules
-/client/node_modules/*
 
 # Exclude server directory and its contents
 !/server/**
 !/server/
 
-# Ignore build and node_modules in the server
+# Ignore build and node_modulesand build directories
+/client/node_modules
 /server/node_modules
 /server/build
+/client/build
 
 # Exclude specific files
 !/scripts/*.sh
