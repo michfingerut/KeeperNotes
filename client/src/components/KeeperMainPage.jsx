@@ -10,11 +10,11 @@ function KeeperMainPage(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const userInfo = props.userInfo;
+  const uuid = props.uuid;
 
   useEffect(() => {
     backApi
-      .getNotes(userInfo.uuid)
+      .getNotes(uuid)
       .then((data) => {
         setNotes(data);
         setLoading(false);
@@ -26,7 +26,7 @@ function KeeperMainPage(props) {
   }, []);
 
   async function deleteNote(key) {
-    await backApi.removeNote(key, userInfo.uuid);
+    await backApi.removeNote(key, uuid);
     setNotes((prevNotes) => {
       prevNotes = prevNotes.filter((note) => {
         return note.id !== key;
@@ -46,7 +46,7 @@ function KeeperMainPage(props) {
   return (
     <div className="container">
       <Header title="Keeper" />
-      <InputArea stateFunc={setNotes} userId={userInfo.uuid} />
+      <InputArea stateFunc={setNotes} userId={uuid} />
       <div className="cards-container">
         {notes.map((note) => {
           return (
@@ -56,7 +56,7 @@ function KeeperMainPage(props) {
               title={note.title}
               content={note.content}
               deleteFunc={deleteNote}
-              userId={userInfo.uuid}
+              userId={uuid}
             />
           );
         })}

@@ -3,11 +3,10 @@ import sequelize from './sequalize.js';
 import { createAssociations, syncModels } from './modelSetup.js';
 
 try {
-  await createAssociations();
-  await syncModels();
-
   await sequelize.authenticate();
   logger.info('connection to sequelize established successfuly');
+  await createAssociations();
+  await syncModels();
 } catch (err) {
   logger.error(
     `unable to create tables and establish sequalize connection -> ${JSON.stringify(

@@ -11,7 +11,7 @@ const syncModels = async () => {
 };
 
 const createAssociations = async () => {
-  await Notes.belongsTo(Users, {
+  Notes.belongsTo(Users, {
     foreignKey: { name: 'uuid', allowNull: false },
     onDelete: 'CASCADE',
   });

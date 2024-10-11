@@ -4,22 +4,15 @@ import './styles/App.css';
 import React, { useState } from 'react';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    firstName: '',
-    lastName: '',
-    password: '',
-    email: '',
-    uuid: '',
-  });
-  if (isLoggedIn) {
-    //TODO: if logged in then refresh should not go to log in page
+  const uuid = localStorage.getItem('uuid');
+
+  if (localStorage.getItem('isLogged')) {
     //TODO: routing
-    return <KeeperMainPage userInfo={userInfo} />;
+    //TODO: logout
+    //TODO: styled component
+    return <KeeperMainPage uuid={uuid} />;
   } else {
-    return (
-      <LogInPage setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} />
-    );
+    return <LogInPage />;
   }
 }
 

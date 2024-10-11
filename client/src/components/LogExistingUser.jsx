@@ -8,10 +8,8 @@ function LogExistingUser(props) {
       props.tmpUsr.email,
       props.tmpUsr.password,
     );
-    props.setIsLoggedIn(true);
-    props.setUserInfo({
-      ...userInfo,
-    });
+    localStorage.setItem('isLogged', true);
+    localStorage.setItem('uuid', userInfo.uuid);
   }
 
   return (

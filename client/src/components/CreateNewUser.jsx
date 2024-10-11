@@ -5,15 +5,11 @@ import backApi from '../services/backApi';
 function CreateNewUser(props) {
   async function createUser(event) {
     event.preventDefault();
+
     //TODO: err handling
     const userInfo = await backApi.postUser(props.tmpUsr);
-    props.setUserInfo(() => {
-      return {
-        ...props.tmpUsr,
-        uuid: userInfo.userId,
-      };
-    });
-    props.setIsLoggedIn(true);
+    localStorage.setItem('uuid', userInfo.userId);
+    localStorage.setItem('isLogged', true);
   }
 
   return (
