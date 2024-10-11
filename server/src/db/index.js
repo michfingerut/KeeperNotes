@@ -3,6 +3,7 @@ import sequelize from './sequalize.js';
 import { createAssociations, syncModels } from './modelSetup.js';
 
 try {
+  //TODO: bug in first build
   await sequelize.authenticate();
   logger.info('connection to sequelize established successfuly');
   await createAssociations();
