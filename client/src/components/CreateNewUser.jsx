@@ -10,6 +10,7 @@ function CreateNewUser(props) {
     const userInfo = await backApi.postUser(props.tmpUsr);
     localStorage.setItem('uuid', userInfo.userId);
     localStorage.setItem('isLogged', true);
+    props.setIsLogged(true);
   }
 
   return (

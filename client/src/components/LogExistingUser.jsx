@@ -11,6 +11,7 @@ function LogExistingUser(props) {
     );
     localStorage.setItem('isLogged', true);
     localStorage.setItem('uuid', userInfo.uuid);
+    props.setIsLogged(true);
   }
 
   return (

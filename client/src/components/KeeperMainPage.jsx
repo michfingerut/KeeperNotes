@@ -45,7 +45,7 @@ function KeeperMainPage(props) {
 
   return (
     <div className="container">
-      <Header title="Keeper" />
+      <Header title="Keeper" setIsLogged={props.setIsLogged} />
       <InputArea stateFunc={setNotes} userId={uuid} />
       <div className="cards-container">
         {notes.map((note) => {

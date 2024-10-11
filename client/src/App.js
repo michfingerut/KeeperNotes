@@ -4,15 +4,18 @@ import './styles/App.css';
 import React, { useState } from 'react';
 
 function App() {
+  const [isLogged, setIsLogged] = useState(
+    JSON.parse(localStorage.getItem('isLogged')),
+  );
   const uuid = localStorage.getItem('uuid');
 
-  if (localStorage.getItem('isLogged')) {
+  if (isLogged) {
     //TODO: routing
     //TODO: logout
     //TODO: styled component
-    return <KeeperMainPage uuid={uuid} />;
+    return <KeeperMainPage uuid={uuid} setIsLogged={setIsLogged} />;
   } else {
-    return <LogInPage />;
+    return <LogInPage setIsLogged={setIsLogged} />;
   }
 }
 

@@ -30,9 +30,17 @@ function LogInPage(props) {
 
   function option() {
     return toSignUp ? (
-      <CreateNewUser handleInput={handleInput} tmpUsr={tmpUsr} />
+      <CreateNewUser
+        handleInput={handleInput}
+        tmpUsr={tmpUsr}
+        setIsLogged={props.setIsLogged}
+      />
     ) : (
-      <LogExistingUser handleInput={handleInput} tmpUsr={tmpUsr} />
+      <LogExistingUser
+        handleInput={handleInput}
+        tmpUsr={tmpUsr}
+        setIsLogged={props.setIsLogged}
+      />
     );
   }
 
