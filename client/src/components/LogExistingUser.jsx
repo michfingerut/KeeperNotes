@@ -2,6 +2,7 @@ import React from 'react';
 import backApi from '../services/backApi';
 
 function LogExistingUser(props) {
+  //TODO: handle wrong password or email
   async function toLog(event) {
     event.preventDefault();
     const userInfo = await backApi.getUser(
