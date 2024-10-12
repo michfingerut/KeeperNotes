@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import InputArea from '../components/InputArea';
 import backApi from '../services/backApi';
-import { GlobalStyle, Container, NotesContainer } from '../styles/styles';
+import { Container, NotesContainer } from '../styles/styles';
 
 function KeeperMainPage(props) {
   const [notes, setNotes] = useState([]);
@@ -49,7 +49,6 @@ function KeeperMainPage(props) {
 
   return (
     <div>
-      <GlobalStyle />
       <Container>
         <Header title="Keeper" setIsLogged={props.setIsLogged} />
         <InputArea stateFunc={setNotes} userId={uuid} />

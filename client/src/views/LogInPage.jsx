@@ -5,12 +5,7 @@ import { RiArrowGoBackLine } from 'react-icons/ri';
 //Internal modules
 import CreateNewUser from '../components/CreateNewUser';
 import LogExistingUser from '../components/LogExistingUser';
-import {
-  GlobalStyle,
-  LogInContainer,
-  LogInH1,
-  LogButton,
-} from '../styles/styles';
+import { LogInContainer, LogInH1, LogButton } from '../styles/styles';
 
 function LogInPage(props) {
   const [isInitOption, setIsInitOption] = useState(true);
@@ -69,7 +64,6 @@ function LogInPage(props) {
 
   return (
     <div>
-      <GlobalStyle />
       <LogInContainer>
         <LogInH1>
           {!isInitOption ? (
