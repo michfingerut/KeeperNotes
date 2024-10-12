@@ -1,47 +1,47 @@
 import KeeperMainPage from './components/KeeperMainPage';
 import LogInPage from './components/LogInPage';
 import './styles/App.css';
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+
+//TODO: styled component
 
 function App() {
   const [isLogged, setIsLogged] = useState(
     JSON.parse(localStorage.getItem('isLogged')),
   );
   const uuid = localStorage.getItem('uuid');
+  const navigate = useNavigate();
 
-  // return (
-  //   <>
-  //     <BrowserRouter basename="/keeper">
-  //       <Routes>
-  //         <Route
-  //           path="/"
-  //           element={<KeeperMainPage uuid={uuid} setIsLogged={setIsLogged} />}
-  //         ></Route>
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/login');
+    } else {
+      navigate('/');
+    }
+  }, [isLogged, navigate]);
 
-  //         <Route
-  //           path="/login"
-  //           element={<LogInPage setIsLogged={setIsLogged} />}
-  //         ></Route>
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={<KeeperMainPage uuid={uuid} setIsLogged={setIsLogged} />}
+      ></Route>
 
-  //         <Route
-  //           path="/signup"
-  //           element={<LogInPage setIsLogged={setIsLogged} ??? />}
-  //         ></Route>
-
-  //       </Routes>
-  //     </BrowserRouter>
-  //   </>
-  // );
-
-  if (isLogged) {
-    //TODO: routing
-    //TODO: logout
-    //TODO: styled component
-    return <KeeperMainPage uuid={uuid} setIsLogged={setIsLogged} />;
-  } else {
-    return <LogInPage setIsLogged={setIsLogged} />;
-  }
+      <Route
+        path="/login"
+        element={<LogInPage setIsLogged={setIsLogged} />}
+      ></Route>
+    </Routes>
+  );
 }
 
-export default App;
+function RootApp() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+export default RootApp;
