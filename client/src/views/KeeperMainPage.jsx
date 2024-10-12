@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import InputArea from '../components/InputArea';
 import backApi from '../services/backApi';
+import { GlobalStyle, Container, NotesContainer } from '../styles/styles';
 
 function KeeperMainPage(props) {
   const [notes, setNotes] = useState([]);
@@ -47,24 +48,27 @@ function KeeperMainPage(props) {
   }
 
   return (
-    <div className="container">
-      <Header title="Keeper" setIsLogged={props.setIsLogged} />
-      <InputArea stateFunc={setNotes} userId={uuid} />
-      <div className="cards-container">
-        {notes.map((note) => {
-          return (
-            <Note
-              key={note.id}
-              id={note.id}
-              title={note.title}
-              content={note.content}
-              deleteFunc={deleteNote}
-              userId={uuid}
-            />
-          );
-        })}
-      </div>
-      <Footer />
+    <div>
+      <GlobalStyle />
+      <Container>
+        <Header title="Keeper" setIsLogged={props.setIsLogged} />
+        <InputArea stateFunc={setNotes} userId={uuid} />
+        <NotesContainer>
+          {notes.map((note) => {
+            return (
+              <Note
+                key={note.id}
+                id={note.id}
+                title={note.title}
+                content={note.content}
+                deleteFunc={deleteNote}
+                userId={uuid}
+              />
+            );
+          })}
+        </NotesContainer>
+        <Footer />
+      </Container>
     </div>
   );
 }

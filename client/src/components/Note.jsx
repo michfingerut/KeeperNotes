@@ -1,14 +1,22 @@
 //TODO: add patch functionality
-//External modules //Internal modules
+//Internal modules
+import {
+  NoteStyle,
+  NoteH1,
+  NoteP,
+  NoteContainer,
+  NoteButton,
+} from '../styles/styles';
+
 function Note(props) {
   return (
-    <div className="note">
-      <h1>{props.title}</h1>
-      <div className="note-container">
-        <p>{props.content}</p>
-      </div>
-      <button onClick={() => props.deleteFunc(props.id)}> delete</button>
-    </div>
+    <NoteStyle>
+      <NoteH1>{props.title}</NoteH1>
+      <NoteContainer>
+        <NoteP>{props.content}</NoteP>
+      </NoteContainer>
+      <NoteButton onClick={() => props.deleteFunc(props.id)}>delete</NoteButton>
+    </NoteStyle>
   );
 }
 

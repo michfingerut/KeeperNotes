@@ -1,8 +1,14 @@
-//External modules
+// External modules
 import React, { useState } from 'react';
 
-//Internal modules
+// Internal modules
 import backApi from '../services/backApi';
+import {
+  TitleInput,
+  AddButton,
+  InputAreaForm,
+  ContentInput,
+} from '../styles/styles';
 
 function InputArea(props) {
   const [tmpNote, setTmpNote] = useState({
@@ -12,7 +18,7 @@ function InputArea(props) {
 
   async function addNote(event) {
     event.preventDefault();
-    //TODO: err handling
+    // TODO: Error handling
     const createNote = await backApi.postNote(tmpNote, props.userId);
 
     props.stateFunc((prevNotes) => {
@@ -39,27 +45,21 @@ function InputArea(props) {
   }
 
   return (
-    <div className="input-area">
-      <form onSubmit={addNote}>
-        <input
-          className="title"
-          type="text"
-          name="title"
-          onChange={handleInput}
-          value={tmpNote.title}
-          placeholder="add note title"
-        />
-        <textarea
-          className="content"
-          type="text"
-          name="content"
-          onChange={handleInput}
-          value={tmpNote.content}
-          placeholder="add note content"
-        />
-        <button type="submit">Add</button>
-      </form>
-    </div>
+    <InputAreaForm onSubmit={addNote}>
+      <TitleInput
+        name="title"
+        onChange={handleInput}
+        value={tmpNote.title}
+        placeholder="add note title"
+      />
+      <ContentInput
+        name="content"
+        onChange={handleInput}
+        value={tmpNote.content}
+        placeholder="add note content"
+      />
+      <AddButton type="submit">Add</AddButton>
+    </InputAreaForm>
   );
 }
 

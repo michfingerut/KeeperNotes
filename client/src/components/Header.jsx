@@ -1,3 +1,5 @@
+import { HeaderStyle, HeaderH1, LogOutButton } from '../styles/styles';
+
 function Header(props) {
   function logOut() {
     localStorage.setItem('uuid', undefined);
@@ -6,10 +8,10 @@ function Header(props) {
   }
 
   return (
-    <div className="header">
-      <h1>{props.title}</h1>
-      <button onClick={() => logOut()}> Log out</button>
-    </div>
+    <HeaderStyle>
+      <HeaderH1>{props.title}</HeaderH1>
+      <LogOutButton onClick={logOut}>Log out</LogOutButton>
+    </HeaderStyle>
   );
 }
 

@@ -5,9 +5,6 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 //Internal modules
 import KeeperMainPage from './views/KeeperMainPage';
 import LogInPage from './views/LogInPage';
-import './styles/App.css';
-
-//TODO: styled component
 
 function App() {
   const [isLogged, setIsLogged] = useState(

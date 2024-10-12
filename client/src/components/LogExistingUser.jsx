@@ -1,12 +1,18 @@
-//External modules
+// External modules
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 
-//Internal modules
+// Internal modules
 import backApi from '../services/backApi';
 import { showError } from '../utils/errorUtils.js';
+import {
+  SignUpContainer,
+  SignUpForm,
+  SignUpInput,
+  LogButton,
+} from '../styles/styles';
 
-//TODO: forgot password button
+// TODO: forgot password button
 function LogExistingUser(props) {
   async function toLog(event) {
     event.preventDefault();
@@ -28,13 +34,13 @@ function LogExistingUser(props) {
           showError('Wrong password, please try again');
           break;
         case 404:
-          showError('Non existing email, please try again');
+          showError('Non-existing email, please try again');
           break;
         case 400:
           showError('Invalid email, please try again');
           break;
         default:
-          showError('something went wrong, please try again later');
+          showError('Something went wrong, please try again later');
           break;
       }
       return;
@@ -46,9 +52,9 @@ function LogExistingUser(props) {
   }
 
   return (
-    <div className="sign-up-container">
-      <form onSubmit={toLog} className="sign-up-form">
-        <input
+    <SignUpContainer>
+      <SignUpForm onSubmit={toLog}>
+        <SignUpInput
           type="email"
           name="email"
           onChange={props.handleInput}
@@ -56,7 +62,7 @@ function LogExistingUser(props) {
           placeholder="Email"
           required
         />
-        <input
+        <SignUpInput
           type="password"
           name="password"
           onChange={props.handleInput}
@@ -66,10 +72,10 @@ function LogExistingUser(props) {
           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
           title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number."
         />
-        <button type="submit">Log In</button>
-      </form>
+        <LogButton type="submit">Log In</LogButton>
+      </SignUpForm>
       <ToastContainer />
-    </div>
+    </SignUpContainer>
   );
 }
 

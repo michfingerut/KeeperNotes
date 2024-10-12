@@ -1,10 +1,12 @@
+import { FooterStyle, FooterP } from '../styles/styles';
+
 function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer>
-      <p>Copyrights © {year}</p>
-    </footer>
+    <FooterStyle>
+      <FooterP>Copyrights © {year}</FooterP>
+    </FooterStyle>
   );
 }
 export default Footer;

@@ -1,12 +1,18 @@
-//External modules
+// External modules
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 
-//Internal modules
+// Internal modules
 import backApi from '../services/backApi';
 import { showError } from '../utils/errorUtils.js';
+import {
+  SignUpContainer,
+  SignUpForm,
+  SignUpInput,
+  LogButton,
+} from '../styles/styles'; // Import your styled components
 
-//TODO: add invalid password
+// TODO: add invalid password
 
 function CreateNewUser(props) {
   async function createUser(event) {
@@ -26,7 +32,7 @@ function CreateNewUser(props) {
           );
           break;
         default:
-          showError('something went wrong, please try again later');
+          showError('Something went wrong, please try again later');
           break;
       }
       return;
@@ -38,9 +44,9 @@ function CreateNewUser(props) {
   }
 
   return (
-    <div className="sign-up-container">
-      <form onSubmit={createUser} className="sign-up-form">
-        <input
+    <SignUpContainer>
+      <SignUpForm onSubmit={createUser}>
+        <SignUpInput
           type="text"
           name="firstName"
           onChange={props.handleInput}
@@ -48,7 +54,7 @@ function CreateNewUser(props) {
           placeholder="First name"
           required
         />
-        <input
+        <SignUpInput
           type="text"
           name="lastName"
           onChange={props.handleInput}
@@ -56,7 +62,7 @@ function CreateNewUser(props) {
           placeholder="Last name"
           required
         />
-        <input
+        <SignUpInput
           type="email"
           name="email"
           onChange={props.handleInput}
@@ -64,7 +70,7 @@ function CreateNewUser(props) {
           placeholder="Email"
           required
         />
-        <input
+        <SignUpInput
           type="password"
           name="password"
           onChange={props.handleInput}
@@ -74,10 +80,10 @@ function CreateNewUser(props) {
           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
           title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number."
         />
-        <button type="submit">Sign Up</button>
-      </form>
+        <LogButton type="submit">Sign Up</LogButton>
+      </SignUpForm>
       <ToastContainer />
-    </div>
+    </SignUpContainer>
   );
 }
 

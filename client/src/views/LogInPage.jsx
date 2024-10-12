@@ -5,6 +5,12 @@ import { RiArrowGoBackLine } from 'react-icons/ri';
 //Internal modules
 import CreateNewUser from '../components/CreateNewUser';
 import LogExistingUser from '../components/LogExistingUser';
+import {
+  GlobalStyle,
+  LogInContainer,
+  LogInH1,
+  LogButton,
+} from '../styles/styles';
 
 function LogInPage(props) {
   const [isInitOption, setIsInitOption] = useState(true);
@@ -20,15 +26,15 @@ function LogInPage(props) {
   function init() {
     return (
       <div>
-        <button onClick={() => setIsInitOption(false)}>Log In</button>
-        <button
+        <LogButton onClick={() => setIsInitOption(false)}>Log In</LogButton>
+        <LogButton
           onClick={() => {
             setIsInitOption(false);
             setToSignUp(true);
           }}
         >
           Sign Up
-        </button>
+        </LogButton>
       </div>
     );
   }
@@ -62,24 +68,25 @@ function LogInPage(props) {
   }
 
   return (
-    <div className="log-in-container">
-      <h1>
-        {!isInitOption ? (
-          <RiArrowGoBackLine
-            onClick={() => goBack()}
-            style={{
-              marginRight: '10px',
-              cursor: 'pointer',
-              width: '25px',
-            }}
-          />
-        ) : (
-          <div></div>
-        )}
-        Hello
-      </h1>
+    <div>
+      <GlobalStyle />
+      <LogInContainer>
+        <LogInH1>
+          {!isInitOption ? (
+            <RiArrowGoBackLine
+              onClick={() => goBack()}
+              style={{
+                marginRight: '10px',
+                cursor: 'pointer',
+                width: '25px',
+              }}
+            />
+          ) : null}
+          Hello
+        </LogInH1>
 
-      <div>{isInitOption ? init() : option()}</div>
+        <div>{isInitOption ? init() : option()}</div>
+      </LogInContainer>
     </div>
   );
 }
