@@ -11,7 +11,8 @@ import {
 function Note(props) {
   return (
     <NoteStyle>
-      <NoteH1>{props.title}</NoteH1>
+      {/* when title too long looks cut, TODO: add tooltip */}
+      <NoteH1 style={{ overflowX: 'hidden' }}>{props.title}</NoteH1>
       <NoteContainer>
         <NoteP>{props.content}</NoteP>
       </NoteContainer>

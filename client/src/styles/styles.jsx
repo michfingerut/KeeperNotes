@@ -54,11 +54,12 @@ const HeaderH1 = styled.h1`
 `;
 
 const FooterStyle = styled.footer`
-  position: absolute;
   text-align: center;
   bottom: 0;
   width: 90%;
-  height: 2.5rem;
+  height: 2rem;
+
+  position: fixed;
 `;
 
 const FooterP = styled.p`
@@ -115,14 +116,10 @@ const NoteContainer = styled.div`
 const NotesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center items horizontally */
+  justify-content: center;
   overflow-y: auto;
   overflow-x: auto;
-  max-height: 63vh;
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-  }
+  max-height: calc(63vh - 1rem);
 `;
 
 const InputAreaForm = styled.form`
@@ -168,8 +165,8 @@ const LogInContainer = styled.div`
 `;
 
 const LogInH1 = styled.h1`
-  display: flex; /* Use flexbox for layout */
-  align-items: center; /* Center vertically */
+  display: flex;
+  align-items: center;
 `;
 
 const LogButton = styled.button`
