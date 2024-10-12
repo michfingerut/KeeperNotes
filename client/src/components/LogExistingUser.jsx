@@ -1,6 +1,9 @@
 import React from 'react';
 import backApi from '../services/backApi';
+import { ToastContainer } from 'react-toastify';
 
+import { showError } from '../utils/errorUtils.js';
+//TODO: forgot password button
 function LogExistingUser(props) {
   async function toLog(event) {
     event.preventDefault();
@@ -10,10 +13,29 @@ function LogExistingUser(props) {
       return;
     }
 
-    const userInfo = await backApi.getUser(
-      props.tmpUsr.email,
-      props.tmpUsr.password,
-    );
+    let userInfo;
+    try {
+      userInfo = await backApi.getUser(
+        props.tmpUsr.email,
+        props.tmpUsr.password,
+      );
+    } catch (err) {
+      switch (err?.status) {
+        case 403:
+          showError('Wrong password, please try again');
+          break;
+        case 404:
+          showError('Non existing email, please try again');
+          break;
+        case 400:
+          showError('Invalid email, please try again');
+          break;
+        default:
+          showError('something went wrong, please try again later');
+          break;
+      }
+      return;
+    }
 
     localStorage.setItem('isLogged', true);
     localStorage.setItem('uuid', userInfo.uuid);
@@ -43,6 +65,7 @@ function LogExistingUser(props) {
         />
         <button type="submit">Log In</button>
       </form>
+      <ToastContainer />
     </div>
   );
 }

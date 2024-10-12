@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import CreateNewUser from './CreateNewUser';
 import LogExistingUser from './LogExistingUser';
-import { FaArrowLeft } from 'react-icons/fa';
+import { RiArrowGoBackLine } from 'react-icons/ri';
 
 function LogInPage(props) {
   const [isInitOption, setIsInitOption] = useState(true);
   const [toSignUp, setToSignUp] = useState(false);
+
   const [tmpUsr, setTmpUsr] = useState({
     firstName: '',
     lastName: '',
@@ -52,15 +53,30 @@ function LogInPage(props) {
     });
   }
 
+  function goBack() {
+    setIsInitOption(true);
+    setToSignUp(false);
+  }
+
   return (
     <div className="log-in-container">
       <h1>
-        {/*
-        TODO: after adding routing, handle the return button
-         <FaArrowLeft style={{ marginRight: '8px' }} /> */}
+        {!isInitOption ? (
+          <RiArrowGoBackLine
+            onClick={() => goBack()}
+            style={{
+              marginRight: '10px',
+              cursor: 'pointer',
+              width: '25px',
+            }}
+          />
+        ) : (
+          <div></div>
+        )}
         Hello
       </h1>
-      {isInitOption ? init() : option()}
+
+      <div>{isInitOption ? init() : option()}</div>
     </div>
   );
 }
