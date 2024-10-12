@@ -1,6 +1,6 @@
 //TODO: add patch functionality
-
-function Card(props) {
+//External modules //Internal modules
+function Note(props) {
   return (
     <div className="note">
       <h1>{props.title}</h1>
@@ -12,4 +12,4 @@ function Card(props) {
   );
 }
 
-export default Card;
+export default Note;

@@ -111,6 +111,7 @@ button {
   max-height: calc(100% - 50px);
 }
 
+/*TODO: change name bug*/
 .cards-container {
   display: flex;
   flex-wrap: wrap;

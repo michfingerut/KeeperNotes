@@ -1,8 +1,11 @@
+//External modules
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+
+//Internal modules
 import KeeperMainPage from './components/KeeperMainPage';
 import LogInPage from './components/LogInPage';
 import './styles/App.css';
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 //TODO: styled component
 
@@ -36,6 +39,7 @@ function App() {
   );
 }
 
+//useNavigate() can be used only in the context of <Router> component
 function RootApp() {
   return (
     <BrowserRouter>

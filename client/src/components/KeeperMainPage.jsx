@@ -1,8 +1,11 @@
-import Card from './Card';
+//External modules
+import React, { useState, useEffect } from 'react';
+
+//Internal modules
+import Note from './Note';
 import Header from './Header';
 import Footer from './Footer';
 import InputArea from './InputArea';
-import React, { useState, useEffect } from 'react';
 import backApi from '../services/backApi';
 
 function KeeperMainPage(props) {
@@ -50,7 +53,7 @@ function KeeperMainPage(props) {
       <div className="cards-container">
         {notes.map((note) => {
           return (
-            <Card
+            <Note
               key={note.id}
               id={note.id}
               title={note.title}

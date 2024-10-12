@@ -1,7 +1,10 @@
+//External modules
 import React, { useState } from 'react';
+import { RiArrowGoBackLine } from 'react-icons/ri';
+
+//Internal modules
 import CreateNewUser from './CreateNewUser';
 import LogExistingUser from './LogExistingUser';
-import { RiArrowGoBackLine } from 'react-icons/ri';
 
 function LogInPage(props) {
   const [isInitOption, setIsInitOption] = useState(true);

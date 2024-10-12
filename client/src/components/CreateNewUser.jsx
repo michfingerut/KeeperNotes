@@ -1,14 +1,18 @@
+//External modules
 import React from 'react';
-import backApi from '../services/backApi';
 import { ToastContainer } from 'react-toastify';
 
+//Internal modules
+import backApi from '../services/backApi';
 import { showError } from '../utils/errorUtils.js';
 
 //TODO: add invalid password
+
 function CreateNewUser(props) {
   async function createUser(event) {
-    event.preventDefault();
     let userInfo;
+    event.preventDefault();
+
     try {
       userInfo = await backApi.postUser(props.tmpUsr);
     } catch (err) {

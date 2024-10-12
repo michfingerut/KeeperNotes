@@ -1,7 +1,9 @@
+//External modules
+import React from 'react';
+
+//Internal modules
 import KeeperMainPage from '../components/KeeperMainPage.jsx';
 import LogInPage from '../components/LogInPage';
-import React from 'react';
-import { Route } from 'react-router-dom';
 
 const routes = [
   {

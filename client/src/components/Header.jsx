@@ -4,6 +4,7 @@ function Header(props) {
     localStorage.setItem('isLogged', false);
     props.setIsLogged(false);
   }
+
   return (
     <div className="header">
       <h1>{props.title}</h1>

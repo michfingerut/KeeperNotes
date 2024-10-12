@@ -1,8 +1,11 @@
+//External modules
 import React from 'react';
-import backApi from '../services/backApi';
 import { ToastContainer } from 'react-toastify';
 
+//Internal modules
+import backApi from '../services/backApi';
 import { showError } from '../utils/errorUtils.js';
+
 //TODO: forgot password button
 function LogExistingUser(props) {
   async function toLog(event) {

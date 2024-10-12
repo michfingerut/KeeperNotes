@@ -1,4 +1,7 @@
+//External modules
 import React, { useState } from 'react';
+
+//Internal modules
 import backApi from '../services/backApi';
 
 function InputArea(props) {
