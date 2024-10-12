@@ -168,8 +168,8 @@ const LogInContainer = styled.div`
 `;
 
 const LogInH1 = styled.h1`
-  font-size: 2.5em;
-  margin-bottom: 20px;
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center vertically */
 `;
 
 const LogButton = styled.button`
@@ -216,7 +216,6 @@ const SignUpContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
 `;
 
 const SignUpForm = styled.form`

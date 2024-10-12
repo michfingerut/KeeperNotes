@@ -78,10 +78,12 @@ function LogInPage(props) {
               style={{
                 marginRight: '10px',
                 cursor: 'pointer',
-                width: '25px',
+                width: '20px',
               }}
             />
-          ) : null}
+          ) : (
+            <div style={{ marginLeft: '25px' }}> </div>
+          )}
           Hello
         </LogInH1>
 
