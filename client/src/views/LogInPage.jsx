@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { RiArrowGoBackLine } from 'react-icons/ri';
 
 //Internal modules
-import CreateNewUser from './CreateNewUser';
-import LogExistingUser from './LogExistingUser';
+import CreateNewUser from '../components/CreateNewUser';
+import LogExistingUser from '../components/LogExistingUser';
 
 function LogInPage(props) {
   const [isInitOption, setIsInitOption] = useState(true);

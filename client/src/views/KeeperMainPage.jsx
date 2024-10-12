@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react';
 
 //Internal modules
-import Note from './Note';
-import Header from './Header';
-import Footer from './Footer';
-import InputArea from './InputArea';
+import Note from '../components/Note';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import InputArea from '../components/InputArea';
 import backApi from '../services/backApi';
 
 function KeeperMainPage(props) {

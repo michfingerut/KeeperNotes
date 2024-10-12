@@ -2,8 +2,8 @@
 import React from 'react';
 
 //Internal modules
-import KeeperMainPage from '../components/KeeperMainPage.jsx';
-import LogInPage from '../components/LogInPage';
+import KeeperMainPage from '../views/KeeperMainPage.jsx';
+import LogInPage from '../views/LogInPage.jsx';
 
 const routes = [
   {
