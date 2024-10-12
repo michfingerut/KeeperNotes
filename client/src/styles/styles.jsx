@@ -29,7 +29,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-// Container for main content
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,7 +36,6 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-// Header styles
 const HeaderStyle = styled.div`
   display: flex;
   justify-content: space-between;
@@ -55,7 +53,6 @@ const HeaderH1 = styled.h1`
   font-weight: 200;
 `;
 
-// Footer styles
 const FooterStyle = styled.footer`
   position: absolute;
   text-align: center;
@@ -68,7 +65,6 @@ const FooterP = styled.p`
   color: #ccc;
 `;
 
-// Note styles
 const NoteStyle = styled.div`
   background: #fff;
   border-radius: 7px;
@@ -111,7 +107,6 @@ const NoteButton = styled.button`
   margin: 0.2em;
 `;
 
-// Note container styles
 const NoteContainer = styled.div`
   overflow-y: auto;
   max-height: calc(100% - 50px);
@@ -130,7 +125,6 @@ const NotesContainer = styled.div`
   }
 `;
 
-// Input area styles
 const InputAreaForm = styled.form`
   width: 20em;
   height: 18vh;
@@ -163,7 +157,6 @@ const ContentInput = styled.textarea`
   word-wrap: break-word;
 `;
 
-// Log-in container styles
 const LogInContainer = styled.div`
   background-color: #f5ba13;
   height: 100vh;
@@ -218,7 +211,6 @@ const LogOutButton = styled.button`
   }
 `;
 
-// Sign-up container styles
 const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
