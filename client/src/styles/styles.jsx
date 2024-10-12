@@ -49,8 +49,7 @@ const HeaderStyle = styled.div`
 
 const HeaderH1 = styled.h1`
   color: #fff;
-  font-family: 'McLaren', cursive;
-  font-weight: 200;
+  font-weight: 400;
 `;
 
 const FooterStyle = styled.footer`
