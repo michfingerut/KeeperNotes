@@ -4,7 +4,6 @@ import request from 'supertest';
 import testData from '../testData.js';
 import testUtils from '../testUtils.js';
 
-//TODO: bug- when run those tests together with users route but users route runs first, notes tests fails
 describe('Route tests', () => {
   const req = request(`${process.env.SERVER_URL}`);
 
