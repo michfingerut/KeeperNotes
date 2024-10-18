@@ -1,5 +1,6 @@
 import validateElement from './validatorUtils.js';
 
+/*****************************************************/
 const getNoteOfUser = (req, res, next) => {
   validateElement('getNoteOfUser', req.params.userId);
   next();
@@ -28,6 +29,8 @@ const deleteNote = (req, res, next) => {
   next();
 };
 
+/*****************************************************/
+
 const putUser = (req, res, next) => {
   req.body.userId = req.params.userId;
 
@@ -53,6 +56,36 @@ const postUser = (req, res, next) => {
   next();
 };
 
+/*****************************************************/
+
+const deleteGroup = (req, res, next) => {
+  validateElement('deleteGroup', req.body);
+  next();
+};
+
+const postGroup = (req, res, next) => {
+  validateElement('postGroup', req.body);
+  next();
+};
+
+/*****************************************************/
+const addMember = (req, res, next) => {
+  validateElement('addMember', req.body);
+  next();
+};
+
+const deleteMember = (req, res, next) => {
+  validateElement('deleteMember', req.body);
+  next();
+};
+
+const getMembersOfGroup = (req, res, next) => {
+  validateElement('getMembersOfGroup', req.body);
+  next();
+};
+
+/*****************************************************/
+
 export default {
   getNoteOfUser,
   postNote,
@@ -63,4 +96,11 @@ export default {
   deleteUser,
   getUser,
   postUser,
+
+  postGroup,
+  deleteGroup,
+
+  addMember,
+  deleteMember,
+  getMembersOfGroup,
 };

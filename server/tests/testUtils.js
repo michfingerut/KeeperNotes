@@ -1,5 +1,5 @@
-import Notes from '../src/db/notes.model.js';
-import Users from '../src/db/users.model.js';
+import Notes from '../src/db/models/notes.model.js';
+import Users from '../src/db/models/users.model.js';
 import _ from 'lodash';
 import testData from './testData.js';
 

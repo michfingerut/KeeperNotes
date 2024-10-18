@@ -11,6 +11,13 @@ const validatorsMap = new Map([
   ['deleteUser', validatorObject.userIdParam],
   ['getUser', validatorObject.getUserParams],
   ['postUser', validatorObject.postUserParams],
+
+  ['deleteGroup', validatorObject], //TODO
+  ['postGroup', validatorObject], //TODO
+
+  ['addMember', validatorObject], //TODO
+  ['deleteMember', validatorObject], //TODO
+  ['getMembersOfGroup', validatorObject], //TODO
 ]);
 
 const validateElement = (key, data) => {
