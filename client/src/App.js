@@ -1,6 +1,12 @@
 //External modules
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  Navigate,
+} from 'react-router-dom';
 
 //Internal modules
 import KeeperMainPage from './views/KeeperMainPage';
@@ -17,21 +23,21 @@ function App() {
     if (!isLogged) {
       navigate('/login');
     } else {
-      navigate('/');
+      navigate('/home');
     }
   }, [isLogged, navigate]);
 
   return (
     <Routes>
       <Route
-        path="/"
+        path="/home"
         element={<KeeperMainPage uuid={uuid} setIsLogged={setIsLogged} />}
-      ></Route>
-
+      />
+      <Route path="/login" element={<LogInPage setIsLogged={setIsLogged} />} />
       <Route
-        path="/login"
-        element={<LogInPage setIsLogged={setIsLogged} />}
-      ></Route>
+        path="/"
+        element={isLogged ? <Navigate to="/home" /> : <Navigate to="/login" />}
+      />
     </Routes>
   );
 }
