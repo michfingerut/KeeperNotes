@@ -36,7 +36,7 @@ const deleteMember = async (req, res) => {
     {
       message: "user -> <userId> was deleted successfully from group <groupId></groupId>"
     }
-    200 - on success / if the user is not part of the group
+    200 - on success / if the user is not part of the group or group not found
     400 - if parameters not valid 
     TODO: 403 - if dont have permissions
     500 - internal err 
