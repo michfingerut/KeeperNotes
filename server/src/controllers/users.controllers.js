@@ -1,4 +1,4 @@
-import Users from '../db/users.model.js';
+import Users from '../db/models/users.model.js';
 import logger from '../logger.js';
 import { errorCode, errorHandler, KeeperError } from '../utils/index.js';
 
