@@ -59,12 +59,7 @@ const postUser = (req, res, next) => {
 /*****************************************************/
 
 const deleteGroup = (req, res, next) => {
-  validateElement('deleteGroup', req.body);
-  next();
-};
-
-const postGroup = (req, res, next) => {
-  validateElement('postGroup', req.body);
+  validateElement('deleteGroup', req.params.groupId);
   next();
 };
 
@@ -97,7 +92,6 @@ export default {
   getUser,
   postUser,
 
-  postGroup,
   deleteGroup,
 
   addMember,

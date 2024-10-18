@@ -28,9 +28,7 @@ router
   .get(routesValidators.getUser, usersControllers.getUser)
   .post(routesValidators.postUser, usersControllers.postUser);
 
-router
-  .route('/groups')
-  .post(routesValidators.postGroup, groupsControllers.postGroup);
+router.route('/groups').post(groupsControllers.postGroup);
 
 router
   .route('/groups/:groupId')

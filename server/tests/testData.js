@@ -31,6 +31,7 @@ const messages = {
 const routes = {
   notes: '/notes',
   users: '/users',
+  groups: '/groups',
 };
 
 const notes = [

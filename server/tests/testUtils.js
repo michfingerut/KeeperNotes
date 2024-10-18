@@ -2,6 +2,7 @@ import Notes from '../src/db/models/notes.model.js';
 import Users from '../src/db/models/users.model.js';
 import _ from 'lodash';
 import testData from './testData.js';
+import Groups from '../src/db/models/groups.model.js';
 
 const clearUsersFromDb = async () => {
   await Users.destroy({ where: {} });
@@ -9,6 +10,10 @@ const clearUsersFromDb = async () => {
 
 const clearNotesFromDb = async () => {
   await Notes.destroy({ where: {} });
+};
+
+const clearGroupsFromDb = async () => {
+  await Groups.destroy({ where: {} });
 };
 
 const createUser = async () => {
@@ -50,6 +55,7 @@ const compareProperties = (res, expected) => {
 export default {
   clearUsersFromDb,
   clearNotesFromDb,
+  clearGroupsFromDb,
   testResponseSingle,
   testResponseArray,
   testMessageResponse,

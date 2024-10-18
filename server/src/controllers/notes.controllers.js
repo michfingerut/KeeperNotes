@@ -24,7 +24,7 @@ const postNote = async (req, res) => {
   */
   req.body.uuid = req.params.userId;
   try {
-    const note = await Notes.create(req.body, { returning: true });
+    const note = await Notes.create(req.body);
     const message = `note -> ${note.id} was created successfully`;
 
     logger.info(message);
