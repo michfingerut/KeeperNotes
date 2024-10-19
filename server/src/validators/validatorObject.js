@@ -60,6 +60,7 @@ const deleteGroupParams = userIdParam;
 
 const postGroupParams = Joi.object().keys({
   name: Joi.string().required(),
+  ownerId: userIdParam,
 });
 const getGroupsOfUserParams = userIdParam;
 

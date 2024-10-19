@@ -135,6 +135,7 @@ const getMembersOfGroup = async (req, res) => {
     const groupToReturn = {
       groupId: group.groupId,
       name: group.name,
+      ownerId: group.ownerId,
       members: membersToReturn,
     };
 

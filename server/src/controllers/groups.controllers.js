@@ -2,6 +2,7 @@ import logger from '../logger.js';
 import { errorHandler } from '../utils/index.js';
 import Groups from '../db/models/groups.model.js';
 import Users from '../db/models/users.model.js';
+import Members from '../db/models/members.model.js';
 
 //TODO: create swagger
 
@@ -9,7 +10,7 @@ const postGroup = async (req, res) => {
   /* 
     req format - /groups
     body: {
-      name
+      name, ownerId
     }
 
     return format:
@@ -24,6 +25,9 @@ const postGroup = async (req, res) => {
   */
   try {
     const group = (await Groups.create(req.body)).dataValues;
+
+    //TODO: what happnes if fails?
+    await Members.create({ groupId: group.groupId, uuid: group.ownerId });
 
     logger.info(`group -> ${group.groupId} was created successfully`);
     res.status(201).json(group);

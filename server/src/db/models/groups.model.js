@@ -14,6 +14,10 @@ const Groups = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    ownerId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
   },
   {
     id: false,

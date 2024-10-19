@@ -31,7 +31,10 @@ describe('Route tests', () => {
 
     michalUser = await testUtils.createUser(testData.users.michal);
     israelUser = await testUtils.createUser(testData.users.israel);
-    group = await testUtils.createGroup({ name: groupName });
+    group = await testUtils.createGroup({
+      name: groupName,
+      ownerId: michalUser.uuid,
+    });
     route = `/groups/${group.groupId}/members`;
   });
 
@@ -192,6 +195,7 @@ describe('Route tests', () => {
       const expectedData = {
         groupId: group.groupId,
         name: groupName,
+        ownerId: michalUser.uuid,
         members: [
           {
             firstName: michalUser.firstName,
@@ -214,6 +218,7 @@ describe('Route tests', () => {
         {
           groupId: group.groupId,
           name: groupName,
+          ownerId: michalUser.uuid,
           members: [],
         },
         OK,
@@ -226,6 +231,7 @@ describe('Route tests', () => {
         getRes2,
         {
           groupId: group.groupId,
+          ownerId: michalUser.uuid,
           name: groupName,
           members: [expectedData.members[0]],
         },

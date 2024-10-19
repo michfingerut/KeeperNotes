@@ -78,6 +78,7 @@ const testSingleGroupResponse = (resData, expectedData, expectedStatus) => {
 const compareGroup = (resGroup, expectedGroup) => {
   expect(resGroup.groupId).toEqual(expectedGroup.groupId);
   expect(resGroup.name).toEqual(expectedGroup.name);
+  expect(resGroup.ownerId).toEqual(expectedGroup.ownerId);
 
   expect(resGroup.members.length).toEqual(expectedGroup.members.length);
 

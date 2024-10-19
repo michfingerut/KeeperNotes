@@ -51,13 +51,11 @@ const deleteUser = async (userId) => {
 
 /******************************************************************************/
 const getGroupsOfUser = async (userId) => {
-  //TODO: as for now, not in use
   return await callBackAPI('get', `/groups/users/${userId}`);
 };
 
-const postGroup = async (name) => {
-  //TODO: as for now, not in use
-  return await callBackAPI('post', '/groups', name);
+const postGroup = async (name, ownerId) => {
+  return await callBackAPI('post', '/groups', { name, ownerId });
 };
 
 const deleteGroup = async (groupId) => {

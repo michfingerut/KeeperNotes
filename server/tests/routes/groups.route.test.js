@@ -50,7 +50,8 @@ describe('Route tests', () => {
       const notValidReq = [
         {}, //empty param 400
         undefined, //undefined 400
-        { name: true }, //not valid type
+        { name: true, ownerId: michalUser.uuid }, //not valid type
+        { name: 'michal', ownerId: true },
         { michal: 'michal' },
       ];
 
@@ -65,10 +66,13 @@ describe('Route tests', () => {
 
       testUtils.testResponseSingle(getRes1, [], OK);
       const groupName = 'self';
-      const postRes = await req.post(route).send({ name: groupName });
+      const postRes = await req
+        .post(route)
+        .send({ name: groupName, ownerId: michalUser.uuid });
 
       expect(postRes.body.groupId).not.toBe(undefined);
       expect(postRes.body.name).toBe(groupName);
+      expect(postRes.body.ownerId).toBe(michalUser.uuid);
       expect(postRes.statusCode).toBe(CREATED);
 
       const groupId = postRes.body.groupId;
@@ -77,6 +81,7 @@ describe('Route tests', () => {
         {
           groupId: groupId,
           name: groupName,
+          ownerId: michalUser.uuid,
         },
       ];
 
@@ -111,7 +116,9 @@ describe('Route tests', () => {
     });
 
     test('basic .DELETE', async () => {
-      const postRes = await req.post(route).send({ name: 'self' });
+      const postRes = await req
+        .post(route)
+        .send({ name: 'self', ownerId: michalUser.uuid });
       const groupId = postRes.body.groupId;
 
       const deleteRes = await req.delete(`${route}/${groupId}`);
