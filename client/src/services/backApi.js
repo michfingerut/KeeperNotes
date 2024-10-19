@@ -12,8 +12,13 @@ const callBackAPI = async (functionToCall, route, params) => {
 };
 
 /******************************************************************************/
-const getNotes = async (userId) => {
+const getNotesOfUser = async (userId) => {
   return await callBackAPI('get', `/users/${userId}/notes`);
+};
+
+const getNotesOfGroup = async (groupId) => {
+  //TODO: not in use
+  return await callBackAPI('get', `/groups/${groupId}/notes`);
 };
 
 const postNote = async (note, userId) => {
@@ -45,7 +50,6 @@ const putUser = async (userId, userInfo) => {
 };
 
 const deleteUser = async (userId) => {
-  //TODO: as for now, not in use
   return await callBackAPI('delete', `/users/${userId}`);
 };
 
@@ -55,7 +59,7 @@ const getGroupsOfUser = async (userId) => {
 };
 
 const postGroup = async (name, ownerId) => {
-  return await callBackAPI('post', '/groups', { name, ownerId });
+  return await callBackAPI('post', '/groups', { name: name, ownerId: ownerId });
 };
 
 const deleteGroup = async (groupId) => {
@@ -81,7 +85,8 @@ const deleteMember = async (groupId, userId) => {
 };
 
 export default {
-  getNotes,
+  getNotesOfUser,
+  getNotesOfGroup,
   removeNote,
   postNote,
   updateNote,

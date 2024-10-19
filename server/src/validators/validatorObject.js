@@ -22,6 +22,7 @@ const postNoteParams = Joi.object().keys({
   title: titleParam.required(),
   content: contentParam.required(),
   userId: userIdParam,
+  groupId: userIdParam,
 });
 
 //TODO: bug of sending too long content

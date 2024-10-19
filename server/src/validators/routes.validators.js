@@ -6,6 +6,11 @@ const getNoteOfUser = (req, res, next) => {
   next();
 };
 
+const getNoteOfGroup = (req, res, next) => {
+  validateElement('getNoteOfGroup', req.params.groupId);
+  next();
+};
+
 const postNote = (req, res, next) => {
   req.body.userId = req.params.userId;
 
@@ -96,6 +101,7 @@ const getMembersOfGroup = (req, res, next) => {
 
 export default {
   getNoteOfUser,
+  getNoteOfGroup,
   postNote,
   putNote,
   deleteNote,

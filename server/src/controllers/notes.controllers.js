@@ -1,6 +1,7 @@
 import logger from '../logger.js';
 import { errorCode, errorHandler, KeeperError } from '../utils/index.js';
 import Notes from '../db/models/notes.model.js';
+import Groups from '../db/models/groups.model.js';
 
 //TODO: create swagger
 
@@ -9,7 +10,8 @@ const postNote = async (req, res) => {
     req format - /users/:userId/notes
     body:{
       title: string,
-      content: string
+      content: string,
+      groupId: string
     }
 
     return format:
@@ -17,13 +19,18 @@ const postNote = async (req, res) => {
       message: "note -> <id> was created successfully"
     }
     201 - on success V
-    404 - if userId doesnt exist V
+    404 - if userId doesnt exist V TODO: if group doesnt exist
     400 - if parameters not valid V
     500 - internal err V
   
   */
   req.body.uuid = req.params.userId;
   try {
+    const group = await Groups.findByPk(req.body.groupId);
+
+    if (!group) {
+      throw new KeeperError(errorCode.NOT_FOUND, 'group doesnt exist');
+    }
     const note = await Notes.create(req.body);
     const message = `note -> ${note.id} was created successfully`;
 
@@ -146,4 +153,40 @@ const getNotesOfUser = async (req, res) => {
     errorHandler(err, res);
   }
 };
-export default { postNote, putNote, deleteNote, getNotesOfUser };
+
+const getNotesOfGroup = async (req, res) => {
+  /* 
+    req format - /groups/:groupId/notes
+    return format:
+    [{
+      id: number,
+      title: string,
+      content: string
+    }]
+    200 - on success V
+    400 - if query string not valid V
+    500 - internal err V
+  
+  */
+  const groupId = req.params.groupId;
+  try {
+    const group = await Groups.findByPk(groupId);
+
+    if (!group) {
+      throw new KeeperError(errorCode.NOT_FOUND, 'group doesnt exist');
+    }
+
+    const notes = await Notes.findAll({ where: { groupId }, raw: true });
+    logger.info(`get notes of group ${groupId}`);
+    res.status(200).json(notes);
+  } catch (err) {
+    errorHandler(err, res);
+  }
+};
+export default {
+  postNote,
+  putNote,
+  deleteNote,
+  getNotesOfUser,
+  getNotesOfGroup,
+};

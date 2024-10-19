@@ -13,6 +13,10 @@ router
   .post(routesValidators.postNote, notesControllers.postNote);
 
 router
+  .route('/groups/:groupId/notes')
+  .get(routesValidators.getNoteOfGroup, notesControllers.getNotesOfGroup);
+
+router
   .route('/users/:userId/notes/:id')
   .put(routesValidators.putNote, notesControllers.putNote)
   .delete(routesValidators.deleteNote, notesControllers.deleteNote);

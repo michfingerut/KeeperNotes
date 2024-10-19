@@ -25,6 +25,11 @@ const createAssociations = async () => {
     onDelete: 'CASCADE',
   });
 
+  Notes.belongsTo(Groups, {
+    foreignKey: { name: 'groupId', allowNull: false },
+    onDelete: 'CASCADE',
+  });
+
   Users.belongsToMany(Groups, {
     through: Members,
     foreignKey: 'uuid',

@@ -3,6 +3,8 @@ import validatorObject from './validatorObject.js';
 
 const validatorsMap = new Map([
   ['getNoteOfUser', validatorObject.userIdParam],
+  ['getNoteOfGroup', validatorObject.userIdParam],
+
   ['postNote', validatorObject.postNoteParams],
   ['putNote', validatorObject.putNoteParams],
   ['deleteNote', validatorObject.deleteNoteParams],
