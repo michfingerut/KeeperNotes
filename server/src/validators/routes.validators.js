@@ -65,17 +65,21 @@ const deleteGroup = (req, res, next) => {
 
 /*****************************************************/
 const addMember = (req, res, next) => {
+  req.body.groupId = req.params.groupId;
   validateElement('addMember', req.body);
   next();
 };
 
 const deleteMember = (req, res, next) => {
-  validateElement('deleteMember', req.body);
+  validateElement('deleteMember', {
+    groupId: req.params.groupId,
+    userId: req.params.userId,
+  });
   next();
 };
 
 const getMembersOfGroup = (req, res, next) => {
-  validateElement('getMembersOfGroup', req.body);
+  validateElement('getMembersOfGroup', req.params.groupId);
   next();
 };
 

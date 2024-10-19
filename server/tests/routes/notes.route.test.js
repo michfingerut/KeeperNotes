@@ -23,7 +23,7 @@ describe('Route tests', () => {
 
   beforeAll(async () => {
     await testUtils.clearUsersFromDb();
-    michalUser = await testUtils.createUser();
+    michalUser = await testUtils.createUser(testData.users.michal);
     route = `/users/${michalUser.uuid}/notes`;
   });
 

@@ -19,9 +19,11 @@ const messages = {
   NOT_FOUND: {
     noteNotFound: 'note doesnt exist',
     userNotFound: 'user doesnt exist',
+    groupNotFound: 'group doesnt exist',
   },
   FORBIDDEN: {
     userExist: 'user already exists',
+    userNotInGroup: 'user doesnt belong to group',
     emailExist: 'email already exists',
     doesntBelong: 'note doesnt belong to user',
     invalidPass: 'invalid password',

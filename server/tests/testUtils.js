@@ -3,6 +3,7 @@ import Users from '../src/db/models/users.model.js';
 import _ from 'lodash';
 import testData from './testData.js';
 import Groups from '../src/db/models/groups.model.js';
+import Members from '../src/db/models/members.model.js';
 
 const clearUsersFromDb = async () => {
   await Users.destroy({ where: {} });
@@ -16,9 +17,16 @@ const clearGroupsFromDb = async () => {
   await Groups.destroy({ where: {} });
 };
 
-const createUser = async () => {
-  const res = await Users.create(testData.users.michal);
-  return res.dataValues;
+const clearMembersFromDb = async () => {
+  await Members.destroy({ where: {} });
+};
+
+const createUser = async (userInfo) => {
+  return await Users.create(userInfo);
+};
+
+const createGroup = async () => {
+  return await Groups.create();
 };
 
 const testResponseArray = (resData, expectedData, expectedStatus) => {
@@ -48,7 +56,9 @@ const compareProperties = (res, expected) => {
   const keys = Object.keys(expected);
 
   for (const key of keys) {
-    expect(res[key]).toEqual(expected[key]);
+    if (key !== 'createdAt' && key !== 'updatedAt') {
+      expect(res[key]).toEqual(expected[key]);
+    }
   }
 };
 
@@ -56,9 +66,11 @@ export default {
   clearUsersFromDb,
   clearNotesFromDb,
   clearGroupsFromDb,
+  clearMembersFromDb,
   testResponseSingle,
   testResponseArray,
   testMessageResponse,
   compareProperties,
   createUser,
+  createGroup,
 };

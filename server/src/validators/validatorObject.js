@@ -56,8 +56,16 @@ const postUserParams = Joi.object().keys({
   password: passwordParam.required(),
 });
 
-const deleteGroupParams = Joi.string().uuid().required();
+const deleteGroupParams = userIdParam;
 
+const addMemberParams = Joi.object().keys({
+  userId: userIdParam,
+  groupId: userIdParam,
+});
+
+const deleteMemberParams = addMemberParams;
+
+const getMembersOfGroupParams = userIdParam;
 export default {
   userIdParam,
   postNoteParams,
@@ -67,4 +75,7 @@ export default {
   getUserParams,
   postUserParams,
   deleteGroupParams,
+  addMemberParams,
+  deleteMemberParams,
+  getMembersOfGroupParams,
 };

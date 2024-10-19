@@ -21,22 +21,228 @@ describe('Route tests', () => {
 
   //
   let michalUser;
+  let israelUser;
+  let group;
 
-  beforeAll(async () => {});
+  beforeAll(async () => {
+    await testUtils.clearUsersFromDb();
+    await testUtils.clearGroupsFromDb();
 
-  beforeEach(async () => {});
+    michalUser = await testUtils.createUser(testData.users.michal);
+    israelUser = await testUtils.createUser(testData.users.israel);
+    group = await testUtils.createGroup();
+    route = `/groups/${group.groupId}/members`;
+  });
+
+  beforeEach(async () => {
+    await testUtils.clearMembersFromDb();
+  });
 
   describe('test /members', () => {
-    test('.POST validation', async () => {});
-    test('basic .POST', async () => {});
-    test('.POST on non existing groupId', async () => {});
-    test('.POST on non existing userId', async () => {});
-    test('.DELETE validation', async () => {});
-    test('basic .DELETE', async () => {});
-    test('.DELETE on non existing groupId', async () => {});
-    test('.DELETE on non existing userId', async () => {});
-    test('.GET validation', async () => {});
-    test('basic .GET', async () => {});
-    test('.GET on non existing groupId', async () => {});
+    test('.POST validation', async () => {
+      const userId = michalUser.uuid;
+      const notValidReq = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidReq) {
+        let res = await req.post(`/groups/${i}/members`).send({ userId });
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+
+      const notValidBody = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        { title: 'hello' }, //not valid params
+        { userId: 'hello' }, //not valid userId
+        { userId: 312 }, //not valid userId
+      ];
+
+      for (let i of notValidBody) {
+        let res = await req.post(route).send(i);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+    });
+
+    test('basic .POST', async () => {
+      const res = await req.post(route).send({ userId: michalUser.uuid });
+
+      testUtils.testMessageResponse(
+        res,
+        CREATED,
+        `user -> ${michalUser.uuid} was added to group ${group.groupId}`,
+      );
+    });
+
+    test('.POST on non existing groupId', async () => {
+      const randomGroupId = testData.randomUUID;
+
+      const res = await req
+        .post(`/groups/${randomGroupId}/members`)
+        .send({ userId: michalUser.uuid });
+
+      testUtils.testMessageResponse(
+        res,
+        NOT_FOUND,
+        testData.messages.NOT_FOUND.groupNotFound,
+      );
+    });
+
+    test('.POST on non existing userId', async () => {
+      const randomUserId = testData.randomUUID;
+
+      const res = await req.post(route).send({ userId: randomUserId });
+      testUtils.testMessageResponse(
+        res,
+        FORBIDDEN,
+        testData.messages.FORBIDDEN.userNotInGroup,
+      );
+    });
+
+    test('.POST on already existing userId', async () => {
+      const res1 = await req.post(route).send({ userId: michalUser.uuid });
+      expect(res1.statusCode).toBe(CREATED);
+
+      const res2 = await req.post(route).send({ userId: michalUser.uuid });
+      testUtils.testMessageResponse(
+        res2,
+        FORBIDDEN,
+        testData.messages.FORBIDDEN.userExist,
+      );
+    });
+
+    test('.DELETE validation', async () => {
+      const notValidReq = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidReq) {
+        const res = await req.delete(`${route}/${i}`);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+
+      for (let i of notValidReq) {
+        const res = await req.delete(`/groups/${i}/members/${michalUser.uuid}`);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+    });
+
+    test('basic .DELETE', async () => {
+      await req.post(route).send({ userId: michalUser.uuid });
+      const deleteRes = await req.delete(`${route}/${michalUser.uuid}`);
+
+      testUtils.testMessageResponse(
+        deleteRes,
+        OK,
+        `user -> ${michalUser.uuid} was deleted successfuly from group ${group.groupId}`,
+      );
+    });
+
+    test('.DELETE on non existing groupId', async () => {
+      const randomGuid = testData.randomUUID;
+      const res = await req.delete(
+        `/groups/${randomGuid}/members/${michalUser.uuid}`,
+      );
+
+      testUtils.testMessageResponse(
+        res,
+        OK,
+        `user -> ${michalUser.uuid} was deleted successfuly from group ${randomGuid}`,
+      );
+    });
+
+    test('.DELETE on non existing userId', async () => {
+      const randomUuid = testData.randomUUID;
+      const res = await req.delete(`${route}/${randomUuid}`);
+
+      testUtils.testMessageResponse(
+        res,
+        OK,
+        `user -> ${randomUuid} was deleted successfuly from group ${group.groupId}`,
+      );
+    });
+
+    test('.GET validation', async () => {
+      const notValidReq = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        321, //number
+        'michal', //not valid uuid
+      ];
+
+      for (let i of notValidReq) {
+        const res = await req.get(`/groups/${i}/members`);
+
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+    });
+
+    test('basic .GET', async () => {
+      const expectedData = {
+        groupId: group.groupId,
+        members: [
+          {
+            firstName: michalUser.firstName,
+            lastName: michalUser.lastName,
+            email: michalUser.email,
+            uuid: michalUser.uuid,
+          },
+          {
+            firstName: israelUser.firstName,
+            lastName: israelUser.lastName,
+            email: israelUser.email,
+            uuid: israelUser.uuid,
+          },
+        ],
+      };
+      const getRes1 = await req.get(route);
+
+      testUtils.testResponseSingle(
+        getRes1,
+        {
+          groupId: group.groupId,
+          members: [],
+        },
+        OK,
+      );
+
+      await req.post(route).send({ userId: michalUser.uuid });
+      const getRes2 = await req.get(route);
+
+      testUtils.testResponseSingle(
+        getRes2,
+        {
+          groupId: group.groupId,
+          members: [expectedData.members[0]],
+        },
+        OK,
+      );
+
+      await req.post(route).send({ userId: israelUser.uuid });
+      const getRes3 = await req.get(route);
+
+      testUtils.testResponseSingle(getRes3, expectedData, OK);
+    });
+
+    test('.GET on non existing groupId', async () => {
+      const randomGuid = testData.randomUUID;
+      const res = await req.get(`/groups/${randomGuid}/members`);
+
+      testUtils.testMessageResponse(
+        res,
+        NOT_FOUND,
+        testData.messages.NOT_FOUND.groupNotFound,
+      );
+    });
   });
 });

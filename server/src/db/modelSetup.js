@@ -31,6 +31,12 @@ const createAssociations = async () => {
     otherKey: 'groupId',
   });
 
+  Groups.belongsToMany(Users, {
+    through: Members,
+    foreignKey: 'groupId',
+    otherKey: 'uuid',
+  });
+
   logger.info('associations has been initialized successfuly');
 };
 
