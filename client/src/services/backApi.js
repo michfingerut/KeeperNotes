@@ -55,9 +55,9 @@ const getGroupsOfUser = async (userId) => {
   return await callBackAPI('get', `/groups/users/${userId}`);
 };
 
-const postGroup = async () => {
+const postGroup = async (name) => {
   //TODO: as for now, not in use
-  return await callBackAPI('post', '/groups');
+  return await callBackAPI('post', '/groups', name);
 };
 
 const deleteGroup = async (groupId) => {
