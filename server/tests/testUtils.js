@@ -52,6 +52,28 @@ const testMessageResponse = (resData, expectedStatus, expectedMessage) => {
   expect(resData.body.message).toEqual(expectedMessage);
 };
 
+const testGroupsResponse = (resData, expectedData, expectedStatus) => {
+  expect(resData.statusCode).toEqual(expectedStatus);
+
+  resData = _.sortBy(resData.body, 'groupId');
+  expectedData = _.sortBy(expectedData, 'groupId');
+
+  expect(resData.length).toEqual(expectedData.length);
+
+  for (let i = 0; i < resData.length; ++i) {
+    expect(resData[i].groupId).toEqual(expectedData[i].groupId);
+    const resMembers = _.sortBy(resData[i].members, 'uuid');
+    const expectedMembers = _.sortBy(expectedData[i].members, 'uuid');
+
+    for (let j = 0; j < resMembers.length; ++j) {
+      expect(resMembers[j].firstName).toEqual(expectedMembers[j].firstName);
+      expect(resMembers[j].lastName).toEqual(expectedMembers[j].lastName);
+      expect(resMembers[j].email).toEqual(expectedMembers[j].email);
+      expect(resMembers[j].uuid).toEqual(expectedMembers[j].uuid);
+    }
+  }
+};
+
 const compareProperties = (res, expected) => {
   const keys = Object.keys(expected);
 
@@ -70,6 +92,7 @@ export default {
   testResponseSingle,
   testResponseArray,
   testMessageResponse,
+  testGroupsResponse,
   compareProperties,
   createUser,
   createGroup,

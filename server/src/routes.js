@@ -35,6 +35,10 @@ router
   .delete(routesValidators.deleteGroup, groupsControllers.deleteGroup);
 
 router
+  .route('/groups/users/:userId')
+  .get(routesValidators.getGroupsOfUser, groupsControllers.getGroupOfUser);
+
+router
   .route('/groups/:groupId/members')
   .get(routesValidators.getMembersOfGroup, membersControllers.getMembersOfGroup)
   .post(routesValidators.addMember, membersControllers.addMember);

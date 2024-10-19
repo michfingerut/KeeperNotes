@@ -63,6 +63,11 @@ const deleteGroup = (req, res, next) => {
   next();
 };
 
+const getGroupsOfUser = (req, res, next) => {
+  validateElement('getGroupsOfUser', req.params.userId);
+  next();
+};
+
 /*****************************************************/
 const addMember = (req, res, next) => {
   req.body.groupId = req.params.groupId;
@@ -97,6 +102,7 @@ export default {
   postUser,
 
   deleteGroup,
+  getGroupsOfUser,
 
   addMember,
   deleteMember,

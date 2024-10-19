@@ -1,6 +1,7 @@
 import logger from '../logger.js';
-import { errorCode, errorHandler, KeeperError } from '../utils/index.js';
+import { errorHandler } from '../utils/index.js';
 import Groups from '../db/models/groups.model.js';
+import Users from '../db/models/users.model.js';
 
 //TODO: create swagger
 
@@ -23,6 +24,47 @@ const postGroup = async (req, res) => {
 
     logger.info(`group -> ${group.groupId} was created successfully`);
     res.status(201).json({ groupId: group.groupId });
+  } catch (err) {
+    errorHandler(err, res, 'note was not created');
+  }
+};
+
+const getGroupOfUser = async (req, res) => {
+  /* 
+    req format - /groups/users/:userId
+
+    return format:
+    {
+      [
+        {
+          groupId: groupId
+        }
+      ]
+    }
+
+    200 - on success + non existing user
+    TODO in the future 403 - if dont have permissions
+    500 - internal err 
+  
+  */
+  const userId = req.params.userId;
+  try {
+    const groups = await Groups.findAll({
+      raw: true,
+      nest: true,
+      attributes: ['groupId'],
+      include: [
+        {
+          model: Users,
+          attributes: ['uuid', 'firstName', 'lastName', 'email'],
+          where: { uuid: userId },
+          through: { attributes: [] },
+        },
+      ],
+    });
+
+    logger.info(`get groups of user ${userId}`);
+    res.status(200).json(groups);
   } catch (err) {
     errorHandler(err, res, 'note was not created');
   }
@@ -62,7 +104,7 @@ const deleteGroup = async (req, res) => {
   }
 };
 
-export default { postGroup, deleteGroup };
+export default { postGroup, getGroupOfUser, deleteGroup };
 
 // maybe put prmissions to group?
 //const putGroup = async (req, res) => {

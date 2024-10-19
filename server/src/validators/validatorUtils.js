@@ -13,6 +13,7 @@ const validatorsMap = new Map([
   ['postUser', validatorObject.postUserParams],
 
   ['deleteGroup', validatorObject.deleteGroupParams],
+  ['getGroupsOfUser', validatorObject.getGroupsOfUserParams],
 
   ['addMember', validatorObject.addMemberParams],
   ['deleteMember', validatorObject.deleteMemberParams],
