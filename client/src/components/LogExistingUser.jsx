@@ -45,9 +45,9 @@ function LogExistingUser(props) {
       }
       return;
     }
-
     localStorage.setItem('isLogged', true);
     localStorage.setItem('uuid', userInfo.uuid);
+    localStorage.setItem('groupId', '');
     props.setIsLogged(true);
   }
 

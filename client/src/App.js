@@ -11,6 +11,7 @@ import {
 //Internal modules
 import KeeperMainPage from './views/KeeperMainPage';
 import LogInPage from './views/LogInPage';
+import GroupPage from './views/GroupPage';
 
 function App() {
   const [isLogged, setIsLogged] = useState(
@@ -22,7 +23,7 @@ function App() {
   useEffect(() => {
     if (!isLogged) {
       navigate('/login');
-    } else {
+    } else if (localStorage.getItem('groupId').length === 0) {
       navigate('/home');
     }
   }, [isLogged, navigate]);
@@ -33,6 +34,11 @@ function App() {
         path="/home"
         element={<KeeperMainPage uuid={uuid} setIsLogged={setIsLogged} />}
       />
+      <Route
+        path="/:groupId"
+        element={<GroupPage setIsLogged={setIsLogged} />}
+      />
+
       <Route path="/login" element={<LogInPage setIsLogged={setIsLogged} />} />
       <Route
         path="/"

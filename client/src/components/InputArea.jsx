@@ -11,14 +11,17 @@ import {
 } from '../styles/styles';
 
 function InputArea(props) {
+  const groupId = props.groupId;
   const [tmpNote, setTmpNote] = useState({
     title: '',
     content: '',
+    groupId: groupId,
   });
 
   async function addNote(event) {
     event.preventDefault();
     // TODO: Error handling
+    //TODO: note should have groupId
     const createNote = await backApi.postNote(tmpNote, props.userId);
 
     props.stateFunc((prevNotes) => {
@@ -29,6 +32,7 @@ function InputArea(props) {
       return {
         title: '',
         content: '',
+        groupId: groupId,
       };
     });
   }
