@@ -51,7 +51,6 @@ function LogInPage(props) {
   }
 
   function handleInput(event) {
-    //TODO: use debounce
     const { value, name } = event.target;
     setTmpUsr((prev) => {
       return { ...prev, [name]: value };

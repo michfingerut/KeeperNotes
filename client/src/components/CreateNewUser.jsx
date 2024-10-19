@@ -10,7 +10,7 @@ import {
   SignUpForm,
   SignUpInput,
   LogButton,
-} from '../styles/styles'; // Import your styled components
+} from '../styles/styles';
 
 // TODO: add invalid password
 
@@ -38,8 +38,18 @@ function CreateNewUser(props) {
       return;
     }
 
+    try {
+      await backApi.postGroup(props.tmpUsr.firstName, userInfo.userId);
+    } catch (err) {
+      await backApi.deleteUser(userInfo.userId);
+      showError('Something went wrong, please try again later');
+      return;
+    }
+
     localStorage.setItem('uuid', userInfo.userId);
     localStorage.setItem('isLogged', true);
+    localStorage.setItem('groupId', '');
+
     props.setIsLogged(true);
   }
 
