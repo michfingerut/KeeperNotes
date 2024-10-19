@@ -49,13 +49,55 @@ const deleteUser = async (userId) => {
   return await callBackAPI('delete', `/users/${userId}`);
 };
 
+/******************************************************************************/
+const getGroupsOfUser = async (userId) => {
+  //TODO: as for now, not in use
+  return await callBackAPI('get', `/groups/users/${userId}`);
+};
+
+const postGroup = async () => {
+  //TODO: as for now, not in use
+  return await callBackAPI('post', '/groups');
+};
+
+const deleteGroup = async (groupId) => {
+  //TODO: as for now, not in use
+  return await callBackAPI('delete', `/groups/${groupId}`);
+};
+
+/******************************************************************************/
+
+const getMembersOfGroup = async (groupId) => {
+  //TODO: as for now, not in use
+  return await callBackAPI('get', `/groups/${groupId}/members`);
+};
+
+const addMember = async (groupId, userId) => {
+  //TODO: as for now, not in use
+  return await callBackAPI('post', `/groups/${groupId}/members`, userId);
+};
+
+const deleteMember = async (groupId, userId) => {
+  //TODO: as for now, not in use
+  return await callBackAPI('delete', `/groups/${groupId}/members/${userId}`);
+};
+
 export default {
   getNotes,
   removeNote,
   postNote,
   updateNote,
+
   getUser,
   postUser,
   putUser,
   deleteUser,
+
+  getGroupsOfUser,
+  postGroup,
+  deleteGroup,
+
+  getMembersOfGroup,
+  addMember,
+  deleteMember,
 };
