@@ -25,8 +25,8 @@ const createUser = async (userInfo) => {
   return await Users.create(userInfo);
 };
 
-const createGroup = async () => {
-  return await Groups.create();
+const createGroup = async (req) => {
+  return await Groups.create(req);
 };
 
 const testResponseArray = (resData, expectedData, expectedStatus) => {
@@ -54,24 +54,43 @@ const testMessageResponse = (resData, expectedStatus, expectedMessage) => {
 
 const testGroupsResponse = (resData, expectedData, expectedStatus) => {
   expect(resData.statusCode).toEqual(expectedStatus);
-
-  resData = _.sortBy(resData.body, 'groupId');
-  expectedData = _.sortBy(expectedData, 'groupId');
+  resData = resData.body;
 
   expect(resData.length).toEqual(expectedData.length);
 
-  for (let i = 0; i < resData.length; ++i) {
-    expect(resData[i].groupId).toEqual(expectedData[i].groupId);
-    const resMembers = _.sortBy(resData[i].members, 'uuid');
-    const expectedMembers = _.sortBy(expectedData[i].members, 'uuid');
+  resData.forEach((obj) => {
+    const expectedObj = expectedData.find((ex) => {
+      return ex.groupId === obj.groupId;
+    });
 
-    for (let j = 0; j < resMembers.length; ++j) {
-      expect(resMembers[j].firstName).toEqual(expectedMembers[j].firstName);
-      expect(resMembers[j].lastName).toEqual(expectedMembers[j].lastName);
-      expect(resMembers[j].email).toEqual(expectedMembers[j].email);
-      expect(resMembers[j].uuid).toEqual(expectedMembers[j].uuid);
-    }
-  }
+    expect(obj.groupId).toEqual(expectedObj.groupId);
+    expect(obj.name).toEqual(expectedObj.name);
+  });
+};
+
+const testSingleGroupResponse = (resData, expectedData, expectedStatus) => {
+  expect(resData.statusCode).toEqual(expectedStatus);
+  resData = resData.body;
+
+  compareGroup(resData, expectedData);
+};
+
+const compareGroup = (resGroup, expectedGroup) => {
+  expect(resGroup.groupId).toEqual(expectedGroup.groupId);
+  expect(resGroup.name).toEqual(expectedGroup.name);
+
+  expect(resGroup.members.length).toEqual(expectedGroup.members.length);
+
+  resGroup.members.forEach((resGroupMembers) => {
+    const expectedGroupMembers = expectedGroup.members.find((mem) => {
+      return mem.uuid === resGroupMembers.uuid;
+    });
+
+    expect(resGroupMembers.firstName).toEqual(expectedGroupMembers.firstName);
+    expect(resGroupMembers.lastName).toEqual(expectedGroupMembers.lastName);
+    expect(resGroupMembers.email).toEqual(expectedGroupMembers.email);
+    expect(resGroupMembers.uuid).toEqual(expectedGroupMembers.uuid);
+  });
 };
 
 const compareProperties = (res, expected) => {
@@ -93,7 +112,9 @@ export default {
   testResponseArray,
   testMessageResponse,
   testGroupsResponse,
+  testSingleGroupResponse,
   compareProperties,
+  compareGroup,
   createUser,
   createGroup,
 };

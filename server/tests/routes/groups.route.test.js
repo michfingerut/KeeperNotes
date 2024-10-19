@@ -46,14 +46,29 @@ describe('Route tests', () => {
       }
     });
 
+    test('.POST validation', async () => {
+      const notValidReq = [
+        {}, //empty param 400
+        undefined, //undefined 400
+        { name: true }, //not valid type
+        { michal: 'michal' },
+      ];
+
+      for (let i of notValidReq) {
+        let res = await req.post(route).send(i);
+        expect(res.statusCode).toBe(BAD_REQUEST);
+      }
+    });
+
     test('basic .GET + .POST', async () => {
       const getRes1 = await req.get(`/groups/users/${michalUser.uuid}`);
 
       testUtils.testResponseSingle(getRes1, [], OK);
-
-      const postRes = await req.post(route);
+      const groupName = 'self';
+      const postRes = await req.post(route).send({ name: groupName });
 
       expect(postRes.body.groupId).not.toBe(undefined);
+      expect(postRes.body.name).toBe(groupName);
       expect(postRes.statusCode).toBe(CREATED);
 
       const groupId = postRes.body.groupId;
@@ -61,14 +76,7 @@ describe('Route tests', () => {
       const expectedData = [
         {
           groupId: groupId,
-          members: [
-            {
-              firstName: michalUser.firstName,
-              lastName: michalUser.lastName,
-              email: michalUser.email,
-              uuid: michalUser.uuid,
-            },
-          ],
+          name: groupName,
         },
       ];
 
@@ -103,7 +111,7 @@ describe('Route tests', () => {
     });
 
     test('basic .DELETE', async () => {
-      const postRes = await req.post(route);
+      const postRes = await req.post(route).send({ name: 'self' });
       const groupId = postRes.body.groupId;
 
       const deleteRes = await req.delete(`${route}/${groupId}`);

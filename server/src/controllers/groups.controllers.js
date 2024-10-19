@@ -8,6 +8,9 @@ import Users from '../db/models/users.model.js';
 const postGroup = async (req, res) => {
   /* 
     req format - /groups
+    body: {
+      name
+    }
 
     return format:
     {
@@ -20,10 +23,10 @@ const postGroup = async (req, res) => {
   
   */
   try {
-    const group = await Groups.create();
+    const group = (await Groups.create(req.body)).dataValues;
 
     logger.info(`group -> ${group.groupId} was created successfully`);
-    res.status(201).json({ groupId: group.groupId });
+    res.status(201).json(group);
   } catch (err) {
     errorHandler(err, res, 'note was not created');
   }
@@ -52,11 +55,11 @@ const getGroupOfUser = async (req, res) => {
     const groups = await Groups.findAll({
       raw: true,
       nest: true,
-      attributes: ['groupId'],
+      attributes: ['groupId', 'name'],
       include: [
         {
           model: Users,
-          attributes: ['uuid', 'firstName', 'lastName', 'email'],
+          attributes: [],
           where: { uuid: userId },
           through: { attributes: [] },
         },

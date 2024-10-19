@@ -115,6 +115,7 @@ const getMembersOfGroup = async (req, res) => {
       include: {
         model: Users,
         attributes: ['uuid', 'firstName', 'lastName', 'email'],
+        through: { attributes: [] },
       },
     });
 
@@ -133,6 +134,7 @@ const getMembersOfGroup = async (req, res) => {
 
     const groupToReturn = {
       groupId: group.groupId,
+      name: group.name,
       members: membersToReturn,
     };
 

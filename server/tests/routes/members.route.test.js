@@ -23,6 +23,7 @@ describe('Route tests', () => {
   let michalUser;
   let israelUser;
   let group;
+  const groupName = 'self';
 
   beforeAll(async () => {
     await testUtils.clearUsersFromDb();
@@ -30,7 +31,7 @@ describe('Route tests', () => {
 
     michalUser = await testUtils.createUser(testData.users.michal);
     israelUser = await testUtils.createUser(testData.users.israel);
-    group = await testUtils.createGroup();
+    group = await testUtils.createGroup({ name: groupName });
     route = `/groups/${group.groupId}/members`;
   });
 
@@ -190,6 +191,7 @@ describe('Route tests', () => {
     test('basic .GET', async () => {
       const expectedData = {
         groupId: group.groupId,
+        name: groupName,
         members: [
           {
             firstName: michalUser.firstName,
@@ -207,10 +209,11 @@ describe('Route tests', () => {
       };
       const getRes1 = await req.get(route);
 
-      testUtils.testResponseSingle(
+      testUtils.testSingleGroupResponse(
         getRes1,
         {
           groupId: group.groupId,
+          name: groupName,
           members: [],
         },
         OK,
@@ -219,10 +222,11 @@ describe('Route tests', () => {
       await req.post(route).send({ userId: michalUser.uuid });
       const getRes2 = await req.get(route);
 
-      testUtils.testResponseSingle(
+      testUtils.testSingleGroupResponse(
         getRes2,
         {
           groupId: group.groupId,
+          name: groupName,
           members: [expectedData.members[0]],
         },
         OK,
@@ -231,7 +235,7 @@ describe('Route tests', () => {
       await req.post(route).send({ userId: israelUser.uuid });
       const getRes3 = await req.get(route);
 
-      testUtils.testResponseSingle(getRes3, expectedData, OK);
+      testUtils.testSingleGroupResponse(getRes3, expectedData, OK);
     });
 
     test('.GET on non existing groupId', async () => {
