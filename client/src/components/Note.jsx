@@ -12,7 +12,7 @@ function Note(props) {
   return (
     <NoteStyle>
       {/* when title too long looks cut, TODO: add tooltip also TODO: scrolling prettier */}
-      <NoteH1 style={{ overflowX: 'hidden' }}>{props.title}</NoteH1>
+      <NoteH1>{props.title}</NoteH1>
       <NoteContainer>
         <NoteP>{props.content}</NoteP>
       </NoteContainer>

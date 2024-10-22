@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import backApi from '../services/backApi';
 import { showError } from '../utils/errorUtils.js';
 import {
-  SignUpContainer,
+  Container,
   SignUpForm,
   SignUpInput,
   LogButton,
@@ -54,7 +54,7 @@ function CreateNewUser(props) {
   }
 
   return (
-    <SignUpContainer>
+    <Container>
       <SignUpForm onSubmit={createUser}>
         <SignUpInput
           type="text"
@@ -93,7 +93,7 @@ function CreateNewUser(props) {
         <LogButton type="submit">Sign Up</LogButton>
       </SignUpForm>
       <ToastContainer />
-    </SignUpContainer>
+    </Container>
   );
 }
 

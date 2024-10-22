@@ -4,10 +4,18 @@ import { useNavigate } from 'react-router-dom';
 
 //Internal modules
 import backApi from '../services/backApi';
-import { NotesContainer, LogOutButton } from '../styles/styles';
+import {
+  NotesContainer,
+  LogOutButton,
+  SignUpInput,
+  AddNoteButton,
+  PopupContainer,
+  PopupInnerContainer,
+  PopupButtonContainer,
+} from '../styles/styles';
 import GroupCard from './GroupCard';
 
-function Modal(props) {
+function AddGroupPopup(props) {
   const show = props.show;
   const onClose = props.onClose;
   const onCreate = props.onCreate;
@@ -28,25 +36,30 @@ function Modal(props) {
     setGroupName(event.target.value);
   }
 
+  function handleClose() {
+    setGroupName('');
+    onClose();
+  }
+
   if (!show) return null;
 
   return (
-    <div style={modalStyles}>
-      <div style={modalContentStyles}>
+    <PopupContainer>
+      <PopupInnerContainer>
         <h2>Create a New Group</h2>
-        <input
+        <SignUpInput
+          name="group name"
           type="text"
           placeholder="Group Name"
           value={groupName}
           onChange={handleChange}
-          style={inputStyles}
         />
-        <div style={modalFooterStyles}>
-          <button onClick={onClose}>Cancel</button>
-          <button onClick={handleCreateClick}>Create</button>
-        </div>
-      </div>
-    </div>
+        <PopupButtonContainer>
+          <AddNoteButton onClick={handleClose}>Cancel</AddNoteButton>
+          <AddNoteButton onClick={handleCreateClick}>Create</AddNoteButton>
+        </PopupButtonContainer>
+      </PopupInnerContainer>
+    </PopupContainer>
   );
 }
 
@@ -107,7 +120,7 @@ function GroupsBoards(props) {
         })}
       </NotesContainer>
 
-      <Modal
+      <AddGroupPopup
         show={isModalOpen}
         onClose={handleCloseModal}
         onCreate={backApi.postGroup}
@@ -119,43 +132,3 @@ function GroupsBoards(props) {
 }
 
 export default GroupsBoards;
-
-const modalStyles = {
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  right: '0',
-  bottom: '0',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  zIndex: '1000',
-};
-
-const modalContentStyles = {
-  backgroundColor: '#fff',
-  padding: '20px',
-  borderRadius: '8px',
-  width: '300px',
-  height: '150px',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  textAlign: 'center',
-};
-
-const inputStyles = {
-  marginTop: '1em',
-  padding: '0.5em',
-  width: '80%',
-};
-
-const modalFooterStyles = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  width: '100%',
-  marginTop: 'auto',
-  paddingTop: '10px',
-};

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 
 //color palate
 const backGroundLightGray = '#E4E0E1';
@@ -34,9 +34,13 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const boxShadowAndBorderRadius = css`
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+`;
+
 /************************** buttons **************************/
 const AddNoteButton = styled.button`
-  width: 2.5em;
   align-self: flex-end;
   margin: 0.2em;
 `;
@@ -54,8 +58,7 @@ const baseButton = styled.button`
   margin: 10px;
   background-color: ${backGroundLightBrown};
   border: 2px solid black;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  ${boxShadowAndBorderRadius}
   transition: background-color 0.3s, color 0.3s, transform 0.2s;
   color: black;
 
@@ -82,6 +85,7 @@ const LogInH1 = styled.h1`
 const NoteH1 = styled.h1`
   font-size: 1.1em;
   height: 2em;
+  overflow-y: hidden;
 `;
 
 const HeaderH1 = styled.h1`
@@ -90,6 +94,7 @@ const HeaderH1 = styled.h1`
 `;
 
 /************************* paragraphs ************************/
+
 const NoteP = styled.p`
   font-size: 0.9em;
   margin-bottom: 10px;
@@ -103,7 +108,7 @@ const FooterP = styled.p`
 `;
 
 /*************************** forms ***************************/
-//TODO: code reuse
+
 const baseForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -117,16 +122,13 @@ const InputAreaForm = styled(baseForm)`
   width: 20em;
   height: 18vh;
   background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-  border-radius: 7px;
+  ${boxShadowAndBorderRadius}
   margin: 1em;
   justify-content: space-between;
   padding: 10px;
 `;
 
 /*************************** input ***************************/
-//TODO: code reuse
 
 const TitleInput = styled.input`
   font-size: 1.1em;
@@ -136,27 +138,21 @@ const TitleInput = styled.input`
 `;
 
 const ContentInput = styled.textarea`
-  width: 100%;
   height: 8em;
   font-weight: bold;
-  font-size: 0.9em;
+  font-size: 1em;
   border: none;
-  resize: vertical;
-  box-sizing: border-box;
-  line-height: 1.5;
   word-wrap: break-word;
 `;
 
 const SignUpInput = styled.input`
-  width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: 2px solid black;
   border-radius: 8px;
 `;
 
-/*************************** input ***************************/
-/*************************** input ***************************/
+/************************* containers ************************/
 
 const Container = styled.div`
   display: flex;
@@ -165,6 +161,57 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const LogInContainer = styled(Container)`
+  background-color: ${backGroundLightBrown};
+  height: 100vh;
+  width: 100vw;
+`;
+
+const NotesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: auto;
+  max-height: calc(58vh - 0.5rem);
+`;
+
+const NoteContainer = styled.div`
+  overflow-y: auto;
+  max-height: calc(100% - 50px);
+`;
+
+const PopupContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const PopupInnerContainer = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const PopupButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 10px;
+`;
+
+/************************** styles ***************************/
+//TODO: code reuse
+
 const HeaderStyle = styled.div`
   display: flex;
   justify-content: space-between;
@@ -172,7 +219,7 @@ const HeaderStyle = styled.div`
   background-color: ${backGroundLightBrown};
   margin: 0 0 16px 0;
   padding: 16px 32px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  ${boxShadowAndBorderRadius}
   width: 100%;
 `;
 
@@ -188,44 +235,12 @@ const FooterStyle = styled.footer`
 
 const NoteStyle = styled.div`
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px #ccc;
+  ${boxShadowAndBorderRadius}
   padding: 10px;
   width: 200px;
   height: 200px;
   margin: 16px;
   position: relative;
-`;
-
-const NoteContainer = styled.div`
-  overflow-y: auto;
-  max-height: calc(100% - 50px);
-`;
-
-const NotesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  overflow-y: auto;
-  overflow-x: auto;
-  max-height: calc(58vh - 0.5rem);
-`;
-
-const LogInContainer = styled.div`
-  background-color: ${backGroundLightBrown};
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SignUpContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 
 const CenteredHeader = styled.h3`
@@ -249,6 +264,10 @@ const CardStyle = styled(NoteStyle)`
 export {
   //global
   GlobalStyle,
+
+  //bases
+  boxShadowAndBorderRadius,
+  baseButton,
 
   //buttons
   LogOutButton,
@@ -275,7 +294,9 @@ export {
   NoteContainer,
   NotesContainer,
   LogInContainer,
-  SignUpContainer,
+  PopupContainer,
+  PopupInnerContainer,
+  PopupButtonContainer,
 
   //forms
   InputAreaForm,
