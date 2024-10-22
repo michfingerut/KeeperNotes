@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import backApi from '../services/backApi';
 import {
   TitleInput,
-  AddButton,
+  AddNoteButton,
   InputAreaForm,
   ContentInput,
 } from '../styles/styles';
@@ -62,7 +62,7 @@ function InputArea(props) {
         value={tmpNote.content}
         placeholder="add note content"
       />
-      <AddButton type="submit">Add</AddButton>
+      <AddNoteButton type="submit">Add</AddNoteButton>
     </InputAreaForm>
   );
 }
