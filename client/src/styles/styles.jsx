@@ -1,5 +1,11 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
+//color palate
+const backGroundLightGray = '#E4E0E1';
+const backGroundLightBrown = '#D6C0B3';
+const midDarkBrown = '#AB886D';
+const darkBrown = '#493628';
+
 // Global Styles
 const GlobalStyle = createGlobalStyle`
   * {
@@ -15,13 +21,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: #eee;
+    background: ${backGroundLightGray};
     height: 100%;
     overflow-y: hidden;
   }
 
   button {
-    color: #d69f09;
+    color: ${darkBrown};
     border: none;
     background-color: white;
     font-weight: bold;
@@ -40,7 +46,7 @@ const HeaderStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f5ba13;
+  background-color: ${backGroundLightBrown};
   margin: 16px -16px;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -48,7 +54,7 @@ const HeaderStyle = styled.div`
 `;
 
 const HeaderH1 = styled.h1`
-  color: #fff;
+  color: white;
   font-weight: 400;
 `;
 
@@ -67,7 +73,7 @@ const FooterP = styled.p`
 
 const NoteStyle = styled.div`
   background: #fff;
-  border-radius: 7px;
+  border-radius: 8px;
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
   width: 200px;
@@ -95,7 +101,7 @@ const NoteP = styled.p`
 `;
 
 const NoteButton = styled.button`
-  color: #d69f09;
+  color: ${darkBrown};
   border: none;
   background-color: white;
   font-weight: bold;
@@ -118,7 +124,7 @@ const NotesContainer = styled.div`
   justify-content: center;
   overflow-y: auto;
   overflow-x: auto;
-  max-height: calc(63vh - 1rem);
+  max-height: calc(58vh - 1.5rem);
 `;
 
 const InputAreaForm = styled.form`
@@ -154,7 +160,7 @@ const ContentInput = styled.textarea`
 `;
 
 const LogInContainer = styled.div`
-  background-color: #f5ba13;
+  background-color: ${backGroundLightBrown};
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -172,7 +178,7 @@ const LogButton = styled.button`
   padding: 12px 24px;
   width: 100%;
   margin: 10px;
-  background-color: #f5ba13;
+  background-color: ${backGroundLightBrown};
   border: 2px solid black;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -181,8 +187,8 @@ const LogButton = styled.button`
   color: black;
 
   &:hover {
-    background-color: white;
-    color: #d69f09;
+    background-color: ${backGroundLightGray};
+    color: ${darkBrown};
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
   }
@@ -191,7 +197,7 @@ const LogButton = styled.button`
 const LogOutButton = styled.button`
   padding: 12px 24px;
   margin: 10px;
-  background-color: #f5ba13;
+  background-color: ${backGroundLightBrown};
   border: 2px solid black;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -200,8 +206,8 @@ const LogOutButton = styled.button`
   color: black;
 
   &:hover {
-    background-color: white;
-    color: #d69f09;
+    background-color: ${backGroundLightGray};
+    color: ${darkBrown};
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
   }
@@ -237,28 +243,61 @@ const AddButton = styled.button`
   margin: 0.2em;
 `;
 
+const CenteredHeader = styled.h3`
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  font-size: 0.9em;
+  line-height: 200px;
+`;
+
+const CardStyle = styled(NoteStyle)`
+  background-color: ${backGroundLightBrown};
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${backGroundLightGray};
+  }
+`;
+
 export {
+  //global
   GlobalStyle,
-  Container,
-  HeaderStyle,
-  HeaderH1,
-  FooterStyle,
-  FooterP,
-  NoteStyle,
-  NoteH1,
-  NoteP,
+
+  //buttons
+  LogOutButton,
   NoteButton,
-  NoteContainer,
-  NotesContainer,
-  InputAreaForm,
+  LogButton,
+  AddButton,
+
+  //headers
+  LogInH1,
+  HeaderH1,
+  NoteH1,
+
+  //paragraphs
+  FooterP,
+  NoteP,
+
+  //inputs
+  SignUpInput,
   TitleInput,
   ContentInput,
+
+  //containers
+  Container,
+  NoteContainer,
+  NotesContainer,
   LogInContainer,
-  LogInH1,
-  LogButton,
-  LogOutButton,
   SignUpContainer,
+
+  //forms
+  InputAreaForm,
   SignUpForm,
-  SignUpInput,
-  AddButton,
+  HeaderStyle,
+  FooterStyle,
+  NoteStyle,
+  CenteredHeader,
+  CardStyle,
 };

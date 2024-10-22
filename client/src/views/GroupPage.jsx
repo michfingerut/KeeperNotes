@@ -9,6 +9,7 @@ import { LogOutButton, NotesContainer } from '../styles/styles';
 import backApi from '../services/backApi';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function GroupPage(props) {
   const [notes, setNotes] = useState([]);
@@ -70,6 +71,7 @@ function GroupPage(props) {
           );
         })}
       </NotesContainer>
+      <Footer />
     </div>
   );
 }
