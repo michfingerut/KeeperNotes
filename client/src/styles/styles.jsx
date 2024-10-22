@@ -47,7 +47,7 @@ const HeaderStyle = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: ${backGroundLightBrown};
-  margin: 16px -16px;
+  margin: 0 0 16px 0;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   width: 100%;
@@ -61,7 +61,7 @@ const HeaderH1 = styled.h1`
 const FooterStyle = styled.footer`
   text-align: center;
   bottom: 0;
-  width: 90%;
+  width: 100%;
   height: 2rem;
 
   position: fixed;
@@ -124,7 +124,7 @@ const NotesContainer = styled.div`
   justify-content: center;
   overflow-y: auto;
   overflow-x: auto;
-  max-height: calc(58vh - 1.5rem);
+  max-height: calc(58vh - 0.5rem);
 `;
 
 const InputAreaForm = styled.form`
