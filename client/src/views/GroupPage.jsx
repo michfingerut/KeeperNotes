@@ -45,18 +45,27 @@ function GroupPage(props) {
     navigate('/home');
   }
   return (
-    <div style={{ position: 'relative' }}>
+    <div
+      style={{
+        position: 'relative',
+      }}
+    >
       <Header title="Keeper" setIsLogged={props.setIsLogged} />
       {/* TODO: add style component to button *also in GroupsBoards */}
       <div
         style={{
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <LogOutButton onClick={returnToGroupBoard}>go back</LogOutButton>
+        <div>
+          <LogOutButton onClick={returnToGroupBoard}>go back</LogOutButton>
+        </div>
+        <div>
+          <InputArea stateFunc={setNotes} userId={userId} groupId={groupId} />
+        </div>
       </div>
-      <InputArea stateFunc={setNotes} userId={userId} groupId={groupId} />
       <NotesContainer>
         {notes.map((note) => {
           return (
