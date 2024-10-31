@@ -2,8 +2,8 @@ import Joi from 'joi';
 
 const userIdParam = Joi.string().uuid().required();
 const idParam = Joi.number().required();
-const titleParam = Joi.string().max(100);
-const contentParam = Joi.string().max(500);
+const titleParam = Joi.string().max(100).min(0);
+const contentParam = Joi.string().max(500).min(0);
 const emailParam = Joi.string()
   .email({ tlds: { allow: false } })
   .required();
