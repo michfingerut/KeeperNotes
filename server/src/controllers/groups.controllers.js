@@ -3,6 +3,7 @@ import { errorHandler } from '../utils/index.js';
 import Groups from '../db/models/groups.model.js';
 import Users from '../db/models/users.model.js';
 import Members from '../db/models/members.model.js';
+import publishers from '../socketio.js';
 
 //TODO: create swagger
 
@@ -105,6 +106,8 @@ const deleteGroup = async (req, res) => {
     res.status(200).json({
       message: message,
     });
+
+    await publishers.genericPublisher(groupId, 'delete group', groupId);
   } catch (err) {
     console.log(JSON.stringify(err, null, 2));
     errorHandler(err, res);

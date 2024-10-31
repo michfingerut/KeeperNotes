@@ -2,7 +2,7 @@ import logger from '../logger.js';
 import { errorCode, errorHandler, KeeperError } from '../utils/index.js';
 import Notes from '../db/models/notes.model.js';
 import Groups from '../db/models/groups.model.js';
-
+import publisher from '../socketio.js';
 //TODO: create swagger
 
 const postNote = async (req, res) => {
@@ -25,8 +25,9 @@ const postNote = async (req, res) => {
   
   */
   req.body.uuid = req.params.userId;
+  const groupId = req.body.groupId;
   try {
-    const group = await Groups.findByPk(req.body.groupId);
+    const group = await Groups.findByPk(groupId);
 
     if (!group) {
       throw new KeeperError(errorCode.NOT_FOUND, 'group doesnt exist');
@@ -36,6 +37,7 @@ const postNote = async (req, res) => {
 
     logger.info(message);
     res.status(201).json(note);
+    await publisher.genericPublisher(groupId, 'post note', note);
   } catch (err) {
     if (err?.name === 'SequelizeForeignKeyConstraintError') {
       errorHandler(
@@ -88,6 +90,11 @@ const putNote = async (req, res) => {
 
     logger.info(`note -> ${id} was updated successfuly`);
     res.status(200).json(updatedNote[0]);
+    await publisher.genericPublisher(
+      updatedNote[0].groupId,
+      'put note',
+      updatedNote[0],
+    );
   } catch (err) {
     errorHandler(err, res, 'note was not updated');
   }
@@ -124,6 +131,8 @@ const deleteNote = async (req, res) => {
     res.status(200).json({
       message: message,
     });
+
+    await publisher.genericPublisher(note.groupId, 'delete note', id);
   } catch (err) {
     errorHandler(err, res);
   }

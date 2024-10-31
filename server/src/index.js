@@ -8,11 +8,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import cors from 'cors';
+import { createServer } from 'node:http';
 
 //internal modules
 import logger from './logger.js';
 import router from './routes.js';
 import { handlerMissedRoutes, errorHandler } from './utils/index.js';
+import socketio from './socketio.js';
 
 const serverPort = process.env.SERVER_PORT;
 const app = express();
@@ -41,6 +43,7 @@ app.use((err, req, res, next) => {
   errorHandler(err, res);
 });
 
-app.listen(serverPort, () => {
+const server = createServer(app).listen(serverPort, () => {
   logger.info(`server is running on port ${serverPort}`);
+  socketio.initSocket(server);
 });

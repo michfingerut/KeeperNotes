@@ -3,6 +3,7 @@ import Members from '../db/models/members.model.js';
 import Users from '../db/models/users.model.js';
 import logger from '../logger.js';
 import { errorCode, errorHandler, KeeperError } from '../utils/index.js';
+import publisher from '../socketio.js';
 
 //TODO: create swagger
 
@@ -35,6 +36,10 @@ const addMember = async (req, res) => {
 
     logger.info(message);
     res.status(201).json({ message: message });
+    await publisher.genericPublisher(groupId, 'add member to group', {
+      groupId,
+      uuid,
+    });
   } catch (err) {
     if (
       err?.name === 'SequelizeForeignKeyConstraintError' &&
@@ -86,6 +91,11 @@ const deleteMember = async (req, res) => {
 
     logger.info(message);
     res.status(200).json({ message: message });
+
+    await publisher.genericPublisher(groupId, 'delete member from group', {
+      groupId,
+      uuid,
+    });
   } catch (err) {
     errorHandler(err, res);
   }
