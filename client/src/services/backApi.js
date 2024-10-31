@@ -13,11 +13,11 @@ const callBackAPI = async (functionToCall, route, params) => {
 
 /******************************************************************************/
 const getNotesOfUser = async (userId) => {
+  //TODO: not in use
   return await callBackAPI('get', `/users/${userId}/notes`);
 };
 
 const getNotesOfGroup = async (groupId) => {
-  //TODO: not in use
   return await callBackAPI('get', `/groups/${groupId}/notes`);
 };
 
