@@ -26,7 +26,6 @@ const postNote = async (note, userId) => {
 };
 
 const updateNote = async (id, userId, dataToUpdate) => {
-  //TODO: as for now, not in use
   return await callBackAPI('put', `/users/${userId}/notes/${id}`, dataToUpdate);
 };
 

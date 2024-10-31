@@ -63,7 +63,11 @@ function GroupPage(props) {
           <LogOutButton onClick={returnToGroupBoard}>go back</LogOutButton>
         </div>
         <div>
-          <InputArea stateFunc={setNotes} userId={userId} groupId={groupId} />
+          <InputArea
+            stateFunc={setNotes}
+            note={{ title: '', content: '', groupId: groupId }}
+            mode="add"
+          />
         </div>
       </div>
       <NotesContainer>
@@ -71,10 +75,9 @@ function GroupPage(props) {
           return (
             <Note
               key={note.id}
-              id={note.id}
-              title={note.title}
-              content={note.content}
+              note={note}
               deleteFunc={deleteNote}
+              notesStateFunc={setNotes}
               userId={userId}
             />
           );

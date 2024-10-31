@@ -100,7 +100,7 @@ const NoteP = styled.p`
   margin-bottom: 10px;
   white-space: pre-wrap;
   word-wrap: break-word;
-  max-height: 90px;
+  max-height: 150px;
 `;
 
 const FooterP = styled.p`

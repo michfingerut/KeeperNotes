@@ -11,30 +11,41 @@ import {
 } from '../styles/styles';
 
 function InputArea(props) {
-  const groupId = props.groupId;
-  const [tmpNote, setTmpNote] = useState({
-    title: '',
-    content: '',
-    groupId: groupId,
-  });
+  const uuid = localStorage.getItem('uuid');
+  const [tmpNote, setTmpNote] = useState(props.note);
+
+  const placeHolderTitle =
+    props.mode === 'add' ? 'add note title' : props.note.title;
+
+  const placeHolderContent =
+    props.mode === 'add' ? 'add note content' : props.note.content;
 
   async function addNote(event) {
+    console.log('add note');
     event.preventDefault();
     // TODO: Error handling
-    //TODO: note should have groupId
-    const createNote = await backApi.postNote(tmpNote, props.userId);
+    const createNote = await backApi.postNote(tmpNote, uuid);
 
     props.stateFunc((prevNotes) => {
       return [...prevNotes, { ...tmpNote, id: createNote.id }];
     });
 
-    setTmpNote(() => {
-      return {
-        title: '',
-        content: '',
-        groupId: groupId,
-      };
+    setTmpNote(props.note);
+  }
+
+  async function editNote(event) {
+    event.preventDefault();
+    // TODO: Error handling
+
+    const updatedNote = await backApi.updateNote(props.note.id, uuid, {
+      title: tmpNote.title,
+      content: tmpNote.content,
     });
+
+    props.stateFunc(updatedNote);
+    setTmpNote(updatedNote);
+
+    props.close(false);
   }
 
   function handleInput(event) {
@@ -49,20 +60,20 @@ function InputArea(props) {
   }
 
   return (
-    <InputAreaForm onSubmit={addNote}>
+    <InputAreaForm onSubmit={props.mode === 'add' ? addNote : editNote}>
       <TitleInput
         name="title"
         onChange={handleInput}
         value={tmpNote.title}
-        placeholder="add note title"
+        placeholder={placeHolderTitle}
       />
       <ContentInput
         name="content"
         onChange={handleInput}
         value={tmpNote.content}
-        placeholder="add note content"
+        placeholder={placeHolderContent}
       />
-      <AddNoteButton type="submit">Add</AddNoteButton>
+      <AddNoteButton type="submit">Save</AddNoteButton>
     </InputAreaForm>
   );
 }
