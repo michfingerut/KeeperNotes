@@ -115,8 +115,10 @@ function GroupsBoards() {
         {groups.map((group) => {
           return (
             <GroupCard
-              name={group.name}
               key={group.groupId}
+              groupId={group.groupId}
+              name={group.name}
+              setGroups={setGroups}
               onClick={(event) => handleGroupPick(group, event)}
             />
           );

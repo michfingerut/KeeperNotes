@@ -62,7 +62,6 @@ const postGroup = async (name, ownerId) => {
 };
 
 const deleteGroup = async (groupId) => {
-  //TODO: as for now, not in use
   return await callBackAPI('delete', `/groups/${groupId}`);
 };
 
