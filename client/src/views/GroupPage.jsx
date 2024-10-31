@@ -77,6 +77,7 @@ function GroupPage(props) {
           />
         </div>
       </div>
+      {/* TODO: should go down when adding notes */}
       <NotesContainer>
         {notes.map((note) => {
           return (

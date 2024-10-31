@@ -7,6 +7,7 @@ import { MenuItem, Menu } from '@mui/material';
 import { NoteStyle, NoteH1, NoteP, NoteContainer } from '../styles/styles';
 import Dialog from '@mui/material/Dialog';
 import InputArea from './InputArea';
+import KeeperMenu from './Menu';
 
 function Dropdown(props) {
   ///////////////////// props /////////////////////
@@ -18,11 +19,6 @@ function Dropdown(props) {
   //TODO: styling!!!
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const open = Boolean(anchorEl);
-
-  function handleClick(event) {
-    setAnchorEl(event.currentTarget);
-  }
 
   function handleClose() {
     setAnchorEl(null);
@@ -30,18 +26,17 @@ function Dropdown(props) {
 
   async function handleEdit() {
     setOpenDialog(true);
-    handleClose();
   }
 
   async function handleDelete() {
     await deleteFunc(note.id);
-    handleClose();
   }
 
   function EditDialog() {
     return (
       <React.Fragment>
-        <Dialog open={openDialog} onClose={handleClose}>
+        {/* TODO should be closed if clicked outside the area */}
+        <Dialog open={openDialog}>
           <InputArea
             stateFunc={setNote}
             note={note}
@@ -55,11 +50,20 @@ function Dropdown(props) {
 
   return (
     <div>
-      <CiMenuKebab onClick={handleClick} />
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem onClick={handleEdit}>Edit note</MenuItem>
-        <MenuItem onClick={handleDelete}>Delete note</MenuItem>
-      </Menu>
+      <KeeperMenu
+        menuItems={[
+          {
+            key: 1,
+            itemName: 'Edit note',
+            handleClick: handleEdit,
+          },
+          {
+            key: 2,
+            itemName: 'Delete note',
+            handleClick: handleDelete,
+          },
+        ]}
+      />
       <EditDialog />
     </div>
   );
