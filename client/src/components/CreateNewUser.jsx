@@ -12,8 +12,6 @@ import {
   LogButton,
 } from '../styles/styles';
 
-// TODO: add invalid password
-
 function CreateNewUser(props) {
   ///////////////////// props /////////////////////
   const handleInput = props.handleInput;
