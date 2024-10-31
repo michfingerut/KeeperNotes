@@ -89,9 +89,9 @@ function LogInPage(props) {
               }}
             />
           ) : (
-            <div style={{ marginLeft: '25px' }}> </div>
+            <div style={{ marginLeft: '25px' }} />
           )}
-          Hello
+          <div style={{ pointerEvents: 'none', userSelect: 'none' }}>Hello</div>
         </LogInH1>
 
         <div>{isInitOption ? init() : option()}</div>

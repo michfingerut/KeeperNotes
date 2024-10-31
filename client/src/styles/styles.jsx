@@ -11,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     box-sizing: border-box;
+      user-select: none;
+
   }
 
   html {
@@ -37,6 +39,11 @@ const GlobalStyle = createGlobalStyle`
 const boxShadowAndBorderRadius = css`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+`;
+
+const notClickableText = css`
+  pointer-events: none;
+  cursor: default;
 `;
 
 /************************** buttons **************************/
@@ -86,11 +93,13 @@ const NoteH1 = styled.h1`
   font-size: 1.1em;
   height: 2em;
   overflow-y: hidden;
+  ${notClickableText}
 `;
 
 const HeaderH1 = styled.h1`
   color: white;
   font-weight: 400;
+  ${notClickableText}
 `;
 
 /************************* paragraphs ************************/
@@ -101,10 +110,12 @@ const NoteP = styled.p`
   white-space: pre-wrap;
   word-wrap: break-word;
   max-height: 150px;
+  ${notClickableText}
 `;
 
 const FooterP = styled.p`
   color: #ccc;
+  ${notClickableText}
 `;
 
 /*************************** forms ***************************/
@@ -248,13 +259,14 @@ const CenteredHeader = styled.h3`
   margin: 0;
   width: 100%;
   font-size: 0.9em;
-  line-height: 200px;
+  line-height: 160px;
+  ${notClickableText}
 `;
 
 const CardStyle = styled(NoteStyle)`
   background-color: ${backGroundLightBrown};
   transition: background-color 0.3s;
-  cursor: pointer;
+  overflow-y: hidden;
 
   &:hover {
     background-color: ${backGroundLightGray};
@@ -266,6 +278,7 @@ export {
   GlobalStyle,
 
   //bases
+  notClickableText,
   boxShadowAndBorderRadius,
   baseButton,
 
@@ -301,6 +314,8 @@ export {
   //forms
   InputAreaForm,
   SignUpForm,
+
+  //general styles
   HeaderStyle,
   FooterStyle,
   NoteStyle,
