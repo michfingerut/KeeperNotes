@@ -5,9 +5,9 @@ import { MenuItem, Menu } from '@mui/material';
 /**
  * props
  * @param {Object[]} menuItems - array of menu items
- * @param {string} itemName - the name of the manu item
- * @param {number} key - key of item
- * @param {Function} handleClick - the function that needs to be triggered
+ * @param {string} menuItem.itemName - the name of the manu item
+ * @param {number} menuItem.key - key of item
+ * @param {Function} menuItem.handleClick - the function that needs to be triggered
  */
 
 //TODO: styling

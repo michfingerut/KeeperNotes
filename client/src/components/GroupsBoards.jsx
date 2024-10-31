@@ -93,9 +93,7 @@ function GroupsBoards() {
     setModalOpen(false);
   };
 
-  function handleGroupPick(group, event) {
-    event.preventDefault();
-
+  function handleGroupPick(group) {
     navigate(`/${group.groupId}`);
   }
 
