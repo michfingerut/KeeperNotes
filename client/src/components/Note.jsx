@@ -1,7 +1,5 @@
 //External modules
 import React, { useEffect, useState } from 'react';
-import { CiMenuKebab } from 'react-icons/ci';
-import { MenuItem, Menu } from '@mui/material';
 
 //Internal modules
 import { NoteStyle, NoteH1, NoteP, NoteContainer } from '../styles/styles';
@@ -16,13 +14,8 @@ function Dropdown(props) {
   const setNote = props.setNote;
   /////////////////////////////////////////////////
 
-  //TODO: styling!!!
-  const [anchorEl, setAnchorEl] = useState(null);
+  //TODO: styling!!! + input styling in popup
   const [openDialog, setOpenDialog] = useState(false);
-
-  function handleClose() {
-    setAnchorEl(null);
-  }
 
   async function handleEdit() {
     setOpenDialog(true);
