@@ -17,7 +17,8 @@ function GroupCard(props) {
   }
 
   function handleEdit() {
-    console.log('Edit');
+    //TODO ?
+    // maybe this will be thwe option to add and remove members
   }
 
   async function handleRemove() {
@@ -38,7 +39,7 @@ function GroupCard(props) {
         style={{}}
         menuItems={[
           { key: 1, itemName: 'Enter group', handleClick: handleEnter },
-          { key: 2, itemName: 'Edit group', handleClick: handleEdit },
+          // { key: 2, itemName: 'Edit group', handleClick: handleEdit },
           { key: 3, itemName: 'Remove group', handleClick: handleRemove },
         ]}
       />
