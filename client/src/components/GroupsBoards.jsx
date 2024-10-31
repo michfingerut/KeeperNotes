@@ -70,14 +70,16 @@ function GroupsBoards(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    backApi
-      .getGroupsOfUser(uuid)
-      .then((data) => {
-        setGroups(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (uuid) {
+      backApi
+        .getGroupsOfUser(uuid)
+        .then((data) => {
+          setGroups(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, [uuid]);
 
   const handleCreateGroupClick = () => {

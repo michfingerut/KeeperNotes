@@ -2,8 +2,8 @@ import Joi from 'joi';
 
 const userIdParam = Joi.string().uuid().required();
 const idParam = Joi.number().required();
-const titleParam = Joi.string();
-const contentParam = Joi.string();
+const titleParam = Joi.string().max(100);
+const contentParam = Joi.string().max(500);
 const emailParam = Joi.string()
   .email({ tlds: { allow: false } })
   .required();
@@ -19,13 +19,12 @@ const firstNameParams = Joi.string();
 const lastNameParams = Joi.string();
 
 const postNoteParams = Joi.object().keys({
-  title: titleParam.required(),
-  content: contentParam.required(),
+  title: titleParam.optional(),
+  content: contentParam.optional(),
   userId: userIdParam,
   groupId: userIdParam,
 });
 
-//TODO: bug of sending too long content
 const putNoteParams = Joi.object().keys({
   userId: userIdParam,
   id: idParam,

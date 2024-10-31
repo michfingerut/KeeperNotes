@@ -2,7 +2,7 @@ import { HeaderStyle, HeaderH1, LogOutButton } from '../styles/styles';
 
 function Header(props) {
   function logOut() {
-    localStorage.setItem('uuid', undefined);
+    localStorage.setItem('uuid', '');
     localStorage.setItem('isLogged', false);
     props.setIsLogged(false);
   }
