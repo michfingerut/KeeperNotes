@@ -69,13 +69,19 @@ function Note(props) {
 
   const [currNote, setNote] = useState(note);
 
+  //TODO: on refresh the order is changing
   useEffect(() => {
     notesStateFunc((prevNotes) => {
-      const tmp = prevNotes.filter((note) => {
-        return note.id !== currNote.id;
+      prevNotes = prevNotes.filter((note) => {
+        if (note.id === currNote.id) {
+          note.title = currNote.title;
+          note.content = currNote.content;
+        }
+
+        return true;
       });
 
-      return [...tmp, currNote];
+      return prevNotes;
     });
   }, [currNote]);
 
