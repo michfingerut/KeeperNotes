@@ -16,11 +16,14 @@ import {
 import GroupCard from './GroupCard';
 
 function AddGroupPopup(props) {
+  ///////////////////// props /////////////////////
   const show = props.show;
   const onClose = props.onClose;
   const onCreate = props.onCreate;
   const setGroups = props.setGroups;
   const uuid = props.uuid;
+  ////////////////////////////////////////////////
+
   const [groupName, setGroupName] = useState('');
 
   const handleCreateClick = async () => {
@@ -63,8 +66,8 @@ function AddGroupPopup(props) {
   );
 }
 
-function GroupsBoards(props) {
-  const uuid = props.uuid;
+function GroupsBoards() {
+  const uuid = localStorage.getItem('uuid');
   const [groups, setGroups] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();

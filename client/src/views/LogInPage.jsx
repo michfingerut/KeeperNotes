@@ -8,6 +8,10 @@ import LogExistingUser from '../components/LogExistingUser';
 import { LogInContainer, LogInH1, LogButton } from '../styles/styles';
 
 function LogInPage(props) {
+  ///////////////////// props /////////////////////
+  const setIsLogged = props.setIsLogged;
+  /////////////////////////////////////////////////
+
   const [isInitOption, setIsInitOption] = useState(true);
   const [toSignUp, setToSignUp] = useState(false);
 
@@ -39,13 +43,13 @@ function LogInPage(props) {
       <CreateNewUser
         handleInput={handleInput}
         tmpUsr={tmpUsr}
-        setIsLogged={props.setIsLogged}
+        setIsLogged={setIsLogged}
       />
     ) : (
       <LogExistingUser
         handleInput={handleInput}
         tmpUsr={tmpUsr}
-        setIsLogged={props.setIsLogged}
+        setIsLogged={setIsLogged}
       />
     );
   }

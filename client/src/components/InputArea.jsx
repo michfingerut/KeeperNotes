@@ -11,14 +11,19 @@ import {
 } from '../styles/styles';
 
 function InputArea(props) {
+  ///////////////////// props /////////////////////
+  const stateFunc = props.stateFunc;
+  const note = props.note;
+  const mode = props.mode;
+  const close = props.close;
+  ////////////////////////////////////////////////
+
   const uuid = localStorage.getItem('uuid');
-  const [tmpNote, setTmpNote] = useState(props.note);
+  const [tmpNote, setTmpNote] = useState(note);
 
-  const placeHolderTitle =
-    props.mode === 'add' ? 'add note title' : props.note.title;
+  const placeHolderTitle = mode === 'add' ? 'add note title' : note.title;
 
-  const placeHolderContent =
-    props.mode === 'add' ? 'add note content' : props.note.content;
+  const placeHolderContent = mode === 'add' ? 'add note content' : note.content;
 
   async function addNote(event) {
     console.log('add note');
@@ -26,26 +31,26 @@ function InputArea(props) {
     // TODO: Error handling
     const createNote = await backApi.postNote(tmpNote, uuid);
 
-    props.stateFunc((prevNotes) => {
+    stateFunc((prevNotes) => {
       return [...prevNotes, { ...tmpNote, id: createNote.id }];
     });
 
-    setTmpNote(props.note);
+    setTmpNote(note);
   }
 
   async function editNote(event) {
     event.preventDefault();
     // TODO: Error handling
 
-    const updatedNote = await backApi.updateNote(props.note.id, uuid, {
+    const updatedNote = await backApi.updateNote(note.id, uuid, {
       title: tmpNote.title,
       content: tmpNote.content,
     });
 
-    props.stateFunc(updatedNote);
+    stateFunc(updatedNote);
     setTmpNote(updatedNote);
 
-    props.close(false);
+    close(false);
   }
 
   function handleInput(event) {
@@ -60,7 +65,7 @@ function InputArea(props) {
   }
 
   return (
-    <InputAreaForm onSubmit={props.mode === 'add' ? addNote : editNote}>
+    <InputAreaForm onSubmit={mode === 'add' ? addNote : editNote}>
       <TitleInput
         name="title"
         onChange={handleInput}

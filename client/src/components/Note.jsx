@@ -9,6 +9,12 @@ import Dialog from '@mui/material/Dialog';
 import InputArea from './InputArea';
 
 function Dropdown(props) {
+  ///////////////////// props /////////////////////
+  const deleteFunc = props.deleteFunc;
+  const note = props.note;
+  const setNote = props.setNote;
+  /////////////////////////////////////////////////
+
   //TODO: styling!!!
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
@@ -28,7 +34,7 @@ function Dropdown(props) {
   }
 
   async function handleDelete() {
-    await props.deleteFunc(props.note.id);
+    await deleteFunc(note.id);
     handleClose();
   }
 
@@ -37,9 +43,8 @@ function Dropdown(props) {
       <React.Fragment>
         <Dialog open={openDialog} onClose={handleClose}>
           <InputArea
-            stateFunc={props.setNote}
-            notesStateFunc={() => props.notesStateFunc}
-            note={props.note}
+            stateFunc={setNote}
+            note={note}
             mode="edit"
             close={setOpenDialog}
           />
@@ -61,10 +66,14 @@ function Dropdown(props) {
 }
 
 function Note(props) {
-  const [currNote, setNote] = useState(props.note);
+  const note = props.note;
+  const deleteFunc = props.deleteFunc;
+  const notesStateFunc = props.notesStateFunc;
+
+  const [currNote, setNote] = useState(note);
 
   useEffect(() => {
-    props.notesStateFunc((prevNotes) => {
+    notesStateFunc((prevNotes) => {
       const tmp = prevNotes.filter((note) => {
         return note.id !== currNote.id;
       });
@@ -77,15 +86,11 @@ function Note(props) {
     <NoteStyle>
       {/*TODO: when title too long looks cut add tooltip also TODO: scrolling prettier */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <NoteH1>{props.note.title}</NoteH1>
-        <Dropdown
-          deleteFunc={props.deleteFunc}
-          note={currNote}
-          setNote={setNote}
-        />
+        <NoteH1>{note.title}</NoteH1>
+        <Dropdown deleteFunc={deleteFunc} note={currNote} setNote={setNote} />
       </div>
       <NoteContainer>
-        <NoteP>{props.note.content}</NoteP>
+        <NoteP>{note.content}</NoteP>
       </NoteContainer>
     </NoteStyle>
   );

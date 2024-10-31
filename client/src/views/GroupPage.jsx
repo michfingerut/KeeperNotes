@@ -12,6 +12,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function GroupPage(props) {
+  ///////////////////// props /////////////////////
+  const setIsLogged = props.setIsLogged;
+  /////////////////////////////////////////////////
+
   const [notes, setNotes] = useState([]);
   const userId = localStorage.getItem('uuid');
   const navigate = useNavigate();
@@ -50,7 +54,7 @@ function GroupPage(props) {
         position: 'relative',
       }}
     >
-      <Header title="Keeper" setIsLogged={props.setIsLogged} />
+      <Header title="Keeper" setIsLogged={setIsLogged} />
       {/* TODO: add style component to button *also in GroupsBoards */}
       <div
         style={{
@@ -60,6 +64,7 @@ function GroupPage(props) {
         }}
       >
         <div>
+          {/* TODO: should be in the same size as create group button */}
           <LogOutButton onClick={returnToGroupBoard}>go back</LogOutButton>
         </div>
         <div>

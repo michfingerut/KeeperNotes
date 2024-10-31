@@ -8,15 +8,15 @@ import { Container } from '../styles/styles';
 import GroupsBoards from '../components/GroupsBoards';
 
 function KeeperMainPage(props) {
-  const uuid = props.uuid;
+  ///////////////////// props /////////////////////
+  const setIsLogged = props.setIsLogged;
+  /////////////////////////////////////////////////
 
   return (
     <div>
       <Container>
-        <Header title="Keeper" setIsLogged={props.setIsLogged} />
-
-        <GroupsBoards uuid={uuid} />
-
+        <Header title="Keeper" setIsLogged={setIsLogged} />
+        <GroupsBoards />
         <Footer />
       </Container>
     </div>

@@ -17,7 +17,6 @@ function App() {
   const [isLogged, setIsLogged] = useState(
     JSON.parse(localStorage.getItem('isLogged')),
   );
-  const uuid = localStorage.getItem('uuid');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function App() {
     <Routes>
       <Route
         path="/home"
-        element={<KeeperMainPage uuid={uuid} setIsLogged={setIsLogged} />}
+        element={<KeeperMainPage setIsLogged={setIsLogged} />}
       />
       <Route
         path="/:groupId"

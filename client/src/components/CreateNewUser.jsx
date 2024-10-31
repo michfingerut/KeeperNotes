@@ -15,12 +15,18 @@ import {
 // TODO: add invalid password
 
 function CreateNewUser(props) {
+  ///////////////////// props /////////////////////
+  const handleInput = props.handleInput;
+  const tmpUsr = props.tmpUsr;
+  const setIsLogged = props.setIsLogged;
+  /////////////////////////////////////////////////
+
   async function createUser(event) {
     let userInfo;
     event.preventDefault();
 
     try {
-      userInfo = await backApi.postUser(props.tmpUsr);
+      userInfo = await backApi.postUser(tmpUsr);
     } catch (err) {
       switch (err?.status) {
         case 403:
@@ -39,7 +45,7 @@ function CreateNewUser(props) {
     }
 
     try {
-      await backApi.postGroup(props.tmpUsr.firstName, userInfo.userId);
+      await backApi.postGroup(tmpUsr.firstName, userInfo.userId);
     } catch (err) {
       await backApi.deleteUser(userInfo.userId);
       showError('Something went wrong, please try again later');
@@ -50,7 +56,7 @@ function CreateNewUser(props) {
     localStorage.setItem('isLogged', true);
     localStorage.setItem('groupId', '');
 
-    props.setIsLogged(true);
+    setIsLogged(true);
   }
 
   return (
@@ -59,32 +65,32 @@ function CreateNewUser(props) {
         <SignUpInput
           type="text"
           name="firstName"
-          onChange={props.handleInput}
-          value={props.tmpUsr.firstName}
+          onChange={handleInput}
+          value={tmpUsr.firstName}
           placeholder="First name"
           required
         />
         <SignUpInput
           type="text"
           name="lastName"
-          onChange={props.handleInput}
-          value={props.tmpUsr.lastName}
+          onChange={handleInput}
+          value={tmpUsr.lastName}
           placeholder="Last name"
           required
         />
         <SignUpInput
           type="email"
           name="email"
-          onChange={props.handleInput}
-          value={props.tmpUsr.email}
+          onChange={handleInput}
+          value={tmpUsr.email}
           placeholder="Email"
           required
         />
         <SignUpInput
           type="password"
           name="password"
-          onChange={props.handleInput}
-          value={props.tmpUsr.password}
+          onChange={handleInput}
+          value={tmpUsr.password}
           placeholder="Password"
           required
           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"

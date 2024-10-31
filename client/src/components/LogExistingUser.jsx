@@ -14,6 +14,12 @@ import {
 
 // TODO: forgot password button
 function LogExistingUser(props) {
+  ///////////////////// props /////////////////////
+  const handleInput = props.handleInput;
+  const tmpUsr = props.tmpUsr;
+  const setIsLogged = props.setIsLogged;
+  /////////////////////////////////////////////////
+
   async function toLog(event) {
     event.preventDefault();
 
@@ -24,10 +30,7 @@ function LogExistingUser(props) {
 
     let userInfo;
     try {
-      userInfo = await backApi.getUser(
-        props.tmpUsr.email,
-        props.tmpUsr.password,
-      );
+      userInfo = await backApi.getUser(tmpUsr.email, tmpUsr.password);
     } catch (err) {
       switch (err?.status) {
         case 403:
@@ -48,7 +51,7 @@ function LogExistingUser(props) {
     localStorage.setItem('isLogged', true);
     localStorage.setItem('uuid', userInfo.uuid);
     localStorage.setItem('groupId', '');
-    props.setIsLogged(true);
+    setIsLogged(true);
   }
 
   return (
@@ -57,16 +60,16 @@ function LogExistingUser(props) {
         <SignUpInput
           type="email"
           name="email"
-          onChange={props.handleInput}
-          value={props.tmpUsr.email}
+          onChange={handleInput}
+          value={tmpUsr.email}
           placeholder="Email"
           required
         />
         <SignUpInput
           type="password"
           name="password"
-          onChange={props.handleInput}
-          value={props.tmpUsr.password}
+          onChange={handleInput}
+          value={tmpUsr.password}
           placeholder="Password"
           required
           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
