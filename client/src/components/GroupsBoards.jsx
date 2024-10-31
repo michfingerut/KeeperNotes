@@ -109,7 +109,7 @@ function GroupsBoards() {
         }}
       >
         <LogOutButton onClick={handleCreateGroupClick}>
-          + Create group
+          Create group
         </LogOutButton>
       </div>
       {/* TODO: when the window is small, it overlaps with the footer of the main component */}

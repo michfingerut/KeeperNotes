@@ -65,7 +65,9 @@ function GroupPage(props) {
       >
         <div>
           {/* TODO: should be in the same size as create group button */}
-          <LogOutButton onClick={returnToGroupBoard}>go back</LogOutButton>
+          <LogOutButton onClick={returnToGroupBoard} style={{ width: '10em' }}>
+            go back
+          </LogOutButton>
         </div>
         <div>
           <InputArea
