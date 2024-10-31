@@ -28,6 +28,7 @@ function App() {
   }, [isLogged, navigate]);
 
   return (
+    //TODO: transition between routes is not smooth
     <Routes>
       <Route
         path="/home"
