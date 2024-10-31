@@ -8,7 +8,7 @@ const initSocket = async (server) => {
   }
 
   io = new Server(server);
-
+  //TODO:
   /*
   io.on("connection", sync(socket) =>{
     socket.on("new connection", () => {
