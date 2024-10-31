@@ -26,7 +26,6 @@ function InputArea(props) {
   const placeHolderContent = mode === 'add' ? 'add note content' : note.content;
 
   async function addNote(event) {
-    console.log('add note');
     event.preventDefault();
     // TODO: Error handling
     const createNote = await backApi.postNote(tmpNote, uuid);
