@@ -265,11 +265,12 @@ describe('Route tests', () => {
       testUtils.testResponseSingle(putRes, expectedData, OK);
     });
 
-    test.skip('.PUT on non existing note', async () => {
-      //TODO: not working when i run all tests
-      const expectedData = testData.notes[0];
-
-      const putRes = await req.put(`${route}/20000`).send(expectedData);
+    test('.PUT on non existing note', async () => {
+      const expectedData = {
+        title: 'another title',
+        content: 'anoter content',
+      };
+      const putRes = await req.put(`${route}/2000`).send(expectedData);
 
       testUtils.testMessageResponse(
         putRes,
