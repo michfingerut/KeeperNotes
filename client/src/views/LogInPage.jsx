@@ -64,6 +64,15 @@ function LogInPage(props) {
   function goBack() {
     setIsInitOption(true);
     setToSignUp(false);
+
+    setTmpUsr(() => {
+      return {
+        firstName: '',
+        lastName: '',
+        password: '',
+        email: '',
+      };
+    });
   }
 
   return (
