@@ -39,6 +39,7 @@ function KeeperMenu(props) {
             <MenuItem
               key={item.key}
               onClick={() => handleClickedItem(item.handleClick)}
+              style={{ fontSize: '0.875rem', fontWeight: 'bold' }}
             >
               {item.itemName}
             </MenuItem>
