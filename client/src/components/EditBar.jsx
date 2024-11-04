@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { EditBarStyle } from '../styles/styles';
 import EditDialog from './EditNote';
 
+//TODO: maybe it should be navbar?
 function EditBar(props) {
   ///////////////////// props /////////////////////
   const { setNotes, note } = props;

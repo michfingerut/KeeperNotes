@@ -62,6 +62,7 @@ function EditDialog(props) {
       >
         <DialogTitle>{mode === 'add' ? 'Add Note' : 'Edit Note'}</DialogTitle>
         <DialogContent>
+          {/* TODO: the name is blue */}
           <TextField
             autoFocus
             margin="dense"
@@ -76,16 +77,16 @@ function EditDialog(props) {
             sx={{
               mb: 2,
               '& .MuiInputLabel-root': {
-                color: 'black', // Title (label) color
+                color: 'black',
               },
               '& .MuiInput-underline:before': {
-                borderBottomColor: 'black', // Underline color when not focused
+                borderBottomColor: 'black',
               },
               '& .MuiInput-underline:after': {
-                borderBottomColor: 'black', // Underline color when focused
+                borderBottomColor: 'black',
               },
               '& .MuiInputBase-input': {
-                color: 'black', // Text color for title field
+                color: 'black',
               },
             }}
           />
@@ -104,18 +105,18 @@ function EditDialog(props) {
             sx={{
               height: '150px',
               '& .MuiInputLabel-root': {
-                color: 'black', // Label color for content field
+                color: 'black',
               },
               '& .MuiInput-underline:before': {
-                borderBottomColor: 'black', // Underline color when not focused
+                borderBottomColor: 'black',
               },
               '& .MuiInput-underline:after': {
-                borderBottomColor: 'black', // Underline color when focused
+                borderBottomColor: 'black',
               },
               '& .MuiInputBase-input': {
                 height: '100%',
                 overflowY: 'auto',
-                color: 'black', // Text color for content field
+                color: 'black',
               },
               '& textarea': {
                 padding: '16.5px 14px',
@@ -127,9 +128,9 @@ function EditDialog(props) {
           <Button
             onClick={handleClose}
             sx={{
-              color: 'black', // Button font color
+              color: 'black',
               '&:hover': {
-                backgroundColor: 'transparent', // Remove hover background
+                backgroundColor: 'transparent',
               },
             }}
           >
@@ -138,9 +139,9 @@ function EditDialog(props) {
           <Button
             type="submit"
             sx={{
-              color: 'black', // Button font color
+              color: 'black',
               '&:hover': {
-                backgroundColor: 'transparent', // Remove hover background
+                backgroundColor: 'transparent',
               },
             }}
           >
