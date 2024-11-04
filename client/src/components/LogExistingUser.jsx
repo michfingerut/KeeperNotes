@@ -1,5 +1,5 @@
 // External modules
-import React from 'react';
+import React, { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 // Internal modules
@@ -12,12 +12,44 @@ import {
   LogButton,
 } from '../styles/styles';
 
-// TODO: forgot password button
-function LogExistingUser(props) {
+function ForgetPassword(props) {
+  //TODO:
   ///////////////////// props /////////////////////
   const handleInput = props.handleInput;
   const tmpUsr = props.tmpUsr;
   const setIsLogged = props.setIsLogged;
+  const setForgotPass = props.setForgotPass;
+  /////////////////////////////////////////////////
+
+  async function restorePass(event) {
+    setForgotPass(false);
+  }
+
+  return (
+    <Container>
+      <SignUpForm onSubmit={restorePass}>
+        <SignUpInput
+          type="email"
+          name="email"
+          onChange={handleInput}
+          value={tmpUsr.email}
+          placeholder="Email"
+          required
+        />
+
+        <LogButton type="submit">Restore</LogButton>
+      </SignUpForm>
+      <ToastContainer />
+    </Container>
+  );
+}
+
+function LogIn(props) {
+  ///////////////////// props /////////////////////
+  const handleInput = props.handleInput;
+  const tmpUsr = props.tmpUsr;
+  const setIsLogged = props.setIsLogged;
+  const setForgotPass = props.setForgotPass;
   /////////////////////////////////////////////////
 
   async function toLog(event) {
@@ -78,6 +110,33 @@ function LogExistingUser(props) {
         <LogButton type="submit">Log In</LogButton>
       </SignUpForm>
       <ToastContainer />
+      {/* <LogButton onClick={() => setForgotPass(true)}>
+        forgot password?
+      </LogButton> */}
+    </Container>
+  );
+}
+
+function LogExistingUser(props) {
+  ///////////////////// props /////////////////////
+  const handleInput = props.handleInput;
+  const tmpUsr = props.tmpUsr;
+  const setIsLogged = props.setIsLogged;
+  /////////////////////////////////////////////////
+  const [forgotPass, setForgotPass] = useState(false);
+
+  return (
+    <Container>
+      {!forgotPass ? (
+        <LogIn
+          handleInput={handleInput}
+          tmpUsr={tmpUsr}
+          setIsLogged={setIsLogged}
+          setForgotPass={setForgotPass}
+        />
+      ) : (
+        <ForgetPassword />
+      )}
     </Container>
   );
 }
