@@ -12,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
     user-select: none;
-
   }
 
   html {
@@ -207,7 +206,7 @@ const NotesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   overflow-y: auto;
-  max-height: calc(58vh - 0.5rem);
+  max-height: calc(80vh - 1em);
 `;
 
 const NoteContainer = styled.div`
@@ -246,6 +245,18 @@ const PopupButtonContainer = styled.div`
 
 /*************************** div *****************************/
 
+const EditBarStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${backGroundLightBrown};
+  ${boxShadowAndBorderRadius}
+  width: 25em;
+  border: 2px solid #000;
+  padding: 4px;
+  margin: 10px;
+`;
+
 const HeaderStyle = styled.div`
   display: flex;
   justify-content: space-between;
@@ -270,7 +281,7 @@ const FooterStyle = styled.footer`
 const NoteStyle = styled.div`
   background: #fff;
   ${boxShadowAndBorderRadius}
-  padding: 10px;
+  padding: 15px;
   width: 200px;
   height: 200px;
   margin: 16px;
@@ -342,4 +353,5 @@ export {
   CenteredHeader,
   CardStyle,
   MenuStyle,
+  EditBarStyle,
 };

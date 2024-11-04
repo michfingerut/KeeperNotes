@@ -94,6 +94,7 @@ function GroupsBoards() {
   };
 
   function handleGroupPick(group) {
+    localStorage.setItem('groupName', group.name);
     navigate(`/${group.groupId}`);
   }
 
@@ -111,7 +112,7 @@ function GroupsBoards() {
         </LogOutButton>
       </div>
       {/* TODO: when the window is small, it overlaps with the footer of the main component */}
-      <NotesContainer style={{ maxHeight: 'calc(75vh - 1em)' }}>
+      <NotesContainer>
         {groups.map((group) => {
           return (
             <GroupCard

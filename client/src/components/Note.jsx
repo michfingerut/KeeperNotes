@@ -3,18 +3,16 @@ import React, { useEffect, useState } from 'react';
 
 //Internal modules
 import { NoteStyle, NoteH1, NoteP, NoteContainer } from '../styles/styles';
-import Dialog from '@mui/material/Dialog';
-import InputArea from './InputArea';
 import KeeperMenu from './Menu';
+import EditDialog from './EditNote';
 
 function Dropdown(props) {
   ///////////////////// props /////////////////////
   const deleteFunc = props.deleteFunc;
   const note = props.note;
-  const setNote = props.setNote;
+  const setFunc = props.setFunc;
   /////////////////////////////////////////////////
 
-  //TODO: styling!!! + input styling in popup
   const [openDialog, setOpenDialog] = useState(false);
 
   async function handleEdit() {
@@ -23,22 +21,6 @@ function Dropdown(props) {
 
   async function handleDelete() {
     await deleteFunc(note.id);
-  }
-
-  function EditDialog() {
-    return (
-      <React.Fragment>
-        {/* TODO should be closed if clicked outside the area */}
-        <Dialog open={openDialog}>
-          <InputArea
-            stateFunc={setNote}
-            note={note}
-            mode="edit"
-            close={setOpenDialog}
-          />
-        </Dialog>
-      </React.Fragment>
-    );
   }
 
   return (
@@ -57,7 +39,13 @@ function Dropdown(props) {
           },
         ]}
       />
-      <EditDialog />
+      <EditDialog
+        note={note}
+        setFunc={setFunc}
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+        mode="edit"
+      />
     </div>
   );
 }
@@ -90,7 +78,7 @@ function Note(props) {
       {/*TODO: when title too long looks cut add tooltip also TODO: scrolling prettier */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <NoteH1>{note.title}</NoteH1>
-        <Dropdown deleteFunc={deleteFunc} note={currNote} setNote={setNote} />
+        <Dropdown deleteFunc={deleteFunc} note={currNote} setFunc={setNote} />
       </div>
       <NoteContainer>
         <NoteP>{note.content}</NoteP>

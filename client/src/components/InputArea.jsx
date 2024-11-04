@@ -1,5 +1,7 @@
 // External modules
 import React, { useState } from 'react';
+import { IoClose } from 'react-icons/io5';
+import Tooltip from '@mui/material/Tooltip';
 
 // Internal modules
 import backApi from '../services/backApi';
@@ -15,7 +17,7 @@ function InputArea(props) {
   const stateFunc = props.stateFunc;
   const note = props.note;
   const mode = props.mode;
-  const close = props.close;
+  const setOpenDialog = props.setOpenDialog;
   ////////////////////////////////////////////////
 
   const uuid = localStorage.getItem('uuid');
@@ -35,6 +37,7 @@ function InputArea(props) {
     });
 
     setTmpNote(note);
+    setOpenDialog(false);
   }
 
   async function editNote(event) {
@@ -49,7 +52,7 @@ function InputArea(props) {
     stateFunc(updatedNote);
     setTmpNote(updatedNote);
 
-    close(false);
+    setOpenDialog(false);
   }
 
   function handleInput(event) {
@@ -65,12 +68,23 @@ function InputArea(props) {
 
   return (
     <InputAreaForm onSubmit={mode === 'add' ? addNote : editNote}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Tooltip title="close" placement="top">
+          <span>
+            <IoClose
+              onClick={() => setOpenDialog(false)}
+              style={{ cursor: 'pointer' }}
+            />
+          </span>
+        </Tooltip>
+      </div>
       <TitleInput
         name="title"
         onChange={handleInput}
         value={tmpNote.title}
         placeholder={placeHolderTitle}
       />
+
       <ContentInput
         name="content"
         onChange={handleInput}

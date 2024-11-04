@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 //Internal modules
-import InputArea from '../components/InputArea';
 import Note from '../components/Note';
-import { LogOutButton, NotesContainer } from '../styles/styles';
+import { NotesContainer } from '../styles/styles';
 import backApi from '../services/backApi';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import EditBar from '../components/EditBar';
 
 function GroupPage(props) {
   ///////////////////// props /////////////////////
@@ -29,7 +29,9 @@ function GroupPage(props) {
       .then((data) => {
         setNotes(data);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        //TODO
+      });
   }, [groupId]);
 
   async function deleteNote(key) {
@@ -43,11 +45,6 @@ function GroupPage(props) {
     });
   }
 
-  function returnToGroupBoard() {
-    localStorage.setItem('groupId', '');
-
-    navigate('/home');
-  }
   return (
     <div
       style={{
@@ -56,7 +53,6 @@ function GroupPage(props) {
       }}
     >
       <Header title="Keeper" setIsLogged={setIsLogged} />
-      {/* TODO: add style component to button *also in GroupsBoards */}
       <div
         style={{
           display: 'flex',
@@ -65,15 +61,9 @@ function GroupPage(props) {
         }}
       >
         <div>
-          <LogOutButton onClick={returnToGroupBoard} style={{ width: '10em' }}>
-            go back
-          </LogOutButton>
-        </div>
-        <div>
-          <InputArea
-            stateFunc={setNotes}
+          <EditBar
+            setNotes={setNotes}
             note={{ title: '', content: '', groupId: groupId }}
-            mode="add"
           />
         </div>
       </div>
