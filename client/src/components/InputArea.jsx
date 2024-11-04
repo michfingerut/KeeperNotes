@@ -79,6 +79,11 @@ function InputArea(props) {
         </Tooltip>
       </div>
       <TitleInput
+        style={{
+          border: '2px solid black',
+          borderRadius: '8px',
+          margin: '3px',
+        }}
         name="title"
         onChange={handleInput}
         value={tmpNote.title}
@@ -86,6 +91,11 @@ function InputArea(props) {
       />
 
       <ContentInput
+        style={{
+          border: '2px solid black',
+          borderRadius: '8px',
+          margin: '3px',
+        }}
         name="content"
         onChange={handleInput}
         value={tmpNote.content}

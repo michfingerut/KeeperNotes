@@ -60,6 +60,13 @@ const notClickableText = css`
   cursor: default;
 `;
 
+const atHover = css`
+  background-color: ${backGroundLightGray};
+  color: ${darkBrown};
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+`;
+
 /************************** buttons **************************/
 const AddNoteButton = styled.button`
   align-self: flex-end;
@@ -84,10 +91,7 @@ const baseButton = styled.button`
   color: black;
 
   &:hover {
-    background-color: ${backGroundLightGray};
-    color: ${darkBrown};
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    ${atHover}
   }
 `;
 
@@ -156,10 +160,8 @@ const InputAreaForm = styled(baseForm)`
   width: 20em;
   height: 18vh;
   background-color: white;
-  ${boxShadowAndBorderRadius}
   margin: 1em;
   justify-content: space-between;
-  padding: 10px;
 `;
 
 /*************************** input ***************************/
@@ -255,6 +257,9 @@ const EditBarStyle = styled.div`
   border: 2px solid #000;
   padding: 4px;
   margin: 10px;
+  &:hover {
+    ${atHover}
+  }
 `;
 
 const HeaderStyle = styled.div`

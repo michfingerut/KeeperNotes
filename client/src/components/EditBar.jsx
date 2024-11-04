@@ -31,9 +31,7 @@ function EditBar(props) {
 
   return (
     <EditBarStyle>
-      <HeaderH1 style={{ fontSize: '1.5em', marginLeft: '10px' }}>
-        {groupName}
-      </HeaderH1>
+      <p style={{ fontSize: '1.5em', marginLeft: '10px' }}>{groupName}</p>
       <div style={{ cursor: 'pointer' }}>
         <Tooltip title="Add">
           <span>
