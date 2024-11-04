@@ -17,11 +17,7 @@ import GroupCard from './GroupCard';
 
 function AddGroupPopup(props) {
   ///////////////////// props /////////////////////
-  const show = props.show;
-  const onClose = props.onClose;
-  const onCreate = props.onCreate;
-  const setGroups = props.setGroups;
-  const uuid = props.uuid;
+  const { show, onClose, onCreate, setGroups, uuid } = props;
   ////////////////////////////////////////////////
 
   const [groupName, setGroupName] = useState('');

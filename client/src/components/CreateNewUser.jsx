@@ -14,9 +14,7 @@ import {
 
 function CreateNewUser(props) {
   ///////////////////// props /////////////////////
-  const handleInput = props.handleInput;
-  const tmpUsr = props.tmpUsr;
-  const setIsLogged = props.setIsLogged;
+  const { handleInput, tmpUsr, setIsLogged } = props;
   /////////////////////////////////////////////////
 
   async function createUser(event) {

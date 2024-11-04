@@ -6,13 +6,12 @@ import Tooltip from '@mui/material/Tooltip';
 import React, { useState } from 'react';
 
 //Internal modules
-import { EditBarStyle, HeaderH1 } from '../styles/styles';
+import { EditBarStyle } from '../styles/styles';
 import EditDialog from './EditNote';
 
 function EditBar(props) {
   ///////////////////// props /////////////////////
-  const setNotes = props.setNotes;
-  const note = props.note;
+  const { setNotes, note } = props;
   /////////////////////////////////////////////////
 
   const groupName = localStorage.getItem('groupName');

@@ -15,10 +15,7 @@ import {
 function ForgetPassword(props) {
   //TODO:
   ///////////////////// props /////////////////////
-  const handleInput = props.handleInput;
-  const tmpUsr = props.tmpUsr;
-  const setIsLogged = props.setIsLogged;
-  const setForgotPass = props.setForgotPass;
+  const { handleInput, tmpUsr, setIsLogged, setForgotPass } = props;
   /////////////////////////////////////////////////
 
   async function restorePass(event) {
@@ -46,10 +43,7 @@ function ForgetPassword(props) {
 
 function LogIn(props) {
   ///////////////////// props /////////////////////
-  const handleInput = props.handleInput;
-  const tmpUsr = props.tmpUsr;
-  const setIsLogged = props.setIsLogged;
-  const setForgotPass = props.setForgotPass;
+  const { handleInput, tmpUsr, setIsLogged, setForgotPass } = props;
   /////////////////////////////////////////////////
 
   async function toLog(event) {
@@ -119,9 +113,7 @@ function LogIn(props) {
 
 function LogExistingUser(props) {
   ///////////////////// props /////////////////////
-  const handleInput = props.handleInput;
-  const tmpUsr = props.tmpUsr;
-  const setIsLogged = props.setIsLogged;
+  const { handleInput, tmpUsr, setIsLogged } = props;
   /////////////////////////////////////////////////
   const [forgotPass, setForgotPass] = useState(false);
 

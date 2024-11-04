@@ -8,9 +8,7 @@ import EditDialog from './EditNote';
 
 function Dropdown(props) {
   ///////////////////// props /////////////////////
-  const deleteFunc = props.deleteFunc;
-  const note = props.note;
-  const setFunc = props.setFunc;
+  const { deleteFunc, note, setFunc } = props;
   /////////////////////////////////////////////////
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -51,9 +49,9 @@ function Dropdown(props) {
 }
 
 function Note(props) {
-  const note = props.note;
-  const deleteFunc = props.deleteFunc;
-  const notesStateFunc = props.notesStateFunc;
+  ///////////////////// props /////////////////////
+  const { note, deleteFunc, notesStateFunc } = props;
+  /////////////////////////////////////////////////
 
   const [currNote, setNote] = useState(note);
 

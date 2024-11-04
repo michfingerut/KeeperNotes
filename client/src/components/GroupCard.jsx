@@ -5,10 +5,7 @@ import backApi from '../services/backApi';
 
 function GroupCard(props) {
   ///////////////////// props /////////////////////
-  const name = props.name;
-  const onClick = props.onClick;
-  const groupId = props.groupId;
-  const setGroups = props.setGroups;
+  const { name, onClick, groupId, setGroups } = props;
   ////////////////////////////////////////////////
 
   function handleEnter() {

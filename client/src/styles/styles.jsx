@@ -6,6 +6,14 @@ const backGroundLightBrown = '#D6C0B3';
 const midDarkBrown = '#AB886D';
 const darkBrown = '#493628';
 
+//
+const darkGreen = '#626F47';
+const lightGrey = '#F2EED7';
+const white = '#FEFAE0';
+const lightGreen = '#798645';
+
+//
+
 // Global Styles
 const GlobalStyle = createGlobalStyle`
   * {
@@ -154,14 +162,6 @@ const baseForm = styled.form`
 
 const SignUpForm = styled(baseForm)`
   align-items: center;
-`;
-
-const InputAreaForm = styled(baseForm)`
-  width: 20em;
-  height: 18vh;
-  background-color: white;
-  margin: 1em;
-  justify-content: space-between;
 `;
 
 /*************************** input ***************************/
@@ -348,7 +348,6 @@ export {
   PopupButtonContainer,
 
   //forms
-  InputAreaForm,
   SignUpForm,
 
   //div

@@ -2,8 +2,7 @@ import { HeaderStyle, HeaderH1, LogOutButton } from '../styles/styles';
 
 function Header(props) {
   ///////////////////// props /////////////////////
-  const title = props.title;
-  const setIsLogged = props.setIsLogged;
+  const { title, setIsLogged } = props;
   /////////////////////////////////////////////////
 
   function logOut() {
