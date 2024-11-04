@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     box-sizing: border-box;
-      user-select: none;
+    user-select: none;
 
   }
 
@@ -260,7 +260,7 @@ const HeaderStyle = styled.div`
 const FooterStyle = styled.footer`
   text-align: center;
   bottom: 0;
-  padding: 0;
+  padding: 5px;
   width: 100%;
   height: 2rem;
 

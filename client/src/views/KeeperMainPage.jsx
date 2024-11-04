@@ -13,7 +13,7 @@ function KeeperMainPage(props) {
   /////////////////////////////////////////////////
 
   return (
-    <div>
+    <div style={{ padding: '8px' }}>
       <Container>
         <Header title="Keeper" setIsLogged={setIsLogged} />
         <GroupsBoards />

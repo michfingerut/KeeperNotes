@@ -52,6 +52,7 @@ function GroupPage(props) {
     <div
       style={{
         position: 'relative',
+        padding: '8px',
       }}
     >
       <Header title="Keeper" setIsLogged={setIsLogged} />
