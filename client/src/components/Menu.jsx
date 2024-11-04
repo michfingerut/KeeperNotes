@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { MenuItem, Menu } from '@mui/material';
+import { MenuStyle } from '../styles/styles';
 
 /**
  * props
@@ -10,7 +11,6 @@ import { MenuItem, Menu } from '@mui/material';
  * @param {Function} menuItem.handleClick - the function that needs to be triggered
  */
 
-//TODO: styling
 function KeeperMenu(props) {
   const menuItems = props.menuItems;
 
@@ -31,8 +31,8 @@ function KeeperMenu(props) {
   }
 
   return (
-    <div>
-      <CiMenuKebab onClick={handleClick} style={{ cursor: 'pointer' }} />
+    <MenuStyle>
+      <CiMenuKebab onClick={handleClick} />
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         {menuItems.map((item) => {
           return (
@@ -46,7 +46,7 @@ function KeeperMenu(props) {
           );
         })}
       </Menu>
-    </div>
+    </MenuStyle>
   );
 }
 

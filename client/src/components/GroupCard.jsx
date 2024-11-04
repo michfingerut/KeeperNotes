@@ -34,9 +34,7 @@ function GroupCard(props) {
 
   return (
     <CardStyle>
-      {/* TODO: should be on the right corner (right now on the left) */}
       <KeeperMenu
-        style={{}}
         menuItems={[
           { key: 1, itemName: 'Enter group', handleClick: handleEnter },
           // { key: 2, itemName: 'Edit group', handleClick: handleEdit },

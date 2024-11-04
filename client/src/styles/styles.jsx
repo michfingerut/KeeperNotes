@@ -102,6 +102,15 @@ const HeaderH1 = styled.h1`
   ${notClickableText}
 `;
 
+const CenteredHeader = styled.h3`
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  font-size: 0.9em;
+  line-height: 160px;
+  ${notClickableText}
+`;
+
 /************************* paragraphs ************************/
 
 const NoteP = styled.p`
@@ -220,8 +229,7 @@ const PopupButtonContainer = styled.div`
   padding-top: 10px;
 `;
 
-/************************** styles ***************************/
-//TODO: code reuse
+/*************************** div *****************************/
 
 const HeaderStyle = styled.div`
   display: flex;
@@ -254,15 +262,6 @@ const NoteStyle = styled.div`
   position: relative;
 `;
 
-const CenteredHeader = styled.h3`
-  text-align: center;
-  margin: 0;
-  width: 100%;
-  font-size: 0.9em;
-  line-height: 160px;
-  ${notClickableText}
-`;
-
 const CardStyle = styled(NoteStyle)`
   background-color: ${backGroundLightBrown};
   transition: background-color 0.3s;
@@ -271,6 +270,12 @@ const CardStyle = styled(NoteStyle)`
   &:hover {
     background-color: ${backGroundLightGray};
   }
+`;
+
+const MenuStyle = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
 `;
 
 export {
@@ -315,10 +320,11 @@ export {
   InputAreaForm,
   SignUpForm,
 
-  //general styles
+  //div
   HeaderStyle,
   FooterStyle,
   NoteStyle,
   CenteredHeader,
   CardStyle,
+  MenuStyle,
 };
