@@ -34,6 +34,21 @@ const GlobalStyle = createGlobalStyle`
     font-weight: bold;
     cursor: pointer;
   }
+
+  //scroller
+  ::-webkit-scrollbar {
+    width: 8px;
+
+  }
+  ::-webkit-scrollbar-track {
+    background: none; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 10px;  
+    border: 2px solid none;  
+
+  }
 `;
 
 const boxShadowAndBorderRadius = css`
