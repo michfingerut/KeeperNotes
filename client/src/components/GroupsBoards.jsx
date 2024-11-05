@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import backApi from '../services/backApi';
 import {
   NotesContainer,
-  LogOutButton,
   SignUpInput,
   AddNoteButton,
   PopupContainer,
@@ -62,10 +61,13 @@ function AddGroupPopup(props) {
   );
 }
 
-function GroupsBoards() {
+function GroupsBoards(props) {
+  ///////////////////// props /////////////////////
+  const { isModalOpen, setModalOpen } = props;
+  /////////////////////////////////////////////////
+
   const uuid = localStorage.getItem('uuid');
   const [groups, setGroups] = useState([]);
-  const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -81,10 +83,6 @@ function GroupsBoards() {
     }
   }, [uuid]);
 
-  const handleCreateGroupClick = () => {
-    setModalOpen(true);
-  };
-
   const handleCloseModal = () => {
     setModalOpen(false);
   };
@@ -96,17 +94,12 @@ function GroupsBoards() {
 
   return (
     <div style={{ position: 'relative' }}>
-      {/* TODO: add style component to button *also in grouppage */}
       <div
         style={{
           display: 'flex',
           justifyContent: 'center',
         }}
-      >
-        <LogOutButton onClick={handleCreateGroupClick}>
-          Create group
-        </LogOutButton>
-      </div>
+      ></div>
       {/* TODO: when the window is small, it overlaps with the footer of the main component */}
       <NotesContainer>
         {groups.map((group) => {
@@ -121,7 +114,8 @@ function GroupsBoards() {
           );
         })}
       </NotesContainer>
-
+      {/* TODO: material ui pop up */}
+      {/* TODO: when click outside should be closed */}
       <AddGroupPopup
         show={isModalOpen}
         onClose={handleCloseModal}

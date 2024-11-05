@@ -208,7 +208,8 @@ const NotesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   overflow-y: auto;
-  max-height: calc(80vh - 1em);
+  margin: 10px;
+  max-height: calc(90vh - 1em);
 `;
 
 const NoteContainer = styled.div`
@@ -246,21 +247,6 @@ const PopupButtonContainer = styled.div`
 `;
 
 /*************************** div *****************************/
-
-const EditBarStyle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${backGroundLightBrown};
-  ${boxShadowAndBorderRadius}
-  width: 25em;
-  border: 2px solid #000;
-  padding: 4px;
-  margin: 10px;
-  &:hover {
-    ${atHover}
-  }
-`;
 
 const HeaderStyle = styled.div`
   display: flex;
@@ -357,5 +343,10 @@ export {
   CenteredHeader,
   CardStyle,
   MenuStyle,
-  EditBarStyle,
+
+  //colors
+  backGroundLightGray,
+  backGroundLightBrown,
+  midDarkBrown,
+  darkBrown,
 };

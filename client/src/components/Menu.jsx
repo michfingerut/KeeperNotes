@@ -1,6 +1,9 @@
+//External modules
 import React, { useState } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { MenuItem, Menu } from '@mui/material';
+
+//Internal modules
 import { MenuStyle } from '../styles/styles';
 
 /**
@@ -12,7 +15,7 @@ import { MenuStyle } from '../styles/styles';
  */
 
 function KeeperMenu(props) {
-  const menuItems = props.menuItems;
+  const { menuItems, menuIcon } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
   let open = Boolean(anchorEl);
@@ -32,7 +35,11 @@ function KeeperMenu(props) {
 
   return (
     <MenuStyle>
-      <CiMenuKebab onClick={handleClick} />
+      {menuIcon ? (
+        React.cloneElement(menuIcon(), { onClick: handleClick })
+      ) : (
+        <CiMenuKebab onClick={handleClick} />
+      )}
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         {menuItems.map((item) => {
           return (
@@ -41,6 +48,7 @@ function KeeperMenu(props) {
               onClick={() => handleClickedItem(item.handleClick)}
               style={{ fontSize: '0.875rem', fontWeight: 'bold' }}
             >
+              {item.icon ? item.icon() : ''}
               {item.itemName}
             </MenuItem>
           );

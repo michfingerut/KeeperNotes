@@ -109,7 +109,6 @@ const deleteGroup = async (req, res) => {
 
     await publishers.genericPublisher(groupId, 'delete group', groupId);
   } catch (err) {
-    console.log(JSON.stringify(err, null, 2));
     errorHandler(err, res);
   }
 };
