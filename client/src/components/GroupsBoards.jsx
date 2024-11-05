@@ -34,8 +34,6 @@ function AddGroupPopup(props) {
   } = props;
   ////////////////////////////////////////////////
 
-  const [groupName, setGroupName] = useState('');
-
   const handleCreateClick = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -49,15 +47,6 @@ function AddGroupPopup(props) {
     onClose();
   };
 
-  function handleChange(event) {
-    setGroupName(event.target.value);
-  }
-
-  // function handleClose() {
-  //   setGroupName('');
-  //   onClose();
-  // }
-
   function handleClose() {
     setOpenDialog(false);
   }
@@ -65,23 +54,6 @@ function AddGroupPopup(props) {
   if (!show) return null;
 
   return (
-    // <PopupContainer>
-    //   <PopupInnerContainer>
-    //     <h2>Create a New Group</h2>
-    //     <SignUpInput
-    //       name="group name"
-    //       type="text"
-    //       placeholder="Group Name"
-    //       value={groupName}
-    //       onChange={handleChange}
-    //     />
-    //     <PopupButtonContainer>
-    //       <AddNoteButton onClick={handleClose}>Cancel</AddNoteButton>
-    //       <AddNoteButton onClick={handleCreateClick}>Create</AddNoteButton>
-    //     </PopupButtonContainer>
-    //   </PopupInnerContainer>
-    // </PopupContainer>
-
     <React.Fragment>
       <Dialog
         onClose={handleClose}
