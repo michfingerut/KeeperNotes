@@ -11,7 +11,7 @@ import backApi from '../services/backApi';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import EditDialog from '../components/EditNote';
+import EditNote from '../components/EditNote';
 
 function GroupPage(props) {
   ///////////////////// props /////////////////////
@@ -108,7 +108,7 @@ function GroupPage(props) {
         })}
       </NotesContainer>
       <Footer />
-      <EditDialog
+      <EditNote
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         mode="add"

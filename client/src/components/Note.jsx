@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 //Internal modules
 import { NoteStyle, NoteH1, NoteP, NoteContainer } from '../styles/styles';
 import KeeperMenu from './Menu';
-import EditDialog from './EditNote';
+import EditNote from './EditNote';
 
 function Dropdown(props) {
   ///////////////////// props /////////////////////
@@ -37,7 +37,7 @@ function Dropdown(props) {
           },
         ]}
       />
-      <EditDialog
+      <EditNote
         note={note}
         setFunc={setFunc}
         openDialog={openDialog}

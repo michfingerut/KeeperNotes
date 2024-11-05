@@ -1,18 +1,13 @@
 //External modules
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 
 //Internal modules
 import backApi from '../services/backApi';
 import { NotesContainer } from '../styles/styles';
 import GroupCard from './GroupCard';
+import EditDialog from './EditDialog';
 
 function AddGroupPopup(props) {
   ///////////////////// props /////////////////////
@@ -45,75 +40,49 @@ function AddGroupPopup(props) {
   }
 
   if (!show) return null;
+  const textFields = [
+    () => {
+      return (
+        <TextField
+          key="1"
+          autoFocus
+          margin="dense"
+          id="groupName"
+          name="groupName"
+          label="Group name"
+          type="text"
+          fullWidth
+          variant="standard"
+          placeholder={'Enter group name'}
+          sx={{
+            mb: 2,
+            '& .MuiInputLabel-root': {
+              color: 'black',
+            },
+            '& .MuiInput-underline:before': {
+              borderBottomColor: 'black',
+            },
+            '& .MuiInput-underline:after': {
+              borderBottomColor: 'black',
+            },
+            '& .MuiInputBase-input': {
+              color: 'black',
+            },
+          }}
+        />
+      );
+    },
+  ];
 
   return (
-    <React.Fragment>
-      <Dialog
-        onClose={handleClose}
-        open={openDialog}
-        PaperProps={{
-          component: 'form',
-          onSubmit: handleCreateClick,
-        }}
-        maxWidth="sm"
-        fullWidth
-      >
-        <DialogTitle>Create Group</DialogTitle>
-        <DialogContent>
-          {/* TODO: the name is blue */}
-          <TextField
-            autoFocus
-            margin="dense"
-            id="groupName"
-            name="groupName"
-            label="Group name"
-            type="text"
-            fullWidth
-            variant="standard"
-            placeholder={'Enter group name'}
-            sx={{
-              mb: 2,
-              '& .MuiInputLabel-root': {
-                color: 'black',
-              },
-              '& .MuiInput-underline:before': {
-                borderBottomColor: 'black',
-              },
-              '& .MuiInput-underline:after': {
-                borderBottomColor: 'black',
-              },
-              '& .MuiInputBase-input': {
-                color: 'black',
-              },
-            }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClose}
-            sx={{
-              color: 'black',
-              '&:hover': {
-                backgroundColor: 'transparent',
-              },
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            sx={{
-              color: 'black',
-              '&:hover': {
-                backgroundColor: 'transparent',
-              },
-            }}
-          >
-            Create
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
+    <EditDialog
+      textFields={textFields}
+      okButtonName="Create"
+      handleClose={handleClose}
+      openDialog={openDialog}
+      handleOK={handleCreateClick}
+      dialogTitle="Create Group"
+    />
   );
 }
 
