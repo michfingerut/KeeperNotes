@@ -11,14 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 //Internal modules
 import backApi from '../services/backApi';
-import {
-  NotesContainer,
-  SignUpInput,
-  AddNoteButton,
-  PopupContainer,
-  PopupInnerContainer,
-  PopupButtonContainer,
-} from '../styles/styles';
+import { NotesContainer } from '../styles/styles';
 import GroupCard from './GroupCard';
 
 function AddGroupPopup(props) {
