@@ -46,10 +46,19 @@ function KeeperMenu(props) {
             <MenuItem
               key={item.key}
               onClick={() => handleClickedItem(item.handleClick)}
-              style={{ fontSize: '0.875rem', fontWeight: 'bold' }}
             >
-              {item.icon ? item.icon() : ''}
-              {item.itemName}
+              {/* TODO: style icons */}
+              <div
+                style={{
+                  marginRight: '2px',
+                  marginTop: '2px',
+                }}
+              >
+                {item.icon ? item.icon() : ''}
+              </div>
+              <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>
+                {item.itemName}
+              </div>
             </MenuItem>
           );
         })}

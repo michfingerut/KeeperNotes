@@ -2,6 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+
 //Internal modules
 import backApi from '../services/backApi';
 import {
@@ -16,17 +23,29 @@ import GroupCard from './GroupCard';
 
 function AddGroupPopup(props) {
   ///////////////////// props /////////////////////
-  const { show, onClose, onCreate, setGroups, uuid } = props;
+  const {
+    show,
+    onClose,
+    onCreate,
+    setGroups,
+    uuid,
+    setOpenDialog,
+    openDialog,
+  } = props;
   ////////////////////////////////////////////////
 
   const [groupName, setGroupName] = useState('');
 
-  const handleCreateClick = async () => {
+  const handleCreateClick = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const formJson = Object.fromEntries(formData.entries());
+    const groupName = formJson.groupName;
+
     const group = await onCreate(groupName, uuid);
     setGroups((prev) => {
       return [...prev, group];
     });
-    setGroupName('');
     onClose();
   };
 
@@ -34,30 +53,102 @@ function AddGroupPopup(props) {
     setGroupName(event.target.value);
   }
 
+  // function handleClose() {
+  //   setGroupName('');
+  //   onClose();
+  // }
+
   function handleClose() {
-    setGroupName('');
-    onClose();
+    setOpenDialog(false);
   }
 
   if (!show) return null;
 
   return (
-    <PopupContainer>
-      <PopupInnerContainer>
-        <h2>Create a New Group</h2>
-        <SignUpInput
-          name="group name"
-          type="text"
-          placeholder="Group Name"
-          value={groupName}
-          onChange={handleChange}
-        />
-        <PopupButtonContainer>
-          <AddNoteButton onClick={handleClose}>Cancel</AddNoteButton>
-          <AddNoteButton onClick={handleCreateClick}>Create</AddNoteButton>
-        </PopupButtonContainer>
-      </PopupInnerContainer>
-    </PopupContainer>
+    // <PopupContainer>
+    //   <PopupInnerContainer>
+    //     <h2>Create a New Group</h2>
+    //     <SignUpInput
+    //       name="group name"
+    //       type="text"
+    //       placeholder="Group Name"
+    //       value={groupName}
+    //       onChange={handleChange}
+    //     />
+    //     <PopupButtonContainer>
+    //       <AddNoteButton onClick={handleClose}>Cancel</AddNoteButton>
+    //       <AddNoteButton onClick={handleCreateClick}>Create</AddNoteButton>
+    //     </PopupButtonContainer>
+    //   </PopupInnerContainer>
+    // </PopupContainer>
+
+    <React.Fragment>
+      <Dialog
+        onClose={handleClose}
+        open={openDialog}
+        PaperProps={{
+          component: 'form',
+          onSubmit: handleCreateClick,
+        }}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>Create Group</DialogTitle>
+        <DialogContent>
+          {/* TODO: the name is blue */}
+          <TextField
+            autoFocus
+            margin="dense"
+            id="groupName"
+            name="groupName"
+            label="Group name"
+            type="text"
+            fullWidth
+            variant="standard"
+            placeholder={'Enter group name'}
+            sx={{
+              mb: 2,
+              '& .MuiInputLabel-root': {
+                color: 'black',
+              },
+              '& .MuiInput-underline:before': {
+                borderBottomColor: 'black',
+              },
+              '& .MuiInput-underline:after': {
+                borderBottomColor: 'black',
+              },
+              '& .MuiInputBase-input': {
+                color: 'black',
+              },
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleClose}
+            sx={{
+              color: 'black',
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            sx={{
+              color: 'black',
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            }}
+          >
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
   );
 }
 
@@ -122,6 +213,8 @@ function GroupsBoards(props) {
         onCreate={backApi.postGroup}
         setGroups={setGroups}
         uuid={uuid}
+        setOpenDialog={setModalOpen}
+        openDialog={isModalOpen}
       />
     </div>
   );
