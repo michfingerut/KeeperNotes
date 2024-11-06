@@ -78,7 +78,10 @@ function Note(props) {
         return note;
       });
 
-      if (note.isFavorite !== currNote.isFavorite) {
+      if (
+        note.isFavorite !== currNote.isFavorite ||
+        note.isDone !== currNote.isDone
+      ) {
         return [...sortFunc(prevNotes)];
       }
       return [...prevNotes];
