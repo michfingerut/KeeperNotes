@@ -15,7 +15,7 @@ import EditNote from './EditNote';
 
 function Dropdown(props) {
   ///////////////////// props /////////////////////
-  const { deleteFunc, note, setFunc } = props;
+  const { deleteFunc, note, setNote } = props;
   /////////////////////////////////////////////////
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -27,7 +27,7 @@ function Dropdown(props) {
   async function handleDelete() {
     await deleteFunc(note.id);
   }
-
+  //TODO: when is favorite updated, doesnt change the order
   return (
     <div>
       <KeeperMenu
@@ -46,7 +46,7 @@ function Dropdown(props) {
       />
       <EditNote
         note={note}
-        setFunc={setFunc}
+        setFunc={setNote}
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         mode="edit"
@@ -83,7 +83,7 @@ function Note(props) {
           ) : null}
           {currNote.title}
         </NoteH1>
-        <Dropdown deleteFunc={deleteFunc} note={currNote} setFunc={setNote} />
+        <Dropdown deleteFunc={deleteFunc} note={currNote} setNote={setNote} />
       </div>
       <NoteContainer>
         <NoteP $isDone={currNote.isDone}>{currNote.content}</NoteP>

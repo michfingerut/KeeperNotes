@@ -45,12 +45,18 @@ function GroupPage(props) {
       handleClick: returnToGroupBoard,
     },
   ];
-
+  //TODO: sort also by isDone
   useEffect(() => {
     backApi
       .getNotesOfGroup(groupId)
       .then((data) => {
-        setNotes(data.sort((a, b) => a.id - b.id));
+        const sortedNotes = data.sort((a, b) => {
+          if (a.isFavorite === b.isFavorite) {
+            return a.id - b.id;
+          }
+          return a.isFavorite ? -1 : 1;
+        });
+        setNotes(sortedNotes);
       })
       .catch((err) => {
         //TODO
