@@ -68,6 +68,7 @@ function EditNote(props) {
 
   //TODO: priority?
 
+  //TODO: styling
   const textFields = [
     () => {
       return (
