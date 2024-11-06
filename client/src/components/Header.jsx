@@ -3,9 +3,10 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
 //Internal modules
 import KeeperMenu from './Menu';
@@ -21,6 +22,8 @@ function Header(props) {
     localStorage.setItem('isLogged', false);
     setIsLogged(false);
   }
+
+  const styling = { color: 'white', fontWeight: 'bold', fontSize: '1.25rem' };
 
   return (
     <AppBar
@@ -44,12 +47,28 @@ function Header(props) {
             menuItems={menuItems}
           />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {title}
-        </Typography>
-        <Button onClick={logOut} color="inherit">
+        <Breadcrumbs aria-label="breadcrumb">
+          {title ? (
+            <div>
+              <Link underline="hover" color="inherit" href="/home" sx={styling}>
+                Keeper
+              </Link>
+              <Typography component="span" sx={styling}>
+                {''} / {title}
+              </Typography>
+            </div>
+          ) : (
+            <div>
+              <Typography component="span" sx={styling}>
+                Keeper
+              </Typography>
+            </div>
+          )}
+        </Breadcrumbs>
+
+        {/* <Button onClick={logOut} color="inherit">
           Logout
-        </Button>
+        </Button> */}
       </Toolbar>
     </AppBar>
   );

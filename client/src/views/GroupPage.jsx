@@ -30,7 +30,7 @@ function GroupPage(props) {
   const { groupId } = useParams();
   localStorage.setItem('groupId', groupId);
 
-  const title = `Keeper / ${localStorage.getItem('groupName')}`;
+  const title = ` ${localStorage.getItem('groupName')}`;
   const menuItems = [
     {
       key: 1,
@@ -40,14 +40,14 @@ function GroupPage(props) {
       },
       handleClick: handleAddNote,
     },
-    {
-      key: 2,
-      itemName: 'Go Back',
-      icon: () => {
-        return <TfiBackRight />;
-      },
-      handleClick: returnToGroupBoard,
-    },
+    // {
+    //   key: 2,
+    //   itemName: 'Go Back',
+    //   icon: () => {
+    //     return <TfiBackRight />;
+    //   },
+    //   handleClick: returnToGroupBoard,
+    // },
   ];
 
   useEffect(() => {

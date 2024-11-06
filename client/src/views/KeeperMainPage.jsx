@@ -35,11 +35,7 @@ function KeeperMainPage(props) {
   return !isError ? (
     <div style={{ padding: '8px' }}>
       <Container>
-        <Header
-          title="Keeper / Groups"
-          setIsLogged={setIsLogged}
-          menuItems={menuItems}
-        />
+        <Header title="" setIsLogged={setIsLogged} menuItems={menuItems} />
         <GroupsBoards
           isModalOpen={isModalOpen}
           setModalOpen={setModalOpen}
