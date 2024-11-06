@@ -127,7 +127,7 @@ function GroupPage(props) {
       />
     </div>
   ) : (
-    <ErrorComp />
+    <ErrorComp setIsLogged={setIsLogged} />
   );
 }
 

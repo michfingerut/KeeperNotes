@@ -49,7 +49,7 @@ function KeeperMainPage(props) {
       </Container>
     </div>
   ) : (
-    <ErrorComp />
+    <ErrorComp setIsLogged={setIsLogged} />
   );
 }
 

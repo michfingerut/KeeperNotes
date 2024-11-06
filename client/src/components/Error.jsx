@@ -1,6 +1,10 @@
 import { LogButton, LogInContainer, LogInH1 } from '../styles/styles';
 
-function ErrorComp() {
+function ErrorComp(props) {
+  ///////////////////// props /////////////////////
+  const { setIsLogged } = props;
+  /////////////////////////////////////////////////
+
   function handleRefresh() {
     window.location.reload();
   }
@@ -13,6 +17,14 @@ function ErrorComp() {
       </div>
       <div>
         <LogButton onClick={handleRefresh}>Refresh</LogButton>
+        <LogButton
+          onClick={() => {
+            setIsLogged(false);
+          }}
+          color="inherit"
+        >
+          Logout
+        </LogButton>
       </div>
     </LogInContainer>
   );
