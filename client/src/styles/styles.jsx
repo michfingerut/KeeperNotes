@@ -135,6 +135,7 @@ const CenteredHeader = styled.h3`
   font-size: 0.9em;
   line-height: 160px;
   ${notClickableText}
+  overflow-x: hidden;
 `;
 
 /************************* paragraphs ************************/

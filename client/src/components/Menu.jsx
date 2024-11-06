@@ -50,7 +50,7 @@ function KeeperMenu(props) {
               {/* TODO: style icons */}
               <div
                 style={{
-                  marginRight: '2px',
+                  marginRight: '5px',
                   marginTop: '2px',
                 }}
               >

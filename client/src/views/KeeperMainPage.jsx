@@ -33,7 +33,7 @@ function KeeperMainPage(props) {
     <div style={{ padding: '8px' }}>
       <Container>
         <Header
-          title="Keeper"
+          title="Keeper / Groups"
           setIsLogged={setIsLogged}
           menuItems={menuItems}
         />
