@@ -15,6 +15,7 @@ function EditNote(props) {
   /////////////////////////////////////////////////
   const [isDone, setIsDone] = useState(note.isDone);
   const [isFavorite, setIsFavorite] = useState(note.isFavorite);
+  const okButtonName = mode === 'add' ? 'Create' : 'Save';
 
   //TODO: scheduled
   const [scheduledTime, setScheduledTime] = useState('');
@@ -232,7 +233,7 @@ function EditNote(props) {
   return (
     <EditDialog
       textFields={textFields}
-      okButtonName="Create"
+      okButtonName={okButtonName}
       handleClose={handleClose}
       openDialog={openDialog}
       handleOK={handleSubmit}
