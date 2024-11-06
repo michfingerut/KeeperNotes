@@ -60,7 +60,6 @@ function AddGroupPopup(props) {
           variant="standard"
           placeholder={'Enter group name'}
           sx={{
-            mb: 2,
             '& .MuiInputLabel-root': {
               color: 'black',
             },

@@ -73,13 +73,11 @@ function EditNote(props) {
 
   //TODO: priority?
 
-  //TODO: styling
   const textFields = [
     () => {
       return (
         <TextField
           key="1"
-          autoFocus
           margin="dense"
           id="title"
           name="title"
@@ -90,7 +88,6 @@ function EditNote(props) {
           defaultValue={note?.title || ''}
           placeholder={!note?.title ? 'Enter title' : ''}
           sx={{
-            mb: 2,
             '& .MuiInputLabel-root': {
               color: 'black',
             },

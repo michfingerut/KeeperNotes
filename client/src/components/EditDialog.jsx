@@ -6,16 +6,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-/*
-TODO: (may JSdocs)
-textFields = [] of <TextField .../>
-
-handleClose, openDialog, handleOK => functions
-
-dialogTitle= string
-okButtonName= string
- */
-
 function EditDialog(props) {
   const {
     textFields,
@@ -40,7 +30,6 @@ function EditDialog(props) {
       >
         <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent>
-          {/* TODO: the name is blue */}
           {textFields.map((textField) => {
             return textField();
           })}
