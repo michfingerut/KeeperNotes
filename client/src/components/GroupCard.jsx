@@ -34,14 +34,12 @@ function GroupCard(props) {
     <CardStyle>
       <KeeperMenu
         menuItems={[
-          { key: 1, itemName: 'Enter group', handleClick: handleEnter },
           // { key: 2, itemName: 'Edit group', handleClick: handleEdit },
           { key: 3, itemName: 'Remove group', handleClick: handleRemove },
         ]}
       />
 
-      {/* when title too long looks cut, TODO: add tooltip also TODO: scrolling prettier */}
-      <CenteredHeader>
+      <CenteredHeader onClick={handleEnter}>
         <Tooltip title={name}>
           <span style={{ overflowX: 'hidden' }}>{name}</span>
         </Tooltip>
