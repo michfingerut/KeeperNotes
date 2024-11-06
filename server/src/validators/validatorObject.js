@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { priorityEnum } from '../utils/index.js';
 
 const userIdParam = Joi.string().uuid().required();
 const idParam = Joi.number().required();
@@ -23,6 +24,12 @@ const postNoteParams = Joi.object().keys({
   content: contentParam.optional(),
   userId: userIdParam,
   groupId: userIdParam,
+  isDone: Joi.boolean().optional(),
+  isFavorite: Joi.boolean().optional(),
+  schedualTime: Joi.date().optional(),
+  priority: Joi.string()
+    .valid(...priorityEnum)
+    .optional(),
 });
 
 const putNoteParams = Joi.object().keys({
@@ -30,6 +37,12 @@ const putNoteParams = Joi.object().keys({
   id: idParam,
   title: titleParam.optional(),
   content: contentParam.optional(),
+  isDone: Joi.boolean().optional(),
+  isFavorite: Joi.boolean().optional(),
+  schedualTime: Joi.date().optional(),
+  priority: Joi.string()
+    .valid(...priorityEnum)
+    .optional(),
 });
 const deleteNoteParams = Joi.object().keys({
   userId: userIdParam,

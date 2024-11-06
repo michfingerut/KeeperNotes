@@ -7,11 +7,17 @@ import publisher from '../socketio.js';
 
 const postNote = async (req, res) => {
   /* 
+  //TODO: need to change route to /groups/:groupId/notes
     req format - /users/:userId/notes
     body:{
       title: string,
       content: string,
       groupId: string
+
+      isDone: boolean, optional
+      isFavorite: boolean, optional
+      schedualTime: time. optional
+      pariority: enum, optional
     }
 
     return format:
@@ -52,6 +58,8 @@ const postNote = async (req, res) => {
 
 const putNote = async (req, res) => {
   /* 
+    //TODO: need to change route to /groups/:groupId/notes
+
     req format - /users/:userId/notes/:id
     body:{
       title: string,
@@ -61,8 +69,13 @@ const putNote = async (req, res) => {
     return format:
     {
       id: number,
-      title: string,
-      content: string
+      title: string, optional
+      content: string, optional
+
+      isDone: boolean, optional
+      isFavorite: boolean, optional
+      schedualTime: time. optional
+      pariority: enum, optional
     }
 
     200 - on success V
@@ -145,7 +158,11 @@ const getNotesOfUser = async (req, res) => {
     [{
       id: number,
       title: string,
-      content: string
+      content: string,
+      isDone: boolean, 
+      isFavorite: boolean, 
+      schedualTime: time. 
+      pariority: enum, 
     }]
     200 - on success V
     400 - if query string not valid V
@@ -170,7 +187,11 @@ const getNotesOfGroup = async (req, res) => {
     [{
       id: number,
       title: string,
-      content: string
+      content: string,
+      isDone: boolean, 
+      isFavorite: boolean, 
+      schedualTime: time. 
+      pariority: enum, 
     }]
     200 - on success V
     400 - if query string not valid V

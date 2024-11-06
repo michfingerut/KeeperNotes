@@ -1,6 +1,6 @@
 import logger from '../logger.js';
 import sequelize from './sequalize.js';
-import { createAssociations, syncModels } from './modelSetup.js';
+import { createAssociations } from './modelSetup.js';
 
 try {
   await createAssociations();

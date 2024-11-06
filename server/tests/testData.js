@@ -41,6 +41,14 @@ const notes = [
     title: 'note1',
     content: 'content1',
   },
+  {
+    title: 'note1',
+    content: 'content1',
+    isDone: false,
+    isFavorite: false,
+    schedualTime: null,
+    priority: 'regular',
+  },
 ];
 
 const users = {
@@ -58,6 +66,8 @@ const users = {
   },
 };
 
+const priorityEnum = ['regular', 'high', 'low'];
+
 export default {
   errorCode,
   messages,
@@ -65,4 +75,5 @@ export default {
   notes,
   users,
   randomUUID,
+  priorityEnum,
 };

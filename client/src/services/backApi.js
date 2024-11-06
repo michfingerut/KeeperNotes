@@ -21,10 +21,32 @@ const getNotesOfGroup = async (groupId) => {
   return await callBackAPI('get', `/groups/${groupId}/notes`);
 };
 
+/**
+ * note
+ * @param {Object} note
+ * @param {string} note.title optional
+ * @param {string} note.content optional
+ * @param {string} note.groupId required
+ * @param {boolean} note.isDone optional
+ * @param {boolean} note.isFavorite optional
+ * @param {Date} note.schedualTime optional
+ * @param {string} note.priority optional, can be regular, high.low
+ */
 const postNote = async (note, userId) => {
   return await callBackAPI('post', `/users/${userId}/notes`, note);
 };
 
+/**
+ * note
+ * @param {Object} dataToUpdate
+ * @param {string} dataToUpdate.title optional
+ * @param {string} dataToUpdate.content optional
+ * @param {string} note.groupId required
+ * @param {boolean} dataToUpdate.isDone optional
+ * @param {boolean} dataToUpdate.isFavorite optional
+ * @param {Date} dataToUpdate.schedualTime optional
+ * @param {string} dataToUpdate.priority optional, can be regular, high.low
+ */
 const updateNote = async (id, userId, dataToUpdate) => {
   return await callBackAPI('put', `/users/${userId}/notes/${id}`, dataToUpdate);
 };

@@ -99,7 +99,7 @@ const compareProperties = (res, expected) => {
 
   for (const key of keys) {
     if (key !== 'createdAt' && key !== 'updatedAt') {
-      expect(res[key]).toEqual(expected[key]);
+      expect(expected[key]).toEqual(res[key]);
     }
   }
 };

@@ -58,6 +58,7 @@ describe('Route tests', () => {
     test('basic .GET notes of user and .POST', async () => {
       const expectedData = testData.notes;
       expectedData[0].groupId = group.groupId;
+      expectedData[1].groupId = group.groupId;
 
       //post new note
       const postRes = await req.post(route).send(expectedData[0]);
@@ -67,7 +68,7 @@ describe('Route tests', () => {
       //get the note
       const getRes = await req.get(route);
 
-      testUtils.testResponseArray(getRes, expectedData, OK);
+      testUtils.testResponseArray(getRes, [expectedData[1]], OK);
     });
 
     test('.POST notes validation', async () => {
@@ -97,6 +98,10 @@ describe('Route tests', () => {
 
         { title: 'hello', michal: true, groupId: groupId }, //not valid param
         { michal: true, content: 'hello', groupId: groupId }, //not valid param
+        { isDone: 'hello' },
+        { isFavorite: 'hello' },
+        { schedualTime: 'hello' },
+        { pariority: 'hello' },
       ];
 
       for (let i of notValidNote) {
@@ -155,6 +160,7 @@ describe('Route tests', () => {
     test('basic .GET notes of groups', async () => {
       const expectedData = testData.notes;
       expectedData[0].groupId = group.groupId;
+      expectedData[1].groupId = group.groupId;
 
       const getRes1 = await req.get(`/groups/${group.groupId}/notes`);
       testUtils.testResponseArray(getRes1, [], OK);
@@ -163,14 +169,14 @@ describe('Route tests', () => {
       await req.post(route).send(expectedData[0]);
 
       const getRes2 = await req.get(`/groups/${group.groupId}/notes`);
-      testUtils.testResponseArray(getRes2, [expectedData[0]], OK);
+      testUtils.testResponseArray(getRes2, [expectedData[1]], OK);
 
       await req.post(route).send(expectedData[0]);
 
       const getRes3 = await req.get(`/groups/${group.groupId}/notes`);
       testUtils.testResponseArray(
         getRes3,
-        [expectedData[0], expectedData[0]],
+        [expectedData[1], expectedData[1]],
         OK,
       );
     });
@@ -220,6 +226,10 @@ describe('Route tests', () => {
         { title: [123], content: 'hello' }, //not valid content
         { title: 'hello', michal: true }, //not valid param
         { michal: true, content: 'hello' }, //not valid param
+        { isDone: 'hello' },
+        { isFavorite: 'hello' },
+        { schedualTime: 'hello' },
+        { pariority: 'hello' },
       ];
 
       for (let i of notValidNote) {
@@ -230,18 +240,22 @@ describe('Route tests', () => {
     });
 
     test('basic .PUT (one parameter)', async () => {
-      const expectedData = testData.notes[0];
+      const sendData = testData.notes[0];
+      const expectedData = { ...testData.notes[1] };
+      expectedData.groupId = group.groupId;
+      sendData.groupId = group.groupId;
 
       //post new note
-      const postRes = await req.post(route).send(expectedData);
-      const id = postRes.body.id;
+      const postRes = await req.post(route).send(sendData);
 
-      expectedData.title = 'another title';
+      const id = postRes.body.id;
+      const time = new Date().toISOString();
+      expectedData.schedualTime = time;
 
       //update note
       const putRes = await req
         .put(`${route}/${id}`)
-        .send({ title: expectedData.title });
+        .send({ schedualTime: expectedData.schedualTime });
 
       testUtils.testResponseSingle(putRes, expectedData, OK);
     });
@@ -250,19 +264,50 @@ describe('Route tests', () => {
       const expectedDataToPost = testData.notes[0];
       expectedDataToPost.groupId = group.groupId;
 
+      const expectedData = testData.notes[1];
+      expectedData.groupId = group.groupId;
+      expectedData.isDone = true;
+      expectedData.title = 'another title';
+
       //post new note
       const postRes = await req.post(route).send(expectedDataToPost);
       const id = postRes.body.id;
 
-      const expectedData = {
+      const dataToPut = {
         title: 'another title',
-        content: 'anoter content',
+        isDone: true,
       };
 
       //update note
-      const putRes = await req.put(`${route}/${id}`).send(expectedData);
+      const putRes = await req.put(`${route}/${id}`).send(dataToPut);
 
       testUtils.testResponseSingle(putRes, expectedData, OK);
+    });
+
+    test('.PUT (all parameter)', async () => {
+      const expectedDataToPost = testData.notes[0];
+      expectedDataToPost.groupId = group.groupId;
+
+      //post new note
+      const postRes = await req.post(route).send(expectedDataToPost);
+      const id = postRes.body.id;
+
+      const dataToPut = {
+        title: 'another title',
+        content: 'another content',
+        isDone: true,
+        isFavorite: true,
+        schedualTime: new Date().toISOString(),
+        priority: testData.priorityEnum[1],
+      };
+
+      //update note
+      const putRes = await req.put(`${route}/${id}`).send(dataToPut);
+
+      dataToPut.groupId = group.groupId;
+      dataToPut.id = id;
+
+      testUtils.testResponseSingle(putRes, dataToPut, OK);
     });
 
     test('.PUT on non existing note', async () => {
