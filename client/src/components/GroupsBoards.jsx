@@ -1,14 +1,14 @@
 //External modules
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
 
 //Internal modules
-import backApi from '../services/backApi';
-import { NotesContainer } from '../styles/styles';
-import GroupCard from './GroupCard';
-import EditDialog from './EditDialog';
-import { showError } from '../utils/index';
+import backApi from "../services/backApi";
+import { NotesContainer } from "../styles/styles";
+import GroupCard from "./GroupCard";
+import EditDialog from "./EditDialog";
+import { showError } from "../utils/index";
 
 function AddGroupPopup(props) {
   ///////////////////// props /////////////////////
@@ -34,7 +34,7 @@ function AddGroupPopup(props) {
         return [...prev, group];
       });
     } catch (err) {
-      showError('Something went wrong, please try again later');
+      showError("Something went wrong, please try again later");
     } finally {
       onClose();
     }
@@ -58,19 +58,19 @@ function AddGroupPopup(props) {
           type="text"
           fullWidth
           variant="standard"
-          placeholder={'Enter group name'}
+          placeholder={"Enter group name"}
           sx={{
-            '& .MuiInputLabel-root': {
-              color: 'black',
+            "& .MuiInputLabel-root": {
+              color: "black",
             },
-            '& .MuiInput-underline:before': {
-              borderBottomColor: 'black',
+            "& .MuiInput-underline:before": {
+              borderBottomColor: "black",
             },
-            '& .MuiInput-underline:after': {
-              borderBottomColor: 'black',
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "black",
             },
-            '& .MuiInputBase-input': {
-              color: 'black',
+            "& .MuiInputBase-input": {
+              color: "black",
             },
           }}
         />
@@ -95,7 +95,7 @@ function GroupsBoards(props) {
   const { isModalOpen, setModalOpen, setIsError } = props;
   /////////////////////////////////////////////////
 
-  const uuid = localStorage.getItem('uuid');
+  const uuid = localStorage.getItem("uuid");
   const [groups, setGroups] = useState([]);
   const navigate = useNavigate();
 
@@ -117,16 +117,16 @@ function GroupsBoards(props) {
   };
 
   function handleGroupPick(group) {
-    localStorage.setItem('groupName', group.name);
+    localStorage.setItem("groupName", group.name);
     navigate(`/${group.groupId}`);
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: "relative" }}>
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
+          display: "flex",
+          justifyContent: "center",
         }}
       ></div>
 

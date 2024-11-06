@@ -1,9 +1,9 @@
 //External modules
-import Axios from 'axios';
+import Axios from "axios";
 
 const back = Axios.create({
   //TODO not HC
-  baseURL: 'http://localhost:3002',
+  baseURL: "http://localhost:3002",
 });
 
 const callBackAPI = async (functionToCall, route, params) => {
@@ -14,11 +14,11 @@ const callBackAPI = async (functionToCall, route, params) => {
 /******************************************************************************/
 const getNotesOfUser = async (userId) => {
   //TODO: not in use
-  return await callBackAPI('get', `/users/${userId}/notes`);
+  return await callBackAPI("get", `/users/${userId}/notes`);
 };
 
 const getNotesOfGroup = async (groupId) => {
-  return await callBackAPI('get', `/groups/${groupId}/notes`);
+  return await callBackAPI("get", `/groups/${groupId}/notes`);
 };
 
 /**
@@ -33,7 +33,7 @@ const getNotesOfGroup = async (groupId) => {
  * @param {string} note.priority optional, can be regular, high.low
  */
 const postNote = async (note, userId) => {
-  return await callBackAPI('post', `/users/${userId}/notes`, note);
+  return await callBackAPI("post", `/users/${userId}/notes`, note);
 };
 
 /**
@@ -48,61 +48,61 @@ const postNote = async (note, userId) => {
  * @param {string} dataToUpdate.priority optional, can be regular, high.low
  */
 const updateNote = async (id, userId, dataToUpdate) => {
-  return await callBackAPI('put', `/users/${userId}/notes/${id}`, dataToUpdate);
+  return await callBackAPI("put", `/users/${userId}/notes/${id}`, dataToUpdate);
 };
 
 const removeNote = async (id, userId) => {
-  return await callBackAPI('delete', `/users/${userId}/notes/${id}`);
+  return await callBackAPI("delete", `/users/${userId}/notes/${id}`);
 };
 
 /******************************************************************************/
 
 const getUser = async (email, password) => {
-  return await callBackAPI('get', `/users?email=${email}&password=${password}`);
+  return await callBackAPI("get", `/users?email=${email}&password=${password}`);
 };
 
 const postUser = async (userInfo) => {
-  return await callBackAPI('post', `/users`, userInfo);
+  return await callBackAPI("post", `/users`, userInfo);
 };
 
 const putUser = async (userId, userInfo) => {
   //TODO: as for now, not in use
-  return await callBackAPI('put', `/users/${userId}`, userInfo);
+  return await callBackAPI("put", `/users/${userId}`, userInfo);
 };
 
 const deleteUser = async (userId) => {
   //TODO: as for now, not in use
-  return await callBackAPI('delete', `/users/${userId}`);
+  return await callBackAPI("delete", `/users/${userId}`);
 };
 
 /******************************************************************************/
 const getGroupsOfUser = async (userId) => {
-  return await callBackAPI('get', `/groups/users/${userId}`);
+  return await callBackAPI("get", `/groups/users/${userId}`);
 };
 
 const postGroup = async (name, ownerId) => {
-  return await callBackAPI('post', '/groups', { name: name, ownerId: ownerId });
+  return await callBackAPI("post", "/groups", { name: name, ownerId: ownerId });
 };
 
 const deleteGroup = async (groupId) => {
-  return await callBackAPI('delete', `/groups/${groupId}`);
+  return await callBackAPI("delete", `/groups/${groupId}`);
 };
 
 /******************************************************************************/
 
 const getMembersOfGroup = async (groupId) => {
   //TODO: as for now, not in use
-  return await callBackAPI('get', `/groups/${groupId}/members`);
+  return await callBackAPI("get", `/groups/${groupId}/members`);
 };
 
 const addMember = async (groupId, userId) => {
   //TODO: as for now, not in use
-  return await callBackAPI('post', `/groups/${groupId}/members`, userId);
+  return await callBackAPI("post", `/groups/${groupId}/members`, userId);
 };
 
 const deleteMember = async (groupId, userId) => {
   //TODO: as for now, not in use
-  return await callBackAPI('delete', `/groups/${groupId}/members/${userId}`);
+  return await callBackAPI("delete", `/groups/${groupId}/members/${userId}`);
 };
 
 export default {

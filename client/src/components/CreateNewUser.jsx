@@ -1,15 +1,15 @@
 // External modules
-import React from 'react';
+import React from "react";
 
 // Internal modules
-import backApi from '../services/backApi';
-import { showError } from '../utils/index';
+import backApi from "../services/backApi";
+import { showError } from "../utils/index";
 import {
   Container,
   SignUpForm,
   SignUpInput,
   LogButton,
-} from '../styles/styles';
+} from "../styles/styles";
 
 function CreateNewUser(props) {
   ///////////////////// props /////////////////////
@@ -25,15 +25,15 @@ function CreateNewUser(props) {
     } catch (err) {
       switch (err?.status) {
         case 403:
-          showError('Email already exists');
+          showError("Email already exists");
           break;
         case 400:
           showError(
-            'Invalid email, please make sure you are entering a valid email',
+            "Invalid email, please make sure you are entering a valid email",
           );
           break;
         default:
-          showError('Something went wrong, please try again later');
+          showError("Something went wrong, please try again later");
           break;
       }
       return;
@@ -43,13 +43,13 @@ function CreateNewUser(props) {
       await backApi.postGroup(tmpUsr.firstName, userInfo.userId);
     } catch (err) {
       await backApi.deleteUser(userInfo.userId);
-      showError('Something went wrong, please try again later');
+      showError("Something went wrong, please try again later");
       return;
     }
 
-    localStorage.setItem('uuid', userInfo.userId);
-    localStorage.setItem('isLogged', true);
-    localStorage.setItem('groupId', '');
+    localStorage.setItem("uuid", userInfo.userId);
+    localStorage.setItem("isLogged", true);
+    localStorage.setItem("groupId", "");
 
     setIsLogged(true);
   }

@@ -1,11 +1,11 @@
 //External modules
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip from "@mui/material/Tooltip";
 
 // Internal modules
-import { CardStyle, CenteredHeader } from '../styles/styles';
-import KeeperMenu from './Menu';
-import backApi from '../services/backApi';
-import { showError } from '../utils/index';
+import { CardStyle, CenteredHeader } from "../styles/styles";
+import KeeperMenu from "./Menu";
+import backApi from "../services/backApi";
+import { showError } from "../utils/index";
 
 function GroupCard(props) {
   ///////////////////// props /////////////////////
@@ -17,7 +17,7 @@ function GroupCard(props) {
   }
 
   function handleEdit() {
-    console.log('handle edit');
+    console.log("handle edit");
     //TODO
     // the dialog will open
     // we will see all users that are not members
@@ -36,7 +36,7 @@ function GroupCard(props) {
         return [...tmp];
       });
     } catch (err) {
-      showError('Something went wrong, please try again later');
+      showError("Something went wrong, please try again later");
     }
   }
 
@@ -44,14 +44,14 @@ function GroupCard(props) {
     <CardStyle>
       <KeeperMenu
         menuItems={[
-          { key: 2, itemName: 'Edit group', handleClick: handleEdit },
-          { key: 3, itemName: 'Remove group', handleClick: handleRemove },
+          { key: 2, itemName: "Edit group", handleClick: handleEdit },
+          { key: 3, itemName: "Remove group", handleClick: handleRemove },
         ]}
       />
 
       <CenteredHeader onClick={handleEnter}>
         <Tooltip title={name}>
-          <span style={{ overflowX: 'hidden' }}>{name}</span>
+          <span style={{ overflowX: "hidden" }}>{name}</span>
         </Tooltip>
       </CenteredHeader>
     </CardStyle>

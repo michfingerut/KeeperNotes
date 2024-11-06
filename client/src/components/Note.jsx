@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import StarIcon from '@mui/icons-material/Star';
-import Tooltip from '@mui/material/Tooltip';
+import React, { useEffect, useState } from "react";
+import StarIcon from "@mui/icons-material/Star";
+import Tooltip from "@mui/material/Tooltip";
 import {
   NoteStyle,
   NoteH1,
   NoteP,
   NoteContainer,
   midDarkBrown,
-} from '../styles/styles';
-import KeeperMenu from './Menu';
-import EditNote from './EditNote';
-import { sortFunc } from '../utils';
+} from "../styles/styles";
+import KeeperMenu from "./Menu";
+import EditNote from "./EditNote";
+import { sortFunc } from "../utils";
 
 function Dropdown(props) {
   ///////////////////// props /////////////////////
@@ -33,12 +33,12 @@ function Dropdown(props) {
         menuItems={[
           {
             key: 1,
-            itemName: 'Edit note',
+            itemName: "Edit note",
             handleClick: handleEdit,
           },
           {
             key: 2,
-            itemName: 'Delete note',
+            itemName: "Delete note",
             handleClick: handleDelete,
           },
         ]}
@@ -89,17 +89,21 @@ function Note(props) {
   }, [currNote]);
 
   return (
-    <NoteStyle style={{ width: '80%' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <NoteStyle style={{ width: "80%" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <NoteH1 $isDone={currNote.isDone}>
           {currNote.isFavorite ? (
-            <StarIcon style={{ color: midDarkBrown, marginRight: '10px' }} />
+            <StarIcon style={{ color: midDarkBrown, marginRight: "10px" }} />
           ) : null}
           <Tooltip title={currNote.title}>
             <span>{currNote.title}</span>
           </Tooltip>
         </NoteH1>
-        <Dropdown deleteFunc={deleteFunc} note={currNote} setNote={setNote} />
+        <Dropdown
+          deleteFunc={deleteFunc}
+          note={currNote}
+          setNote={setNote}
+        />
       </div>
       <NoteContainer>
         <NoteP $isDone={currNote.isDone}>{currNote.content}</NoteP>
@@ -108,16 +112,16 @@ function Note(props) {
       {formattedScheduledTime && (
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            fontSize: '0.8em',
-            color: 'gray',
-            marginTop: '10px',
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: "0.8em",
+            color: "gray",
+            marginTop: "10px",
           }}
         >
           <div>Scheduled for: {formattedScheduledTime}</div>
           {isExpired && (
-            <div style={{ color: 'red', fontWeight: 'bold' }}>Expired</div>
+            <div style={{ color: "red", fontWeight: "bold" }}>Expired</div>
           )}
         </div>
       )}

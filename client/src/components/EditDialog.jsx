@@ -1,10 +1,10 @@
 //External modules
-import React from 'react';
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import React from "react";
+import Dialog from "@mui/material/Dialog";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function EditDialog(props) {
   ///////////////////// props /////////////////////
@@ -24,7 +24,7 @@ function EditDialog(props) {
         onClose={handleClose}
         open={openDialog}
         PaperProps={{
-          component: 'form',
+          component: "form",
           onSubmit: handleOK,
         }}
         maxWidth="sm"
@@ -40,9 +40,9 @@ function EditDialog(props) {
           <Button
             onClick={handleClose}
             sx={{
-              color: 'black',
-              '&:hover': {
-                backgroundColor: 'transparent',
+              color: "black",
+              "&:hover": {
+                backgroundColor: "transparent",
               },
             }}
           >
@@ -51,9 +51,9 @@ function EditDialog(props) {
           <Button
             type="submit"
             sx={{
-              color: 'black',
-              '&:hover': {
-                backgroundColor: 'transparent',
+              color: "black",
+              "&:hover": {
+                backgroundColor: "transparent",
               },
             }}
           >

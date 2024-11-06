@@ -1,11 +1,11 @@
 //External modules
-import React, { useState } from 'react';
-import { RiArrowGoBackLine } from 'react-icons/ri';
+import React, { useState } from "react";
+import { RiArrowGoBackLine } from "react-icons/ri";
 
 //Internal modules
-import CreateNewUser from '../components/CreateNewUser';
-import LogExistingUser from '../components/LogExistingUser';
-import { LogInContainer, LogInH1, LogButton } from '../styles/styles';
+import CreateNewUser from "../components/CreateNewUser";
+import LogExistingUser from "../components/LogExistingUser";
+import { LogInContainer, LogInH1, LogButton } from "../styles/styles";
 
 function LogInPage(props) {
   ///////////////////// props /////////////////////
@@ -16,10 +16,10 @@ function LogInPage(props) {
   const [toSignUp, setToSignUp] = useState(false);
 
   const [tmpUsr, setTmpUsr] = useState({
-    firstName: '',
-    lastName: '',
-    password: '',
-    email: '',
+    firstName: "",
+    lastName: "",
+    password: "",
+    email: "",
   });
 
   function init() {
@@ -67,10 +67,10 @@ function LogInPage(props) {
 
     setTmpUsr(() => {
       return {
-        firstName: '',
-        lastName: '',
-        password: '',
-        email: '',
+        firstName: "",
+        lastName: "",
+        password: "",
+        email: "",
       };
     });
   }
@@ -83,15 +83,15 @@ function LogInPage(props) {
             <RiArrowGoBackLine
               onClick={() => goBack()}
               style={{
-                marginRight: '10px',
-                cursor: 'pointer',
-                width: '20px',
+                marginRight: "10px",
+                cursor: "pointer",
+                width: "20px",
               }}
             />
           ) : (
-            <div style={{ marginLeft: '25px' }} />
+            <div style={{ marginLeft: "25px" }} />
           )}
-          <div style={{ pointerEvents: 'none', userSelect: 'none' }}>Hello</div>
+          <div style={{ pointerEvents: "none", userSelect: "none" }}>Hello</div>
         </LogInH1>
 
         <div>{isInitOption ? init() : option()}</div>

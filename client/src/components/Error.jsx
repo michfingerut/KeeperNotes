@@ -1,4 +1,4 @@
-import { LogButton, LogInContainer, LogInH1 } from '../styles/styles';
+import { LogButton, LogInContainer, LogInH1 } from "../styles/styles";
 
 function ErrorComp(props) {
   ///////////////////// props /////////////////////
@@ -9,7 +9,7 @@ function ErrorComp(props) {
     window.location.reload();
   }
 
-  const message = 'Oops... something went wrong';
+  const message = "Oops... something went wrong";
   return (
     <LogInContainer>
       <div>

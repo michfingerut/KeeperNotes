@@ -1,10 +1,10 @@
 //External modules
-import React, { useState } from 'react';
-import { CiMenuKebab } from 'react-icons/ci';
-import { MenuItem, Menu } from '@mui/material';
+import React, { useState } from "react";
+import { CiMenuKebab } from "react-icons/ci";
+import { MenuItem, Menu } from "@mui/material";
 
 //Internal modules
-import { MenuStyle, backGroundLightGray } from '../styles/styles';
+import { MenuStyle, backGroundLightGray } from "../styles/styles";
 
 /**
  * props
@@ -38,19 +38,23 @@ function KeeperMenu(props) {
   return (
     <MenuStyle>
       <CiMenuKebab onClick={handleClick} />
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
         {menuItems.map((item) => {
           return (
             <MenuItem
               key={item.key}
               onClick={() => handleClickedItem(item.handleClick)}
               sx={{
-                '&:hover': {
+                "&:hover": {
                   backgroundColor: backGroundLightGray,
                 },
               }}
             >
-              <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>
+              <div style={{ fontSize: "0.875rem", fontWeight: "bold" }}>
                 {item.itemName}
               </div>
             </MenuItem>

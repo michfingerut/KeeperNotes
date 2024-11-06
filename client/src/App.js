@@ -1,30 +1,30 @@
 //External modules
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
   useNavigate,
   Navigate,
-} from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 //Internal modules
-import KeeperMainPage from './views/KeeperMainPage';
-import LogInPage from './views/LogInPage';
-import GroupPage from './views/GroupPage';
+import KeeperMainPage from "./views/KeeperMainPage";
+import LogInPage from "./views/LogInPage";
+import GroupPage from "./views/GroupPage";
 
 function App() {
   const [isLogged, setIsLogged] = useState(
-    JSON.parse(localStorage.getItem('isLogged')),
+    JSON.parse(localStorage.getItem("isLogged")),
   );
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLogged) {
-      navigate('/login');
-    } else if (localStorage.getItem('groupId').length === 0) {
-      navigate('/home');
+      navigate("/login");
+    } else if (localStorage.getItem("groupId").length === 0) {
+      navigate("/home");
     }
   }, [isLogged, navigate]);
 
@@ -40,7 +40,10 @@ function App() {
         element={<GroupPage setIsLogged={setIsLogged} />}
       />
 
-      <Route path="/login" element={<LogInPage setIsLogged={setIsLogged} />} />
+      <Route
+        path="/login"
+        element={<LogInPage setIsLogged={setIsLogged} />}
+      />
       <Route
         path="/"
         element={isLogged ? <Navigate to="/home" /> : <Navigate to="/login" />}

@@ -1,14 +1,14 @@
 //External modules
-import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import { FormControlLabel, Checkbox } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
+import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import { FormControlLabel, Checkbox } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
 
 //Interenal modules
-import backApi from '../services/backApi';
-import EditDialog from './EditDialog';
-import { midDarkBrown, backGroundLightGray } from '../styles/styles';
-import { showError, sortFunc } from '../utils/index';
+import backApi from "../services/backApi";
+import EditDialog from "./EditDialog";
+import { midDarkBrown, backGroundLightGray } from "../styles/styles";
+import { showError, sortFunc } from "../utils/index";
 
 //TODO: idea- add option like text book with * and _ and B etc'
 function EditNote(props) {
@@ -17,10 +17,10 @@ function EditNote(props) {
   /////////////////////////////////////////////////
   const [isDone, setIsDone] = useState(note.isDone);
   const [isFavorite, setIsFavorite] = useState(note.isFavorite);
-  const [scheduledTime, setScheduledTime] = useState(note.scheduledTime || '');
+  const [scheduledTime, setScheduledTime] = useState(note.scheduledTime || "");
 
-  const okButtonName = mode === 'add' ? 'Create' : 'Save';
-  const uuid = localStorage.getItem('uuid');
+  const okButtonName = mode === "add" ? "Create" : "Save";
+  const uuid = localStorage.getItem("uuid");
 
   function handleClose() {
     setOpenDialog(false);
@@ -38,7 +38,7 @@ function EditNote(props) {
     }
 
     try {
-      if (mode === 'add') {
+      if (mode === "add") {
         const createNote = await backApi.postNote(
           { ...data, groupId: note.groupId },
           uuid,
@@ -50,13 +50,13 @@ function EditNote(props) {
         });
         setIsFavorite(false);
         setIsDone(false);
-        setScheduledTime('');
+        setScheduledTime("");
       } else {
         const updatedNote = await backApi.updateNote(note.id, uuid, data);
         setFunc(updatedNote);
       }
     } catch (err) {
-      showError('Something went wrong, please try again later');
+      showError("Something went wrong, please try again later");
     } finally {
       handleClose();
     }
@@ -93,20 +93,20 @@ function EditNote(props) {
           type="text"
           fullWidth
           variant="standard"
-          defaultValue={note?.title || ''}
-          placeholder={!note?.title ? 'Enter title' : ''}
+          defaultValue={note?.title || ""}
+          placeholder={!note?.title ? "Enter title" : ""}
           sx={{
-            '& .MuiInputLabel-root': {
-              color: 'black',
+            "& .MuiInputLabel-root": {
+              color: "black",
             },
-            '& .MuiInput-underline:before': {
-              borderBottomColor: 'black',
+            "& .MuiInput-underline:before": {
+              borderBottomColor: "black",
             },
-            '& .MuiInput-underline:after': {
-              borderBottomColor: 'black',
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "black",
             },
-            '& .MuiInputBase-input': {
-              color: 'black',
+            "& .MuiInputBase-input": {
+              color: "black",
             },
           }}
         />
@@ -125,26 +125,26 @@ function EditNote(props) {
           multiline
           variant="standard"
           rows={3}
-          defaultValue={note?.content || ''}
-          placeholder={!note?.content ? 'Enter content' : ''}
+          defaultValue={note?.content || ""}
+          placeholder={!note?.content ? "Enter content" : ""}
           sx={{
-            height: '150px',
-            '& .MuiInputLabel-root': {
-              color: 'black',
+            height: "150px",
+            "& .MuiInputLabel-root": {
+              color: "black",
             },
-            '& .MuiInput-underline:before': {
-              borderBottomColor: 'black',
+            "& .MuiInput-underline:before": {
+              borderBottomColor: "black",
             },
-            '& .MuiInput-underline:after': {
-              borderBottomColor: 'black',
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "black",
             },
-            '& .MuiInputBase-input': {
-              height: '100%',
-              overflowY: 'auto',
-              color: 'black',
+            "& .MuiInputBase-input": {
+              height: "100%",
+              overflowY: "auto",
+              color: "black",
             },
-            '& textarea': {
-              padding: '16.5px 14px',
+            "& textarea": {
+              padding: "16.5px 14px",
             },
           }}
         />
@@ -160,9 +160,9 @@ function EditNote(props) {
               onChange={(e) => handleChangeCheckbox(e)}
               name="isDone"
               sx={{
-                '& .MuiSvgIcon-root': {
+                "& .MuiSvgIcon-root": {
                   color: isDone ? midDarkBrown : backGroundLightGray,
-                  transition: 'background-color 0.3s',
+                  transition: "background-color 0.3s",
                 },
               }}
               color="primary"
@@ -171,8 +171,8 @@ function EditNote(props) {
           label="Done"
           sx={{
             mb: 2,
-            '& .MuiFormControlLabel-label': {
-              color: 'black',
+            "& .MuiFormControlLabel-label": {
+              color: "black",
             },
           }}
         />
@@ -189,9 +189,9 @@ function EditNote(props) {
               checked={isFavorite}
               onChange={(e) => handleStarred(e)}
               sx={{
-                '& .MuiSvgIcon-root': {
+                "& .MuiSvgIcon-root": {
                   color: isFavorite ? midDarkBrown : backGroundLightGray,
-                  transition: 'background-color 0.3s',
+                  transition: "background-color 0.3s",
                 },
               }}
             />
@@ -218,21 +218,21 @@ function EditNote(props) {
           value={scheduledTime}
           onChange={(e) => handleScheduledTime(e)}
           sx={{
-            '& .MuiInputLabel-root': {
-              color: 'black',
+            "& .MuiInputLabel-root": {
+              color: "black",
             },
-            '& .MuiInput-underline:before': {
-              borderBottomColor: 'black',
+            "& .MuiInput-underline:before": {
+              borderBottomColor: "black",
             },
-            '& .MuiInput-underline:after': {
-              borderBottomColor: 'black',
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "black",
             },
-            '& .MuiInputBase-input': {
-              color: 'black',
+            "& .MuiInputBase-input": {
+              color: "black",
             },
             '& input[type="datetime-local"]': {
-              paddingTop: '30px',
-              cursor: 'pointer',
+              paddingTop: "30px",
+              cursor: "pointer",
             },
           }}
         />
@@ -248,7 +248,7 @@ function EditNote(props) {
         handleClose={handleClose}
         openDialog={openDialog}
         handleOK={handleSubmit}
-        dialogTitle={mode === 'add' ? 'Add Note' : 'Edit Note'}
+        dialogTitle={mode === "add" ? "Add Note" : "Edit Note"}
       />
     </div>
   );

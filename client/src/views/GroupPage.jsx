@@ -1,18 +1,18 @@
 //External modules
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import PostAddIcon from '@mui/icons-material/PostAdd';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 
 //Internal modules
-import Note from '../components/Note';
-import { NotesContainer } from '../styles/styles';
-import backApi from '../services/backApi';
-import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import EditNote from '../components/EditNote';
-import ErrorComp from '../components/Error';
-import { showError, sortFunc } from '../utils/index';
+import Note from "../components/Note";
+import { NotesContainer } from "../styles/styles";
+import backApi from "../services/backApi";
+import { useParams } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import EditNote from "../components/EditNote";
+import ErrorComp from "../components/Error";
+import { showError, sortFunc } from "../utils/index";
 
 //TODO: add a way to see members
 function GroupPage(props) {
@@ -23,17 +23,17 @@ function GroupPage(props) {
   const [isError, setIsError] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [notes, setNotes] = useState([]);
-  const userId = localStorage.getItem('uuid');
+  const userId = localStorage.getItem("uuid");
   const navigate = useNavigate();
 
   const { groupId } = useParams();
-  localStorage.setItem('groupId', groupId);
+  localStorage.setItem("groupId", groupId);
 
-  const title = ` ${localStorage.getItem('groupName')}`;
+  const title = ` ${localStorage.getItem("groupName")}`;
   const menuItems = [
     {
       key: 1,
-      itemName: 'Add Note',
+      itemName: "Add Note",
       icon: () => {
         return <PostAddIcon />;
       },
@@ -64,7 +64,7 @@ function GroupPage(props) {
         return [...prevNotes];
       });
     } catch (err) {
-      showError('Something went wrong, please try again later');
+      showError("Something went wrong, please try again later");
     }
   }
 
@@ -73,9 +73,9 @@ function GroupPage(props) {
   }
 
   function returnToGroupBoard() {
-    localStorage.setItem('groupId', '');
+    localStorage.setItem("groupId", "");
 
-    navigate('/home');
+    navigate("/home");
   }
 
   //TODO: filter by done, favorite and etc'
@@ -84,11 +84,15 @@ function GroupPage(props) {
   return !isError ? (
     <div
       style={{
-        position: 'relative',
-        padding: '8px',
+        position: "relative",
+        padding: "8px",
       }}
     >
-      <Header title={title} setIsLogged={setIsLogged} menuItems={menuItems} />
+      <Header
+        title={title}
+        setIsLogged={setIsLogged}
+        menuItems={menuItems}
+      />
       <NotesContainer>
         {notes.map((note) => {
           return (
@@ -108,12 +112,12 @@ function GroupPage(props) {
         setOpenDialog={setOpenDialog}
         mode="add"
         note={{
-          title: '',
-          content: '',
+          title: "",
+          content: "",
           groupId: groupId,
           isDone: false,
           isFavorite: false,
-          priority: 'regular',
+          priority: "regular",
         }}
         setFunc={setNotes}
       />

@@ -1,16 +1,16 @@
-import styled, { createGlobalStyle, css } from 'styled-components';
+import styled, { createGlobalStyle, css } from "styled-components";
 
 //color palate
-const backGroundLightGray = '#E4E0E1';
-const backGroundLightBrown = '#D6C0B3';
-const midDarkBrown = '#AB886D';
-const darkBrown = '#493628';
+const backGroundLightGray = "#E4E0E1";
+const backGroundLightBrown = "#D6C0B3";
+const midDarkBrown = "#AB886D";
+const darkBrown = "#493628";
 
 //
-const darkGreen = '#626F47';
-const lightGrey = '#F2EED7';
-const white = '#FEFAE0';
-const lightGreen = '#798645';
+const darkGreen = "#626F47";
+const lightGrey = "#F2EED7";
+const white = "#FEFAE0";
+const lightGreen = "#798645";
 
 //
 
@@ -120,7 +120,7 @@ const NoteH1 = styled.h1`
   height: 2em;
   overflow-y: hidden;
 
-  text-decoration: ${({ $isDone }) => ($isDone ? 'line-through' : 'none')};
+  text-decoration: ${({ $isDone }) => ($isDone ? "line-through" : "none")};
 `;
 
 const HeaderH1 = styled.h1`
@@ -149,7 +149,7 @@ const NoteP = styled.p`
   max-height: 150px;
   ${notClickableText}
 
-  text-decoration: ${({ $isDone }) => ($isDone ? 'line-through' : 'none')};
+  text-decoration: ${({ $isDone }) => ($isDone ? "line-through" : "none")};
 `;
 
 const FooterP = styled.p`

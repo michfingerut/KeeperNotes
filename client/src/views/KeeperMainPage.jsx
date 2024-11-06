@@ -1,13 +1,13 @@
 //External modules
-import React, { useState } from 'react';
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import React, { useState } from "react";
+import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 
 //Internal modules
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { Container } from '../styles/styles';
-import GroupsBoards from '../components/GroupsBoards';
-import ErrorComp from '../components/Error';
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { Container } from "../styles/styles";
+import GroupsBoards from "../components/GroupsBoards";
+import ErrorComp from "../components/Error";
 
 function KeeperMainPage(props) {
   ///////////////////// props /////////////////////
@@ -27,15 +27,19 @@ function KeeperMainPage(props) {
       icon: () => {
         return <CreateNewFolderIcon />;
       },
-      itemName: 'Create Group',
+      itemName: "Create Group",
       handleClick: handleCreateGroup,
     },
   ];
 
   return !isError ? (
-    <div style={{ padding: '8px' }}>
+    <div style={{ padding: "8px" }}>
       <Container>
-        <Header title="" setIsLogged={setIsLogged} menuItems={menuItems} />
+        <Header
+          title=""
+          setIsLogged={setIsLogged}
+          menuItems={menuItems}
+        />
         <GroupsBoards
           isModalOpen={isModalOpen}
           setModalOpen={setModalOpen}

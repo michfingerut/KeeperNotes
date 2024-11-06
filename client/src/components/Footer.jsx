@@ -1,4 +1,4 @@
-import { FooterStyle, FooterP } from '../styles/styles';
+import { FooterStyle, FooterP } from "../styles/styles";
 
 function Footer() {
   const year = new Date().getFullYear();

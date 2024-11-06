@@ -1,15 +1,15 @@
 // External modules
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // Internal modules
-import backApi from '../services/backApi';
-import { showError } from '../utils/index';
+import backApi from "../services/backApi";
+import { showError } from "../utils/index";
 import {
   Container,
   SignUpForm,
   SignUpInput,
   LogButton,
-} from '../styles/styles';
+} from "../styles/styles";
 
 function ForgetPassword(props) {
   //TODO:
@@ -58,23 +58,23 @@ function LogIn(props) {
     } catch (err) {
       switch (err?.status) {
         case 403:
-          showError('Wrong password, please try again');
+          showError("Wrong password, please try again");
           break;
         case 404:
-          showError('Non-existing email, please try again');
+          showError("Non-existing email, please try again");
           break;
         case 400:
-          showError('Invalid email, please try again');
+          showError("Invalid email, please try again");
           break;
         default:
-          showError('Something went wrong, please try again later');
+          showError("Something went wrong, please try again later");
           break;
       }
       return;
     }
-    localStorage.setItem('isLogged', true);
-    localStorage.setItem('uuid', userInfo.uuid);
-    localStorage.setItem('groupId', '');
+    localStorage.setItem("isLogged", true);
+    localStorage.setItem("uuid", userInfo.uuid);
+    localStorage.setItem("groupId", "");
     setIsLogged(true);
   }
 
