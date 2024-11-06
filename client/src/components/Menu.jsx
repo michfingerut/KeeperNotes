@@ -52,7 +52,18 @@ function KeeperMenu(props) {
                 },
               }}
             >
-              {item.itemName}
+              {/* TODO: style icons */}
+              <div
+                style={{
+                  marginRight: '5px',
+                  marginTop: '2px',
+                }}
+              >
+                {item.icon ? item.icon() : ''}
+              </div>
+              <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>
+                {item.itemName}
+              </div>
             </MenuItem>
           );
         })}

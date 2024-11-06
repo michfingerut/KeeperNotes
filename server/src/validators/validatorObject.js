@@ -4,7 +4,7 @@ import { priorityEnum } from '../utils/index.js';
 const userIdParam = Joi.string().uuid().required();
 const idParam = Joi.number().required();
 const titleParam = Joi.string().max(100).min(0);
-const contentParam = Joi.string().max(500).min(0);
+const contentParam = Joi.string();
 const emailParam = Joi.string()
   .email({ tlds: { allow: false } })
   .required();
