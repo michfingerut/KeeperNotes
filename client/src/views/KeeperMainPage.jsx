@@ -1,6 +1,6 @@
 //External modules
 import React, { useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 
 //Internal modules
 import Header from '../components/Header';
@@ -25,7 +25,7 @@ function KeeperMainPage(props) {
     {
       key: 1,
       icon: () => {
-        return <AddIcon />;
+        return <CreateNewFolderIcon />;
       },
       itemName: 'Create Group',
       handleClick: handleCreateGroup,

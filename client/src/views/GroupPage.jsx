@@ -1,8 +1,7 @@
 //External modules
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AddIcon from '@mui/icons-material/Add';
-import { TfiBackRight } from 'react-icons/tfi';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 //Internal modules
 import Note from '../components/Note';
@@ -36,18 +35,10 @@ function GroupPage(props) {
       key: 1,
       itemName: 'Add Note',
       icon: () => {
-        return <AddIcon />;
+        return <PostAddIcon />;
       },
       handleClick: handleAddNote,
     },
-    // {
-    //   key: 2,
-    //   itemName: 'Go Back',
-    //   icon: () => {
-    //     return <TfiBackRight />;
-    //   },
-    //   handleClick: returnToGroupBoard,
-    // },
   ];
 
   useEffect(() => {

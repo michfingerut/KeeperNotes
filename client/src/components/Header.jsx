@@ -3,14 +3,12 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 
 //Internal modules
-import KeeperMenu from './Menu';
 import { backGroundLightBrown } from '../styles/styles';
+import NavBar from './NavBar';
 
 function Header(props) {
   ///////////////////// props /////////////////////
@@ -33,20 +31,7 @@ function Header(props) {
       }}
     >
       <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <KeeperMenu
-            menuIcon={() => {
-              return <MenuIcon />;
-            }}
-            menuItems={menuItems}
-          />
-        </IconButton>
+        <NavBar menuItems={menuItems} handleLogOut={logOut} />
         <Breadcrumbs aria-label="breadcrumb">
           {title ? (
             <div>
@@ -65,10 +50,6 @@ function Header(props) {
             </div>
           )}
         </Breadcrumbs>
-
-        {/* <Button onClick={logOut} color="inherit">
-          Logout
-        </Button> */}
       </Toolbar>
     </AppBar>
   );

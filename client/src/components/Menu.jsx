@@ -16,7 +16,7 @@ import { MenuStyle, backGroundLightGray } from '../styles/styles';
 
 function KeeperMenu(props) {
   ///////////////////// props /////////////////////
-  const { menuItems, menuIcon } = props;
+  const { menuItems } = props;
   /////////////////////////////////////////////////
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -37,11 +37,7 @@ function KeeperMenu(props) {
 
   return (
     <MenuStyle>
-      {menuIcon ? (
-        React.cloneElement(menuIcon(), { onClick: handleClick })
-      ) : (
-        <CiMenuKebab onClick={handleClick} />
-      )}
+      <CiMenuKebab onClick={handleClick} />
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         {menuItems.map((item) => {
           return (
@@ -54,15 +50,6 @@ function KeeperMenu(props) {
                 },
               }}
             >
-              {/* TODO: style icons  
-              <div
-                style={{
-                  marginRight: '5px',
-                  marginTop: '2px',
-                }}
-              >
-                {item.icon ? item.icon() : ''}
-              </div>*/}
               <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>
                 {item.itemName}
               </div>
