@@ -119,7 +119,8 @@ const NoteH1 = styled.h1`
   font-size: 1.1em;
   height: 2em;
   overflow-y: hidden;
-  ${notClickableText}
+
+  text-decoration: ${({ $isDone }) => ($isDone ? 'line-through' : 'none')};
 `;
 
 const HeaderH1 = styled.h1`
@@ -147,6 +148,8 @@ const NoteP = styled.p`
   word-wrap: break-word;
   max-height: 150px;
   ${notClickableText}
+
+  text-decoration: ${({ $isDone }) => ($isDone ? 'line-through' : 'none')};
 `;
 
 const FooterP = styled.p`

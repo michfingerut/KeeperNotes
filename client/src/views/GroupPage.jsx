@@ -50,7 +50,7 @@ function GroupPage(props) {
     backApi
       .getNotesOfGroup(groupId)
       .then((data) => {
-        setNotes(data);
+        setNotes(data.sort((a, b) => a.id - b.id));
       })
       .catch((err) => {
         //TODO
@@ -78,6 +78,8 @@ function GroupPage(props) {
     navigate('/home');
   }
 
+  //TODO: filter by done, favorite and etc'
+
   return (
     <div
       style={{
@@ -94,6 +96,7 @@ function GroupPage(props) {
         }}
       ></div>
       {/* TODO: should go down when adding notes */}
+      {/* TODOL draggable note */}
       <NotesContainer>
         {notes.map((note) => {
           return (

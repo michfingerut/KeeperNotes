@@ -1,8 +1,15 @@
 //External modules
 import React, { useEffect, useState } from 'react';
+import StarIcon from '@mui/icons-material/Star';
 
 //Internal modules
-import { NoteStyle, NoteH1, NoteP, NoteContainer } from '../styles/styles';
+import {
+  NoteStyle,
+  NoteH1,
+  NoteP,
+  NoteContainer,
+  midDarkBrown,
+} from '../styles/styles';
 import KeeperMenu from './Menu';
 import EditNote from './EditNote';
 
@@ -55,31 +62,31 @@ function Note(props) {
 
   const [currNote, setNote] = useState(note);
 
-  //TODO: on refresh the order is changing
   useEffect(() => {
-    notesStateFunc((prevNotes) => {
-      prevNotes = prevNotes.filter((note) => {
+    notesStateFunc((prevNotes) =>
+      prevNotes.map((note) => {
         if (note.id === currNote.id) {
-          note.title = currNote.title;
-          note.content = currNote.content;
+          return currNote;
         }
-
-        return true;
-      });
-
-      return prevNotes;
-    });
+        return note;
+      }),
+    );
   }, [currNote]);
 
   return (
-    <NoteStyle>
+    <NoteStyle style={{ width: '80%' }}>
       {/*TODO: when title too long looks cut add tooltip also TODO: scrolling prettier */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <NoteH1>{note.title}</NoteH1>
+        <NoteH1 $isDone={currNote.isDone}>
+          {currNote.isFavorite ? (
+            <StarIcon style={{ color: midDarkBrown, marginRight: '10px' }} />
+          ) : null}
+          {currNote.title}
+        </NoteH1>
         <Dropdown deleteFunc={deleteFunc} note={currNote} setFunc={setNote} />
       </div>
       <NoteContainer>
-        <NoteP>{note.content}</NoteP>
+        <NoteP $isDone={currNote.isDone}>{currNote.content}</NoteP>
       </NoteContainer>
     </NoteStyle>
   );
