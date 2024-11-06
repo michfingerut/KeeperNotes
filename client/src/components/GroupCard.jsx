@@ -5,7 +5,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { CardStyle, CenteredHeader } from '../styles/styles';
 import KeeperMenu from './Menu';
 import backApi from '../services/backApi';
-import { showError } from '../utils/errorUtils';
+import { showError } from '../utils/index';
 
 function GroupCard(props) {
   ///////////////////// props /////////////////////

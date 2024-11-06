@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
 function EditDialog(props) {
+  ///////////////////// props /////////////////////
   const {
     textFields,
     okButtonName,
@@ -15,6 +16,7 @@ function EditDialog(props) {
     handleOK,
     dialogTitle,
   } = props;
+  /////////////////////////////////////////////////
 
   return (
     <React.Fragment>

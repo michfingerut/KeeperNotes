@@ -13,12 +13,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import EditNote from '../components/EditNote';
 import ErrorComp from '../components/Error';
-import { showError } from '../utils/errorUtils';
+import { showError, sortFunc } from '../utils/index';
 
 function GroupPage(props) {
   ///////////////////// props /////////////////////
   const setIsLogged = props.setIsLogged;
   /////////////////////////////////////////////////
+
   const [isError, setIsError] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [notes, setNotes] = useState([]);
@@ -47,17 +48,12 @@ function GroupPage(props) {
       handleClick: returnToGroupBoard,
     },
   ];
-  //TODO: sort also by isDone
+
   useEffect(() => {
     backApi
       .getNotesOfGroup(groupId)
       .then((data) => {
-        const sortedNotes = data.sort((a, b) => {
-          if (a.isFavorite === b.isFavorite) {
-            return a.id - b.id;
-          }
-          return a.isFavorite ? -1 : 1;
-        });
+        const sortedNotes = sortFunc(data);
         setNotes(sortedNotes);
       })
       .catch((err) => {
@@ -91,12 +87,8 @@ function GroupPage(props) {
   }
 
   //TODO: filter by done, favorite and etc'
-  {
-    /* TODO: should go down when adding notes */
-  }
-  {
-    /* TODOL draggable note */
-  }
+  // TODOL draggable note
+
   return !isError ? (
     <div
       style={{

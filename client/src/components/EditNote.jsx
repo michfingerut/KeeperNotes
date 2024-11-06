@@ -8,7 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import backApi from '../services/backApi';
 import EditDialog from './EditDialog';
 import { midDarkBrown, backGroundLightGray } from '../styles/styles';
-import { showError } from '../utils/errorUtils.js';
+import { showError, sortFunc } from '../utils/index';
 
 //TODO: idea- add option like text book with * and _ and B etc'
 function EditNote(props) {
@@ -44,7 +44,10 @@ function EditNote(props) {
           uuid,
         );
 
-        setFunc((prevNotes) => [...prevNotes, { ...data, id: createNote.id }]);
+        setFunc((prevNotes) => {
+          const toReturn = [...prevNotes, { ...data, id: createNote.id }];
+          return sortFunc(toReturn);
+        });
         setIsFavorite(false);
         setIsDone(false);
         setScheduledTime('');

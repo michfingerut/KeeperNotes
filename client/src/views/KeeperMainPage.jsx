@@ -13,6 +13,7 @@ function KeeperMainPage(props) {
   ///////////////////// props /////////////////////
   const setIsLogged = props.setIsLogged;
   /////////////////////////////////////////////////
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [isError, setIsError] = useState(false);
 

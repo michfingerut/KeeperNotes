@@ -10,9 +10,13 @@ import {
 } from '../styles/styles';
 import KeeperMenu from './Menu';
 import EditNote from './EditNote';
+import { sortFunc } from '../utils';
 
 function Dropdown(props) {
+  ///////////////////// props /////////////////////
   const { deleteFunc, note, setNote } = props;
+  /////////////////////////////////////////////////
+
   const [openDialog, setOpenDialog] = useState(false);
 
   async function handleEdit() {
@@ -51,7 +55,9 @@ function Dropdown(props) {
 }
 
 function Note(props) {
+  ///////////////////// props /////////////////////
   const { note, deleteFunc, notesStateFunc } = props;
+  /////////////////////////////////////////////////
   const [currNote, setNote] = useState(note);
 
   const formattedScheduledTime = currNote.scheduledTime
@@ -64,14 +70,19 @@ function Note(props) {
     !note.isDone;
 
   useEffect(() => {
-    notesStateFunc((prevNotes) =>
-      prevNotes.map((note) => {
+    notesStateFunc((prevNotes) => {
+      prevNotes = prevNotes.map((note) => {
         if (note.id === currNote.id) {
           return currNote;
         }
         return note;
-      }),
-    );
+      });
+
+      if (note.isFavorite !== currNote.isFavorite) {
+        return [...sortFunc(prevNotes)];
+      }
+      return [...prevNotes];
+    });
   }, [currNote]);
 
   return (

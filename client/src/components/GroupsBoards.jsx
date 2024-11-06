@@ -8,7 +8,7 @@ import backApi from '../services/backApi';
 import { NotesContainer } from '../styles/styles';
 import GroupCard from './GroupCard';
 import EditDialog from './EditDialog';
-import { showError } from '../utils/errorUtils';
+import { showError } from '../utils/index';
 
 function AddGroupPopup(props) {
   ///////////////////// props /////////////////////

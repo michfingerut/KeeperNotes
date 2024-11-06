@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 // Internal modules
 import backApi from '../services/backApi';
-import { showError } from '../utils/errorUtils.js';
+import { showError } from '../utils/index';
 import {
   Container,
   SignUpForm,

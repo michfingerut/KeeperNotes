@@ -15,7 +15,9 @@ import { MenuStyle, backGroundLightGray } from '../styles/styles';
  */
 
 function KeeperMenu(props) {
+  ///////////////////// props /////////////////////
   const { menuItems, menuIcon } = props;
+  /////////////////////////////////////////////////
 
   const [anchorEl, setAnchorEl] = useState(null);
   let open = Boolean(anchorEl);
@@ -52,7 +54,7 @@ function KeeperMenu(props) {
                 },
               }}
             >
-              {/* TODO: style icons */}
+              {/* TODO: style icons  
               <div
                 style={{
                   marginRight: '5px',
@@ -60,7 +62,7 @@ function KeeperMenu(props) {
                 }}
               >
                 {item.icon ? item.icon() : ''}
-              </div>
+              </div>*/}
               <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>
                 {item.itemName}
               </div>
