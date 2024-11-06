@@ -32,7 +32,7 @@ function NavBar(props) {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 200 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         {menuItems.map((item) => (
           <ListItem key={item.itemName} disablePadding>
