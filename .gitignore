@@ -9,6 +9,7 @@
 /server/node_modules
 /server/build
 /client/build
+.env
 
 # Exclude specific files
 !/scripts/*.sh
@@ -22,3 +23,5 @@
 !**.sh
 !**.env
 !**.json
+!env_example
+
