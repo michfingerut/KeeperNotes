@@ -9,6 +9,7 @@ import backApi from '../services/backApi';
 import EditDialog from './EditDialog';
 import { midDarkBrown, backGroundLightGray } from '../styles/styles';
 
+//TODO: idea- add option like text book with * and _ and B etc'
 function EditNote(props) {
   ///////////////////// props /////////////////////
   const { note, setFunc, openDialog, setOpenDialog, mode } = props;
