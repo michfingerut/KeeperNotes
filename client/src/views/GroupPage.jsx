@@ -112,7 +112,15 @@ function GroupPage(props) {
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         mode="add"
-        note={{ title: '', content: '', groupId: groupId }}
+        note={{
+          title: '',
+          content: '',
+          groupId: groupId,
+          isDone: false,
+          isFavorite: false,
+          priority: 'regular',
+          scheduledTime: undefined,
+        }}
         setFunc={setNotes}
       />
     </div>
