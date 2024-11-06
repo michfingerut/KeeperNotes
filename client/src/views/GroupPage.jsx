@@ -15,6 +15,7 @@ import EditNote from '../components/EditNote';
 import ErrorComp from '../components/Error';
 import { showError, sortFunc } from '../utils/index';
 
+//TODO: add a way to see members
 function GroupPage(props) {
   ///////////////////// props /////////////////////
   const setIsLogged = props.setIsLogged;

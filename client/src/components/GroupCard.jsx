@@ -17,8 +17,12 @@ function GroupCard(props) {
   }
 
   function handleEdit() {
-    //TODO ?
-    // maybe this will be the option to add and remove members
+    console.log('handle edit');
+    //TODO
+    // the dialog will open
+    // we will see all users that are not members
+    // and all members
+    // and i could control who to add and who to delete
   }
 
   async function handleRemove() {
@@ -40,7 +44,7 @@ function GroupCard(props) {
     <CardStyle>
       <KeeperMenu
         menuItems={[
-          // { key: 2, itemName: 'Edit group', handleClick: handleEdit },
+          { key: 2, itemName: 'Edit group', handleClick: handleEdit },
           { key: 3, itemName: 'Remove group', handleClick: handleRemove },
         ]}
       />
