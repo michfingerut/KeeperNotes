@@ -91,7 +91,7 @@ const NoteButton = styled.button`
 
 const baseButton = styled.button`
   padding: 12px 24px;
-  margin: 10px;
+  margin: 0.5em;
   background-color: ${backGroundLightBrown};
   border: 2px solid black;
   ${boxShadowAndBorderRadius}
