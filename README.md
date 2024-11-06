@@ -44,8 +44,7 @@ git clone https://github.com/your-username/KeeperNotes.git
 
 3.  Set up your environment variables:
 
--0/ Make sure you have a `.env` file with the correct values.
-
+- Make sure you have a `.env` file with the correct values.
 - You can use `env_example` as a template for required variables.
 
 4.  Run the project:
