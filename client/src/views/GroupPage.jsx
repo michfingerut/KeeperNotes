@@ -1,7 +1,7 @@
 //External modules
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import AddIcon from '@mui/icons-material/Add';
 import { TfiBackRight } from 'react-icons/tfi';
 
 //Internal modules
@@ -34,7 +34,7 @@ function GroupPage(props) {
       key: 1,
       itemName: 'Add Note',
       icon: () => {
-        return <LibraryAddIcon />;
+        return <AddIcon />;
       },
       handleClick: handleAddNote,
     },

@@ -245,7 +245,7 @@ const FooterStyle = styled.footer`
   position: fixed;
 `;
 
-const NoteStyle = styled.div`
+const baseStyle = styled.div`
   background: #fff;
   ${boxShadowAndBorderRadius}
   padding: 15px;
@@ -253,11 +253,14 @@ const NoteStyle = styled.div`
   height: 200px;
   margin: 16px;
   position: relative;
+`;
+
+const NoteStyle = styled(baseStyle)`
   display: flex;
   flex-direction: column;
 `;
 
-const CardStyle = styled(NoteStyle)`
+const CardStyle = styled(baseStyle)`
   background-color: ${backGroundLightBrown};
   transition: background-color 0.3s;
   overflow-y: hidden;
