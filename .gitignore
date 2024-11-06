@@ -21,7 +21,6 @@
 !**.js
 !**.jsx
 !**.sh
-!**.env
 !**.json
 !env_example
 
