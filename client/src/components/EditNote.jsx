@@ -54,11 +54,9 @@ function EditNote(props) {
 
   function handleChangeCheckbox(event) {
     setIsDone(event.target.checked);
-    console.log(isDone);
   }
   function handleStarred(event) {
     setIsFavorite(event.target.checked);
-    console.log(isFavorite);
   }
   function handleScheduledTime(event) {
     //TODO
