@@ -13,13 +13,12 @@ function GroupCard(props) {
   ////////////////////////////////////////////////
 
   function handleEnter() {
-    //TODO: transition not smooth
     onClick();
   }
 
   function handleEdit() {
     //TODO ?
-    // maybe this will be thwe option to add and remove members
+    // maybe this will be the option to add and remove members
   }
 
   async function handleRemove() {

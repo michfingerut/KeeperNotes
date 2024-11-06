@@ -4,7 +4,7 @@ import { CiMenuKebab } from 'react-icons/ci';
 import { MenuItem, Menu } from '@mui/material';
 
 //Internal modules
-import { MenuStyle } from '../styles/styles';
+import { MenuStyle, backGroundLightGray } from '../styles/styles';
 
 /**
  * props
@@ -46,19 +46,13 @@ function KeeperMenu(props) {
             <MenuItem
               key={item.key}
               onClick={() => handleClickedItem(item.handleClick)}
+              sx={{
+                '&:hover': {
+                  backgroundColor: backGroundLightGray,
+                },
+              }}
             >
-              {/* TODO: style icons */}
-              <div
-                style={{
-                  marginRight: '5px',
-                  marginTop: '2px',
-                }}
-              >
-                {item.icon ? item.icon() : ''}
-              </div>
-              <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>
-                {item.itemName}
-              </div>
+              {item.itemName}
             </MenuItem>
           );
         })}

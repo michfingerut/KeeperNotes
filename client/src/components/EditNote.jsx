@@ -78,8 +78,6 @@ function EditNote(props) {
     //TODO: setTimeOut so when time expired it will show
   }
 
-  //TODO: priority?
-
   const textFields = [
     () => {
       return (

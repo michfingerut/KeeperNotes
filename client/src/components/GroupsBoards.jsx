@@ -129,7 +129,7 @@ function GroupsBoards(props) {
           justifyContent: 'center',
         }}
       ></div>
-      {/* TODO: when the window is small, it overlaps with the footer of the main component */}
+
       <NotesContainer>
         {groups.map((group) => {
           return (
