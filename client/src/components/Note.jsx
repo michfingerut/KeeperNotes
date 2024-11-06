@@ -1,8 +1,6 @@
-//External modules
 import React, { useEffect, useState } from 'react';
 import StarIcon from '@mui/icons-material/Star';
-
-//Internal modules
+import Tooltip from '@mui/material/Tooltip';
 import {
   NoteStyle,
   NoteH1,
@@ -14,10 +12,7 @@ import KeeperMenu from './Menu';
 import EditNote from './EditNote';
 
 function Dropdown(props) {
-  ///////////////////// props /////////////////////
   const { deleteFunc, note, setNote } = props;
-  /////////////////////////////////////////////////
-
   const [openDialog, setOpenDialog] = useState(false);
 
   async function handleEdit() {
@@ -27,7 +22,7 @@ function Dropdown(props) {
   async function handleDelete() {
     await deleteFunc(note.id);
   }
-  //TODO: when is favorite updated, doesnt change the order
+
   return (
     <div>
       <KeeperMenu
@@ -56,11 +51,17 @@ function Dropdown(props) {
 }
 
 function Note(props) {
-  ///////////////////// props /////////////////////
   const { note, deleteFunc, notesStateFunc } = props;
-  /////////////////////////////////////////////////
-
   const [currNote, setNote] = useState(note);
+
+  const formattedScheduledTime = currNote.scheduledTime
+    ? new Date(currNote.scheduledTime).toLocaleString()
+    : null;
+
+  const isExpired =
+    currNote.scheduledTime &&
+    new Date(currNote.scheduledTime) < new Date() &&
+    !note.isDone;
 
   useEffect(() => {
     notesStateFunc((prevNotes) =>
@@ -75,19 +76,37 @@ function Note(props) {
 
   return (
     <NoteStyle style={{ width: '80%' }}>
-      {/*TODO: when title too long looks cut add tooltip also TODO: scrolling prettier */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <NoteH1 $isDone={currNote.isDone}>
           {currNote.isFavorite ? (
             <StarIcon style={{ color: midDarkBrown, marginRight: '10px' }} />
           ) : null}
-          {currNote.title}
+          <Tooltip title={currNote.title}>
+            <span>{currNote.title}</span>
+          </Tooltip>
         </NoteH1>
         <Dropdown deleteFunc={deleteFunc} note={currNote} setNote={setNote} />
       </div>
       <NoteContainer>
         <NoteP $isDone={currNote.isDone}>{currNote.content}</NoteP>
       </NoteContainer>
+
+      {formattedScheduledTime && (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            fontSize: '0.8em',
+            color: 'gray',
+            marginTop: '10px',
+          }}
+        >
+          <div>Scheduled for: {formattedScheduledTime}</div>
+          {isExpired && (
+            <div style={{ color: 'red', fontWeight: 'bold' }}>Expired</div>
+          )}
+        </div>
+      )}
     </NoteStyle>
   );
 }

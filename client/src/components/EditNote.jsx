@@ -17,11 +17,9 @@ function EditNote(props) {
   /////////////////////////////////////////////////
   const [isDone, setIsDone] = useState(note.isDone);
   const [isFavorite, setIsFavorite] = useState(note.isFavorite);
+  const [scheduledTime, setScheduledTime] = useState(note.scheduledTime || '');
+
   const okButtonName = mode === 'add' ? 'Create' : 'Save';
-
-  //TODO: scheduled
-  const [scheduledTime, setScheduledTime] = useState('');
-
   const uuid = localStorage.getItem('uuid');
 
   function handleClose() {
@@ -33,8 +31,12 @@ function EditNote(props) {
     const formData = new FormData(event.currentTarget);
     const formJson = Object.fromEntries(formData.entries());
     const { title, content } = formJson;
-
     const data = { title, content, isFavorite, isDone };
+
+    if (scheduledTime) {
+      data.scheduledTime = scheduledTime;
+    }
+
     try {
       if (mode === 'add') {
         const createNote = await backApi.postNote(
@@ -43,13 +45,11 @@ function EditNote(props) {
         );
 
         setFunc((prevNotes) => [...prevNotes, { ...data, id: createNote.id }]);
+        setIsFavorite(false);
+        setIsDone(false);
+        setScheduledTime('');
       } else {
-        const updatedNote = await backApi.updateNote(note.id, uuid, {
-          title,
-          content,
-          isDone,
-          isFavorite,
-        });
+        const updatedNote = await backApi.updateNote(note.id, uuid, data);
         setFunc(updatedNote);
       }
     } catch (err) {
@@ -62,13 +62,20 @@ function EditNote(props) {
   function handleChangeCheckbox(event) {
     setIsDone(event.target.checked);
   }
+
   function handleStarred(event) {
     setIsFavorite(event.target.checked);
   }
+
   function handleScheduledTime(event) {
-    //TODO
-    // console.log(event.target);
-    // console.log('setScheduledTime');
+    let formattedTime = event.target.value;
+
+    if (formattedTime) {
+      formattedTime = new Date(formattedTime).toISOString().slice(0, 16);
+    }
+
+    setScheduledTime(formattedTime);
+    //TODO: setTimeOut so when time expired it will show
   }
 
   //TODO: priority?
@@ -197,7 +204,7 @@ function EditNote(props) {
     },
     () => {
       return (
-        //TODO: cursor bug
+        //TODO: cursor bug + styling!!
         <TextField
           key="5"
           margin="dense"
@@ -208,9 +215,8 @@ function EditNote(props) {
           fullWidth
           variant="standard"
           value={scheduledTime}
-          onChange={(e) => handleScheduledTime(e.target.value)}
+          onChange={(e) => handleScheduledTime(e)}
           sx={{
-            mb: 2,
             '& .MuiInputLabel-root': {
               color: 'black',
             },

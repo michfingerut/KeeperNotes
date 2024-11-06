@@ -219,6 +219,7 @@ const NotesContainer = styled.div`
 const NoteContainer = styled.div`
   overflow-y: auto;
   max-height: calc(100% - 50px);
+  flex-grow: 1;
 `;
 
 /*************************** div *****************************/
@@ -252,6 +253,8 @@ const NoteStyle = styled.div`
   height: 200px;
   margin: 16px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CardStyle = styled(NoteStyle)`

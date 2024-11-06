@@ -130,7 +130,6 @@ function GroupPage(props) {
           isDone: false,
           isFavorite: false,
           priority: 'regular',
-          scheduledTime: undefined,
         }}
         setFunc={setNotes}
       />
