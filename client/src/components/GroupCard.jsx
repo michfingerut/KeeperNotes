@@ -2,6 +2,7 @@
 import { CardStyle, CenteredHeader } from '../styles/styles';
 import KeeperMenu from './Menu';
 import backApi from '../services/backApi';
+import Tooltip from '@mui/material/Tooltip';
 
 function GroupCard(props) {
   ///////////////////// props /////////////////////
@@ -41,7 +42,9 @@ function GroupCard(props) {
 
       {/* when title too long looks cut, TODO: add tooltip also TODO: scrolling prettier */}
       <CenteredHeader>
-        <span style={{ overflowX: 'hidden' }}>{name}</span>
+        <Tooltip title={name}>
+          <span style={{ overflowX: 'hidden' }}>{name}</span>
+        </Tooltip>
       </CenteredHeader>
     </CardStyle>
   );
