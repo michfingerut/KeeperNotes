@@ -5,6 +5,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { CardStyle, CenteredHeader } from '../styles/styles';
 import KeeperMenu from './Menu';
 import backApi from '../services/backApi';
+import { showError } from '../utils/errorUtils';
 
 function GroupCard(props) {
   ///////////////////// props /////////////////////
@@ -22,14 +23,18 @@ function GroupCard(props) {
   }
 
   async function handleRemove() {
-    await backApi.deleteGroup(groupId);
-    setGroups((prevGroups) => {
-      const tmp = prevGroups.filter((group) => {
-        return group.groupId !== groupId;
-      });
+    try {
+      await backApi.deleteGroup(groupId);
+      setGroups((prevGroups) => {
+        const tmp = prevGroups.filter((group) => {
+          return group.groupId !== groupId;
+        });
 
-      return [...tmp];
-    });
+        return [...tmp];
+      });
+    } catch (err) {
+      showError('Something went wrong, please try again later');
+    }
   }
 
   return (

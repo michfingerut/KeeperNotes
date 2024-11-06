@@ -71,6 +71,7 @@ const putUser = async (userId, userInfo) => {
 };
 
 const deleteUser = async (userId) => {
+  //TODO: as for now, not in use
   return await callBackAPI('delete', `/users/${userId}`);
 };
 

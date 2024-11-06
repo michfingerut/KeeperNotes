@@ -221,35 +221,6 @@ const NoteContainer = styled.div`
   max-height: calc(100% - 50px);
 `;
 
-const PopupContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-`;
-
-const PopupInnerContainer = styled.div`
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const PopupButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: auto;
-  padding-top: 10px;
-`;
-
 /*************************** div *****************************/
 
 const HeaderStyle = styled.div`
@@ -333,9 +304,6 @@ export {
   NoteContainer,
   NotesContainer,
   LogInContainer,
-  PopupContainer,
-  PopupInnerContainer,
-  PopupButtonContainer,
 
   //forms
   SignUpForm,

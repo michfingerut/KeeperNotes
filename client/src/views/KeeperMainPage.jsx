@@ -7,12 +7,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Container } from '../styles/styles';
 import GroupsBoards from '../components/GroupsBoards';
+import ErrorComp from '../components/Error';
 
 function KeeperMainPage(props) {
   ///////////////////// props /////////////////////
   const setIsLogged = props.setIsLogged;
   /////////////////////////////////////////////////
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   function handleCreateGroup() {
     setModalOpen(true);
@@ -29,7 +31,7 @@ function KeeperMainPage(props) {
     },
   ];
 
-  return (
+  return !isError ? (
     <div style={{ padding: '8px' }}>
       <Container>
         <Header
@@ -37,10 +39,16 @@ function KeeperMainPage(props) {
           setIsLogged={setIsLogged}
           menuItems={menuItems}
         />
-        <GroupsBoards isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+        <GroupsBoards
+          isModalOpen={isModalOpen}
+          setModalOpen={setModalOpen}
+          setIsError={setIsError}
+        />
         <Footer />
       </Container>
     </div>
+  ) : (
+    <ErrorComp />
   );
 }
 

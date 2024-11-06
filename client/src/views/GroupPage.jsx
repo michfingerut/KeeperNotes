@@ -12,12 +12,14 @@ import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import EditNote from '../components/EditNote';
+import ErrorComp from '../components/Error';
+import { showError } from '../utils/errorUtils';
 
 function GroupPage(props) {
   ///////////////////// props /////////////////////
   const setIsLogged = props.setIsLogged;
   /////////////////////////////////////////////////
-
+  const [isError, setIsError] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [notes, setNotes] = useState([]);
   const userId = localStorage.getItem('uuid');
@@ -59,19 +61,23 @@ function GroupPage(props) {
         setNotes(sortedNotes);
       })
       .catch((err) => {
-        //TODO
+        setIsError(true);
       });
   }, [groupId]);
 
   async function deleteNote(key) {
-    await backApi.removeNote(key, userId);
-    setNotes((prevNotes) => {
-      prevNotes = prevNotes.filter((note) => {
-        return note.id !== key;
-      });
+    try {
+      await backApi.removeNote(key, userId);
+      setNotes((prevNotes) => {
+        prevNotes = prevNotes.filter((note) => {
+          return note.id !== key;
+        });
 
-      return [...prevNotes];
-    });
+        return [...prevNotes];
+      });
+    } catch (err) {
+      showError('Something went wrong, please try again later');
+    }
   }
 
   function handleAddNote() {
@@ -85,8 +91,13 @@ function GroupPage(props) {
   }
 
   //TODO: filter by done, favorite and etc'
-
-  return (
+  {
+    /* TODO: should go down when adding notes */
+  }
+  {
+    /* TODOL draggable note */
+  }
+  return !isError ? (
     <div
       style={{
         position: 'relative',
@@ -94,15 +105,6 @@ function GroupPage(props) {
       }}
     >
       <Header title={title} setIsLogged={setIsLogged} menuItems={menuItems} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      ></div>
-      {/* TODO: should go down when adding notes */}
-      {/* TODOL draggable note */}
       <NotesContainer>
         {notes.map((note) => {
           return (
@@ -133,6 +135,8 @@ function GroupPage(props) {
         setFunc={setNotes}
       />
     </div>
+  ) : (
+    <ErrorComp />
   );
 }
 

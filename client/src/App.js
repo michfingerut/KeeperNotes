@@ -7,6 +7,7 @@ import {
   useNavigate,
   Navigate,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 //Internal modules
 import KeeperMainPage from './views/KeeperMainPage';
@@ -53,6 +54,7 @@ function RootApp() {
   return (
     <BrowserRouter>
       <App />
+      <ToastContainer />
     </BrowserRouter>
   );
 }

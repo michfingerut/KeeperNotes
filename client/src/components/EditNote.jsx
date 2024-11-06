@@ -8,6 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import backApi from '../services/backApi';
 import EditDialog from './EditDialog';
 import { midDarkBrown, backGroundLightGray } from '../styles/styles';
+import { showError } from '../utils/errorUtils.js';
 
 //TODO: idea- add option like text book with * and _ and B etc'
 function EditNote(props) {
@@ -34,24 +35,28 @@ function EditNote(props) {
     const { title, content } = formJson;
 
     const data = { title, content, isFavorite, isDone };
+    try {
+      if (mode === 'add') {
+        const createNote = await backApi.postNote(
+          { ...data, groupId: note.groupId },
+          uuid,
+        );
 
-    if (mode === 'add') {
-      const createNote = await backApi.postNote(
-        { ...data, groupId: note.groupId },
-        uuid,
-      );
-
-      setFunc((prevNotes) => [...prevNotes, { ...data, id: createNote.id }]);
-    } else {
-      const updatedNote = await backApi.updateNote(note.id, uuid, {
-        title,
-        content,
-        isDone,
-        isFavorite,
-      });
-      setFunc(updatedNote);
+        setFunc((prevNotes) => [...prevNotes, { ...data, id: createNote.id }]);
+      } else {
+        const updatedNote = await backApi.updateNote(note.id, uuid, {
+          title,
+          content,
+          isDone,
+          isFavorite,
+        });
+        setFunc(updatedNote);
+      }
+    } catch (err) {
+      showError('Something went wrong, please try again later');
+    } finally {
+      handleClose();
     }
-    handleClose();
   }
 
   function handleChangeCheckbox(event) {
@@ -232,14 +237,16 @@ function EditNote(props) {
   ];
 
   return (
-    <EditDialog
-      textFields={textFields}
-      okButtonName={okButtonName}
-      handleClose={handleClose}
-      openDialog={openDialog}
-      handleOK={handleSubmit}
-      dialogTitle={mode === 'add' ? 'Add Note' : 'Edit Note'}
-    />
+    <div>
+      <EditDialog
+        textFields={textFields}
+        okButtonName={okButtonName}
+        handleClose={handleClose}
+        openDialog={openDialog}
+        handleOK={handleSubmit}
+        dialogTitle={mode === 'add' ? 'Add Note' : 'Edit Note'}
+      />
+    </div>
   );
 }
 

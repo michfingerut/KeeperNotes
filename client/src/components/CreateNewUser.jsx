@@ -1,6 +1,5 @@
 // External modules
 import React from 'react';
-import { ToastContainer } from 'react-toastify';
 
 // Internal modules
 import backApi from '../services/backApi';
@@ -94,7 +93,6 @@ function CreateNewUser(props) {
         />
         <LogButton type="submit">Sign Up</LogButton>
       </SignUpForm>
-      <ToastContainer />
     </Container>
   );
 }

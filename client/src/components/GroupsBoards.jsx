@@ -8,6 +8,7 @@ import backApi from '../services/backApi';
 import { NotesContainer } from '../styles/styles';
 import GroupCard from './GroupCard';
 import EditDialog from './EditDialog';
+import { showError } from '../utils/errorUtils';
 
 function AddGroupPopup(props) {
   ///////////////////// props /////////////////////
@@ -27,12 +28,16 @@ function AddGroupPopup(props) {
     const formData = new FormData(event.currentTarget);
     const formJson = Object.fromEntries(formData.entries());
     const groupName = formJson.groupName;
-
-    const group = await onCreate(groupName, uuid);
-    setGroups((prev) => {
-      return [...prev, group];
-    });
-    onClose();
+    try {
+      const group = await onCreate(groupName, uuid);
+      setGroups((prev) => {
+        return [...prev, group];
+      });
+    } catch (err) {
+      showError('Something went wrong, please try again later');
+    } finally {
+      onClose();
+    }
   };
 
   function handleClose() {
@@ -88,7 +93,7 @@ function AddGroupPopup(props) {
 
 function GroupsBoards(props) {
   ///////////////////// props /////////////////////
-  const { isModalOpen, setModalOpen } = props;
+  const { isModalOpen, setModalOpen, setIsError } = props;
   /////////////////////////////////////////////////
 
   const uuid = localStorage.getItem('uuid');
@@ -103,7 +108,7 @@ function GroupsBoards(props) {
           setGroups(data);
         })
         .catch((err) => {
-          console.error(err);
+          setIsError(true);
         });
     }
   }, [uuid]);
@@ -139,8 +144,6 @@ function GroupsBoards(props) {
           );
         })}
       </NotesContainer>
-      {/* TODO: material ui pop up */}
-      {/* TODO: when click outside should be closed */}
       <AddGroupPopup
         show={isModalOpen}
         onClose={handleCloseModal}

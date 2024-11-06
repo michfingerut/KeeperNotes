@@ -1,6 +1,5 @@
 // External modules
 import React, { useState } from 'react';
-import { ToastContainer } from 'react-toastify';
 
 // Internal modules
 import backApi from '../services/backApi';
@@ -36,7 +35,6 @@ function ForgetPassword(props) {
 
         <LogButton type="submit">Restore</LogButton>
       </SignUpForm>
-      <ToastContainer />
     </Container>
   );
 }
@@ -103,7 +101,6 @@ function LogIn(props) {
         />
         <LogButton type="submit">Log In</LogButton>
       </SignUpForm>
-      <ToastContainer />
       {/* <LogButton onClick={() => setForgotPass(true)}>
         forgot password?
       </LogButton> */}
