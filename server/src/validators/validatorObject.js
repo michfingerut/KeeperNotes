@@ -26,7 +26,7 @@ const postNoteParams = Joi.object().keys({
   groupId: userIdParam,
   isDone: Joi.boolean().optional(),
   isFavorite: Joi.boolean().optional(),
-  schedualTime: Joi.date().optional(),
+  scheduledTime: Joi.date().optional(),
   priority: Joi.string()
     .valid(...priorityEnum)
     .optional(),
@@ -39,7 +39,7 @@ const putNoteParams = Joi.object().keys({
   content: contentParam.optional(),
   isDone: Joi.boolean().optional(),
   isFavorite: Joi.boolean().optional(),
-  schedualTime: Joi.date().optional(),
+  scheduledTime: Joi.date().optional(),
   priority: Joi.string()
     .valid(...priorityEnum)
     .optional(),

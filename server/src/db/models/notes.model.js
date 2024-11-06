@@ -22,7 +22,7 @@ const Notes = sequelize.define('notes', {
     allowNull: true,
     defaultValue: false,
   },
-  schedualTime: {
+  scheduledTime: {
     type: DataTypes.DATE,
     allowNull: true,
     defaultValue: null,

@@ -46,7 +46,7 @@ const notes = [
     content: 'content1',
     isDone: false,
     isFavorite: false,
-    schedualTime: null,
+    scheduledTime: null,
     priority: 'regular',
   },
 ];

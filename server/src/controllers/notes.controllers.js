@@ -16,7 +16,7 @@ const postNote = async (req, res) => {
 
       isDone: boolean, optional
       isFavorite: boolean, optional
-      schedualTime: time. optional
+      scheduledTime: time. optional
       pariority: enum, optional
     }
 
@@ -74,7 +74,7 @@ const putNote = async (req, res) => {
 
       isDone: boolean, optional
       isFavorite: boolean, optional
-      schedualTime: time. optional
+      scheduledTime: time. optional
       pariority: enum, optional
     }
 
@@ -161,7 +161,7 @@ const getNotesOfUser = async (req, res) => {
       content: string,
       isDone: boolean, 
       isFavorite: boolean, 
-      schedualTime: time. 
+      scheduledTime: time. 
       pariority: enum, 
     }]
     200 - on success V
@@ -190,7 +190,7 @@ const getNotesOfGroup = async (req, res) => {
       content: string,
       isDone: boolean, 
       isFavorite: boolean, 
-      schedualTime: time. 
+      scheduledTime: time. 
       pariority: enum, 
     }]
     200 - on success V

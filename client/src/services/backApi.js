@@ -29,7 +29,7 @@ const getNotesOfGroup = async (groupId) => {
  * @param {string} note.groupId required
  * @param {boolean} note.isDone optional
  * @param {boolean} note.isFavorite optional
- * @param {Date} note.schedualTime optional
+ * @param {Date} note.scheduledTime optional
  * @param {string} note.priority optional, can be regular, high.low
  */
 const postNote = async (note, userId) => {
@@ -44,7 +44,7 @@ const postNote = async (note, userId) => {
  * @param {string} note.groupId required
  * @param {boolean} dataToUpdate.isDone optional
  * @param {boolean} dataToUpdate.isFavorite optional
- * @param {Date} dataToUpdate.schedualTime optional
+ * @param {Date} dataToUpdate.scheduledTime optional
  * @param {string} dataToUpdate.priority optional, can be regular, high.low
  */
 const updateNote = async (id, userId, dataToUpdate) => {

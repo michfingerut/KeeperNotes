@@ -100,7 +100,7 @@ describe('Route tests', () => {
         { michal: true, content: 'hello', groupId: groupId }, //not valid param
         { isDone: 'hello' },
         { isFavorite: 'hello' },
-        { schedualTime: 'hello' },
+        { scheduledTime: 'hello' },
         { pariority: 'hello' },
       ];
 
@@ -228,7 +228,7 @@ describe('Route tests', () => {
         { michal: true, content: 'hello' }, //not valid param
         { isDone: 'hello' },
         { isFavorite: 'hello' },
-        { schedualTime: 'hello' },
+        { scheduledTime: 'hello' },
         { pariority: 'hello' },
       ];
 
@@ -250,12 +250,12 @@ describe('Route tests', () => {
 
       const id = postRes.body.id;
       const time = new Date().toISOString();
-      expectedData.schedualTime = time;
+      expectedData.scheduledTime = time;
 
       //update note
       const putRes = await req
         .put(`${route}/${id}`)
-        .send({ schedualTime: expectedData.schedualTime });
+        .send({ scheduledTime: expectedData.scheduledTime });
 
       testUtils.testResponseSingle(putRes, expectedData, OK);
     });
@@ -297,7 +297,7 @@ describe('Route tests', () => {
         content: 'another content',
         isDone: true,
         isFavorite: true,
-        schedualTime: new Date().toISOString(),
+        scheduledTime: new Date().toISOString(),
         priority: testData.priorityEnum[1],
       };
 
