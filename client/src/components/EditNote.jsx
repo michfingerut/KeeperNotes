@@ -96,6 +96,8 @@ function EditNote(props) {
           defaultValue={note?.title || ""}
           placeholder={!note?.title ? "Enter title" : ""}
           sx={{
+            mb: 2,
+
             "& .MuiInputLabel-root": {
               color: "black",
             },
@@ -218,6 +220,8 @@ function EditNote(props) {
           value={scheduledTime}
           onChange={(e) => handleScheduledTime(e)}
           sx={{
+            mb: 2,
+
             "& .MuiInputLabel-root": {
               color: "black",
             },
