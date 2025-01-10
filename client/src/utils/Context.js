@@ -1,8 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-const Context = createContext();
+const GroupInfoContext = createContext();
 const AuthContext = createContext();
-const MenuItemsContext = createContext();
 
 export const GroupInfoProvider = ({ children }) => {
   const [groupId, setGroupId] = useState(localStorage.getItem("groupId"));
@@ -13,7 +12,7 @@ export const GroupInfoProvider = ({ children }) => {
   }, [groupId]);
 
   return (
-    <Context.Provider
+    <GroupInfoContext.Provider
       value={{
         groupId,
         setGroupId,
@@ -22,24 +21,7 @@ export const GroupInfoProvider = ({ children }) => {
       }}
     >
       {children}
-    </Context.Provider>
-  );
-};
-
-export const MenuItemsProvider = ({ children }) => {
-  const [menuItems, setMenuItems] = useState([]);
-
-  // const [groupId, setGroupId] = useState(localStorage.getItem("groupId"));
-  // const [groupName, setGroupName] = useState(localStorage.getItem("groupName"));
-
-  // useEffect(() => {
-  //   localStorage.setItem("groupId", groupId);
-  // }, [groupId]);
-
-  return (
-    <MenuItemsContext.Provider value={{ menuItems, setMenuItems }}>
-      {children}
-    </MenuItemsContext.Provider>
+    </GroupInfoContext.Provider>
   );
 };
 
@@ -65,8 +47,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useGroupInfo = () => useContext(Context);
+export const useGroupInfo = () => useContext(GroupInfoContext);
 export const useAuth = () => useContext(AuthContext);
-export const useItems = () => {
-  useContext(MenuItemsContext);
-};
