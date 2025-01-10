@@ -15,11 +15,7 @@ import ErrorComp from "../components/Error";
 import { showError, sortFunc } from "../utils/index";
 
 //TODO: add a way to see members
-function GroupPage(props) {
-  ///////////////////// props /////////////////////
-  const setIsLogged = props.setIsLogged;
-  /////////////////////////////////////////////////
-
+function GroupPage() {
   const [isError, setIsError] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [notes, setNotes] = useState([]);
@@ -90,7 +86,6 @@ function GroupPage(props) {
     >
       <Header
         title={title}
-        setIsLogged={setIsLogged}
         menuItems={menuItems}
       />
       <NotesContainer>
@@ -123,7 +118,7 @@ function GroupPage(props) {
       />
     </div>
   ) : (
-    <ErrorComp setIsLogged={setIsLogged} />
+    <ErrorComp />
   );
 }
 

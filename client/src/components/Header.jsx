@@ -9,15 +9,16 @@ import Link from "@mui/material/Link";
 //Internal modules
 import { backGroundLightBrown } from "../styles/styles";
 import NavBar from "./NavBar";
+import { useAuth } from "../utils/Context";
 
 function Header(props) {
+  const { setIsLogged } = useAuth();
   ///////////////////// props /////////////////////
-  const { title, setIsLogged, menuItems } = props;
+  const { title, menuItems } = props;
   /////////////////////////////////////////////////
 
   function logOut() {
     localStorage.setItem("uuid", "");
-    localStorage.setItem("isLogged", false);
     setIsLogged(false);
   }
 

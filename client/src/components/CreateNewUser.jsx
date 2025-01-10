@@ -10,10 +10,13 @@ import {
   SignUpInput,
   LogButton,
 } from "../styles/styles";
+import { useAuth } from "../utils/Context";
 
 function CreateNewUser(props) {
+  const { setIsLogged } = useAuth();
+
   ///////////////////// props /////////////////////
-  const { handleInput, tmpUsr, setIsLogged } = props;
+  const { handleInput, tmpUsr } = props;
   /////////////////////////////////////////////////
 
   async function createUser(event) {
@@ -48,7 +51,6 @@ function CreateNewUser(props) {
     }
 
     localStorage.setItem("uuid", userInfo.userId);
-    localStorage.setItem("isLogged", true);
     localStorage.setItem("groupId", "");
 
     setIsLogged(true);

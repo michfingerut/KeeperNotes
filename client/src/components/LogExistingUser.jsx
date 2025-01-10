@@ -10,11 +10,12 @@ import {
   SignUpInput,
   LogButton,
 } from "../styles/styles";
+import { useAuth } from "../utils/Context";
 
 function ForgetPassword(props) {
   //TODO:
   ///////////////////// props /////////////////////
-  const { handleInput, tmpUsr, setIsLogged, setForgotPass } = props;
+  const { handleInput, tmpUsr, setForgotPass } = props;
   /////////////////////////////////////////////////
 
   async function restorePass(event) {
@@ -40,8 +41,9 @@ function ForgetPassword(props) {
 }
 
 function LogIn(props) {
+  const { setIsLogged } = useAuth();
   ///////////////////// props /////////////////////
-  const { handleInput, tmpUsr, setIsLogged, setForgotPass } = props;
+  const { handleInput, tmpUsr, setForgotPass } = props;
   /////////////////////////////////////////////////
 
   async function toLog(event) {
@@ -72,7 +74,6 @@ function LogIn(props) {
       }
       return;
     }
-    localStorage.setItem("isLogged", true);
     localStorage.setItem("uuid", userInfo.uuid);
     localStorage.setItem("groupId", "");
     setIsLogged(true);
@@ -110,7 +111,7 @@ function LogIn(props) {
 
 function LogExistingUser(props) {
   ///////////////////// props /////////////////////
-  const { handleInput, tmpUsr, setIsLogged } = props;
+  const { handleInput, tmpUsr } = props;
   /////////////////////////////////////////////////
   const [forgotPass, setForgotPass] = useState(false);
 
@@ -120,7 +121,6 @@ function LogExistingUser(props) {
         <LogIn
           handleInput={handleInput}
           tmpUsr={tmpUsr}
-          setIsLogged={setIsLogged}
           setForgotPass={setForgotPass}
         />
       ) : (

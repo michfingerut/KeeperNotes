@@ -1,9 +1,8 @@
 import { LogButton, LogInContainer, LogInH1 } from "../styles/styles";
+import { useAuth } from "../utils/Context";
 
-function ErrorComp(props) {
-  ///////////////////// props /////////////////////
-  const { setIsLogged } = props;
-  /////////////////////////////////////////////////
+function ErrorComp() {
+  const { setIsLogged } = useAuth();
 
   function handleRefresh() {
     window.location.reload();

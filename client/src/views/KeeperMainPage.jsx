@@ -9,11 +9,7 @@ import { Container } from "../styles/styles";
 import GroupsBoards from "../components/GroupsBoards";
 import ErrorComp from "../components/Error";
 
-function KeeperMainPage(props) {
-  ///////////////////// props /////////////////////
-  const setIsLogged = props.setIsLogged;
-  /////////////////////////////////////////////////
-
+function KeeperMainPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -37,7 +33,6 @@ function KeeperMainPage(props) {
       <Container>
         <Header
           title=""
-          setIsLogged={setIsLogged}
           menuItems={menuItems}
         />
         <GroupsBoards
@@ -49,7 +44,7 @@ function KeeperMainPage(props) {
       </Container>
     </div>
   ) : (
-    <ErrorComp setIsLogged={setIsLogged} />
+    <ErrorComp />
   );
 }
 
