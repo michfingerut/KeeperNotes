@@ -4,12 +4,18 @@ const GroupInfoContext = createContext();
 const AuthContext = createContext();
 
 export const GroupInfoProvider = ({ children }) => {
-  const [groupId, setGroupId] = useState(localStorage.getItem("groupId"));
-  const [groupName, setGroupName] = useState(localStorage.getItem("groupName"));
+  const [groupId, setGroupId] = useState(localStorage.getItem("groupId") || "");
+  const [groupName, setGroupName] = useState(
+    localStorage.getItem("groupName") || "",
+  );
 
   useEffect(() => {
     localStorage.setItem("groupId", groupId);
   }, [groupId]);
+
+  useEffect(() => {
+    localStorage.setItem("groupName", groupName);
+  }, [groupName]);
 
   return (
     <GroupInfoContext.Provider
