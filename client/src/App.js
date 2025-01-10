@@ -13,11 +13,10 @@ import { ToastContainer } from "react-toastify";
 import KeeperMainPage from "./views/KeeperMainPage";
 import LogInPage from "./views/LogInPage";
 import GroupPage from "./views/GroupPage";
+import { AuthProvider, useAuth } from "./utils/Context";
 
 function App() {
-  const [isLogged, setIsLogged] = useState(
-    JSON.parse(localStorage.getItem("isLogged")),
-  );
+  const { isLogged } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,16 +32,16 @@ function App() {
     <Routes>
       <Route
         path="/home"
-        element={<KeeperMainPage setIsLogged={setIsLogged} />}
+        element={<KeeperMainPage />}
       />
       <Route
         path="/:groupId"
-        element={<GroupPage setIsLogged={setIsLogged} />}
+        element={<GroupPage />}
       />
 
       <Route
         path="/login"
-        element={<LogInPage setIsLogged={setIsLogged} />}
+        element={<LogInPage />}
       />
       <Route
         path="/"
@@ -56,7 +55,9 @@ function App() {
 function RootApp() {
   return (
     <BrowserRouter>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
       <ToastContainer />
     </BrowserRouter>
   );
