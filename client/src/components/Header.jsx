@@ -70,5 +70,6 @@ function Header(props) {
   );
 }
 
-export default React.memo(Header);
-//TODO: consider move menuItems to the context so wont re-render
+export default React.memo(Header, (prevPros, newProps) => {
+  return true;
+});
