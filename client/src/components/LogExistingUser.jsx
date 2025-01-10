@@ -41,7 +41,7 @@ function ForgetPassword(props) {
 }
 
 function LogIn(props) {
-  const { setIsLogged } = useAuth();
+  const { setIsLogged, setUUID } = useAuth();
   ///////////////////// props /////////////////////
   const { handleInput, tmpUsr, setForgotPass } = props;
   /////////////////////////////////////////////////
@@ -74,7 +74,7 @@ function LogIn(props) {
       }
       return;
     }
-    localStorage.setItem("uuid", userInfo.uuid);
+    setUUID(userInfo.uuid);
     localStorage.setItem("groupId", "");
     setIsLogged(true);
   }

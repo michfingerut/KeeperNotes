@@ -12,13 +12,13 @@ import NavBar from "./NavBar";
 import { useAuth } from "../utils/Context";
 
 function Header(props) {
-  const { setIsLogged } = useAuth();
+  const { setIsLogged, setUUID } = useAuth();
   ///////////////////// props /////////////////////
   const { title, menuItems } = props;
   /////////////////////////////////////////////////
 
   function logOut() {
-    localStorage.setItem("uuid", "");
+    setUUID("");
     setIsLogged(false);
   }
 

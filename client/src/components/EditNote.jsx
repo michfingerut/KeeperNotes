@@ -9,9 +9,11 @@ import backApi from "../services/backApi";
 import EditDialog from "./EditDialog";
 import { midDarkBrown, backGroundLightGray } from "../styles/styles";
 import { showError, sortFunc } from "../utils/index";
+import { useAuth } from "../utils/Context";
 
 //TODO: idea- add option like text book with * and _ and B etc'
 function EditNote(props) {
+  const { uuid } = useAuth();
   ///////////////////// props /////////////////////
   const { note, setFunc, openDialog, setOpenDialog, mode } = props;
   /////////////////////////////////////////////////
@@ -20,7 +22,6 @@ function EditNote(props) {
   const [scheduledTime, setScheduledTime] = useState(note.scheduledTime || "");
 
   const okButtonName = mode === "add" ? "Create" : "Save";
-  const uuid = localStorage.getItem("uuid");
 
   function handleClose() {
     setOpenDialog(false);

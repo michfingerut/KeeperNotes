@@ -9,6 +9,7 @@ import { NotesContainer } from "../styles/styles";
 import GroupCard from "./GroupCard";
 import EditDialog from "./EditDialog";
 import { showError } from "../utils/index";
+import { useAuth } from "../utils/Context";
 
 function AddGroupPopup(props) {
   ///////////////////// props /////////////////////
@@ -91,11 +92,11 @@ function AddGroupPopup(props) {
 }
 
 function GroupsBoards(props) {
+  const { uuid } = useAuth();
   ///////////////////// props /////////////////////
   const { isModalOpen, setModalOpen, setIsError } = props;
   /////////////////////////////////////////////////
 
-  const uuid = localStorage.getItem("uuid");
   const [groups, setGroups] = useState([]);
   const navigate = useNavigate();
 

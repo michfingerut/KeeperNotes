@@ -13,13 +13,15 @@ import Footer from "../components/Footer";
 import EditNote from "../components/EditNote";
 import ErrorComp from "../components/Error";
 import { showError, sortFunc } from "../utils/index";
+import { useAuth } from "../utils/Context";
 
 //TODO: add a way to see members
 function GroupPage() {
+  const { uuid } = useAuth();
   const [isError, setIsError] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [notes, setNotes] = useState([]);
-  const userId = localStorage.getItem("uuid");
+  const userId = uuid;
   const navigate = useNavigate();
 
   const { groupId } = useParams();

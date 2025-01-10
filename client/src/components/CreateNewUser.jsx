@@ -13,7 +13,7 @@ import {
 import { useAuth } from "../utils/Context";
 
 function CreateNewUser(props) {
-  const { setIsLogged } = useAuth();
+  const { setIsLogged, setUUID } = useAuth();
 
   ///////////////////// props /////////////////////
   const { handleInput, tmpUsr } = props;
@@ -50,7 +50,7 @@ function CreateNewUser(props) {
       return;
     }
 
-    localStorage.setItem("uuid", userInfo.userId);
+    setUUID(userInfo.userId);
     localStorage.setItem("groupId", "");
 
     setIsLogged(true);
