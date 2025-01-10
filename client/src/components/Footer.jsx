@@ -1,12 +1,12 @@
+import React from 'react'
+
 import { FooterStyle, FooterP } from "../styles/styles";
 
 function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <FooterStyle>
-      <FooterP>Copyrights © {year}</FooterP>
+      <FooterP>Copyrights © 2024</FooterP>
     </FooterStyle>
   );
 }
-export default Footer;
+export default React.memo(Footer);
