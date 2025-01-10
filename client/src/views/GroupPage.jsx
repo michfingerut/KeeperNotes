@@ -1,10 +1,9 @@
 //External modules
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 
 //Internal modules
-import Note from "../components/Note";
 import { NotesContainer } from "../styles/styles";
 import backApi from "../services/backApi";
 import { useParams } from "react-router-dom";
@@ -14,6 +13,8 @@ import EditNote from "../components/EditNote";
 import ErrorComp from "../components/Error";
 import { showError, sortFunc } from "../utils/index";
 import { useAuth } from "../utils/Context";
+
+const LazyNote = React.lazy(() => import("../components/Note"));
 
 //TODO: add a way to see members
 function GroupPage() {
@@ -70,12 +71,6 @@ function GroupPage() {
     setOpenDialog(true);
   }
 
-  function returnToGroupBoard() {
-    localStorage.setItem("groupId", "");
-
-    navigate("/home");
-  }
-
   //TODO: filter by done, favorite and etc'
   // TODOL draggable note
 
@@ -93,13 +88,14 @@ function GroupPage() {
       <NotesContainer>
         {notes.map((note) => {
           return (
-            <Note
-              key={note.id}
-              note={note}
-              deleteFunc={deleteNote}
-              notesStateFunc={setNotes}
-              userId={userId}
-            />
+            <Suspense key={note.id}>
+              <LazyNote
+                note={note}
+                deleteFunc={deleteNote}
+                notesStateFunc={setNotes}
+                userId={userId}
+              />
+            </Suspense>
           );
         })}
       </NotesContainer>
