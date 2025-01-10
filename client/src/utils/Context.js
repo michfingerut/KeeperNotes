@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-export const Context = createContext();
+const Context = createContext();
 const AuthContext = createContext();
+const MenuItemsContext = createContext();
 
 export const GroupInfoProvider = ({ children }) => {
   const [groupId, setGroupId] = useState(localStorage.getItem("groupId"));
@@ -22,6 +23,23 @@ export const GroupInfoProvider = ({ children }) => {
     >
       {children}
     </Context.Provider>
+  );
+};
+
+export const MenuItemsProvider = ({ children }) => {
+  const [menuItems, setMenuItems] = useState([]);
+
+  // const [groupId, setGroupId] = useState(localStorage.getItem("groupId"));
+  // const [groupName, setGroupName] = useState(localStorage.getItem("groupName"));
+
+  // useEffect(() => {
+  //   localStorage.setItem("groupId", groupId);
+  // }, [groupId]);
+
+  return (
+    <MenuItemsContext.Provider value={{ menuItems, setMenuItems }}>
+      {children}
+    </MenuItemsContext.Provider>
   );
 };
 
@@ -47,5 +65,8 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useContextItems = () => useContext(Context);
+export const useGroupInfo = () => useContext(Context);
 export const useAuth = () => useContext(AuthContext);
+export const useItems = () => {
+  useContext(MenuItemsContext);
+};
