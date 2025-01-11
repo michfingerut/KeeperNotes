@@ -18,7 +18,6 @@ function Header(props) {
   /////////////////////////////////////////////////
 
   function logOut() {
-    setUUID("");
     setIsLogged(false);
   }
 

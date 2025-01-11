@@ -44,6 +44,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("isLogged", isLogged);
+
+    if (!isLogged) {
+      setUUID("");
+    }
   }, [isLogged]);
 
   return (
