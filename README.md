@@ -21,7 +21,7 @@ KeeperNotes is a comprehensive web application designed to help users efficientl
 
 ## Technologies Used
 
-- **Frontend**: React.js, Material UI, styled-components
+- **Frontend**: React.js, Material UI, styled-components, axios
 - **Backend**: Node.js, Express.js, PostgreSQL, Sequelize ORM
 - **Containerization**: Docker
 - **Testing**: Jest
